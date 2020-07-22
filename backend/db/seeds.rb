@@ -67,6 +67,7 @@ dish.tags << [
     Tag.where(name: 'Private Parties'),
     Tag.where(name: 'Plated')
 ]
+dish.images.create(path: 'dish_001.jpg')
 
 		### [002]
 dish = Dish.create(description: 'Hawaiian Ahi Poke with Glass Noodle Salad (Toppings include cilantro, tamari, green onion, kimchi) and Haupia (Coconut Pudding)')
@@ -81,6 +82,7 @@ dish.tags << [
     Tag.where(name: 'Retreats'),
     Tag.where(name: 'Family Style')
 ]
+dish.images.create(path: 'dish_002.jpg')
 
 		### [003]
 dish = Dish.create(description: 'B&B Breakfast Tray. Gluten Free Banana Bread with Butter, Macadamia Nuts, & Fresh Local Fruit')
@@ -92,6 +94,7 @@ dish.tags << [
     Tag.where(name: 'Retreats'),
     Tag.where(name: 'Family Style')
 ]
+dish.images.create(path: 'dish_003.jpg')
 
 		### [004]
 dish = Dish.create(description: 'Garden Frittata with Mushrooms, Tomato, Basil, & Local Goat Cheese')
@@ -103,6 +106,7 @@ dish.tags << [
     Tag.where(name: 'Retreats'),
     Tag.where(name: 'Festivals')
 ]
+dish.images.create(path: 'dish_004.jpg')
 
 		### [005]
 dish = Dish.create(description: 'Garden Harvest')
@@ -115,6 +119,7 @@ dish.tags << [
     Tag.where(name: 'Gluten Free'),
     Tag.where(name: 'Retreats')
 ]
+dish.images.create(path: 'dish_005.jpg')
 
 		### [006]
 dish = Dish.create(description: 'Salad with Edible Flowers, Beets, & Seeds with a Lilikoi Balsamic Dressing')
@@ -129,6 +134,7 @@ dish.tags << [
     Tag.where(name: 'Weddings'),
     Tag.where(name: 'Plated')
 ]
+dish.images.create(path: 'dish_006.jpg')
 
 		### [007]
 dish = Dish.create(description: 'Raw Avocado Cacao Pie with a Macadamia, Coconut, & Date Crust')
@@ -140,6 +146,7 @@ dish.tags << [
     Tag.where(name: 'Retreats'),
     Tag.where(name: 'Weddings')
 ]
+dish.images.create(path: 'dish_007.jpg')
 
 		### [008]
 dish = Dish.create(description: 'Crispy Coconut Bacon')
@@ -150,6 +157,7 @@ dish.tags << [
     Tag.where(name: 'Vegan'),
     Tag.where(name: 'Gluten Free')
 ]
+dish.images.create(path: 'dish_008.jpg')
 
 		### [009]
 dish = Dish.create(description: 'Kimchi Ingredients')
@@ -161,6 +169,7 @@ dish.tags << [
     Tag.where(name: 'Vegan'),
     Tag.where(name: 'Hawaiian')
 ]
+dish.images.create(path: 'dish_009.jpg')
 
 		### [010]
 dish = Dish.create(description: 'Green Banana Pasteles')
@@ -176,6 +185,7 @@ dish.tags << [
     Tag.where(name: 'Private Parties'),
     Tag.where(name: 'Festivals')
 ]
+dish.images.create(path: 'dish_010.jpg')
 
 		### [011]
 dish = Dish.create(description: 'Fruit Altar for Retreats')
@@ -189,6 +199,7 @@ dish.tags << [
     Tag.where(name: 'Gluten Free'),
     Tag.where(name: 'Retreats')
 ]
+dish.images.create(path: 'dish_011.jpg')
 
 		### [012]
 dish = Dish.create(description: 'Rainbow Salad of Seasonal Vegetables, & Hawaiian Seaweed with a Lilikoi Balsamic Vinaigrette')
@@ -204,6 +215,7 @@ dish.tags << [
     Tag.where(name: 'Weddings'),
     Tag.where(name: 'Plated')
 ]
+dish.images.create(path: 'dish_012.jpg')
 
 		### [013]
 dish = Dish.create(description: 'Garlic Butter Seared Kauai Prawns')
@@ -219,6 +231,7 @@ dish.tags << [
     Tag.where(name: 'Weddings'),
     Tag.where(name: 'Family Style')
 ]
+dish.images.create(path: 'dish_013.jpg')
 
 		### [014]
 dish = Dish.create(description: 'Lilikoi Cheesecake with Lilikoi Glaze & Reduction')
@@ -231,6 +244,7 @@ dish.tags << [
     Tag.where(name: 'Weddings'),
     Tag.where(name: 'Plated')
 ]
+dish.images.create(path: 'dish_014.jpg')
 
 		### [015]
 dish = Dish.create(description: 'Mediterranean Lunch-Ulu Falafel, Quinoa Tabouli, Sprouted Hummus, Yogurt Tzatziki, Kalamata Olives, Local Goat Feta, & Vegetable Dippers')
@@ -244,6 +258,7 @@ dish.tags << [
     Tag.where(name: 'Plated'),
     Tag.where(name: 'Take Away')
 ]
+dish.images.create(path: 'dish_015.jpg')
 
 		### [016]
 dish = Dish.create(description: 'Buddha Bowl Lunch')
@@ -257,6 +272,7 @@ dish.tags << [
     Tag.where(name: 'Self Serve'),
     Tag.where(name: 'Take Away')
 ]
+dish.images.create(path: 'dish_016.jpg')
 
 		### [017]
 dish = Dish.create(description: 'Retreat Breakfast Buffet')
