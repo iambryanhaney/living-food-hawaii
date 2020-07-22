@@ -1,30 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import ListGroup from 'react-bootstrap/ListGroup'
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
+
+import Container from 'react-bootstrap/Container'
+
+import Navigation from './containers/Navigation'
+import Home from './containers/Home'
+import ExampleOfferings from './containers/ExampleOfferings';
+
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-      <ListGroup>
-        <ListGroup.Item>Hello, I'm an item.</ListGroup.Item>
-        <ListGroup.Item>Hello, I'm an item.</ListGroup.Item>
-      </ListGroup>
-    </div>
+    <Router>
+      <Navigation />
+      <Container style={{ marginTop: '100px', border: '2px solid #000000' }} >
+        <Route path='/' exact component={Home} />
+        <Route path='/example-offerings' exact component={ExampleOfferings} />
+      </Container>
+    </Router>
   );
 }
 
