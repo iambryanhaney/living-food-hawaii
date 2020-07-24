@@ -16,6 +16,7 @@ export default function Navigation(props) {
                     <NavLink to="/" exact activeStyle={{ color: '#00FF00' }}>Home </NavLink>
                     {/* <NavLink to="/blog" activeStyle={{ color: '#00FF00' }}>Services </NavLink> */}
                     <NavLink to="/example-offerings" exact activeStyle={{ color: '#00FF00' }}>Example Offerings </NavLink>
+                    <NavLink to="/services" exact activeStyle={{ color: '#00FF00' }}>Services </NavLink>
                 </Nav>
             </Navbar.Collapse>
         </Navbar>
