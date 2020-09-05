@@ -14,9 +14,11 @@ export default function Navigation(props) {
             <Navbar.Collapse id="responsive-navbar-nav" >
                 <Nav className="mr-auto">
                     <NavLink to="/" exact activeStyle={{ color: '#00FF00' }}>Home </NavLink>
-                    {/* <NavLink to="/blog" activeStyle={{ color: '#00FF00' }}>Services </NavLink> */}
-                    <NavLink to="/example-offerings" exact activeStyle={{ color: '#00FF00' }}>Example Offerings </NavLink>
-                    <NavLink to="/services" exact activeStyle={{ color: '#00FF00' }}>Services </NavLink>
+                    <NavLink to="/example-offerings" exact activeStyle={{ color: '#00FF00' }}>Example Offerings</NavLink>
+                    <NavLink to="/services" exact activeStyle={{ color: '#00FF00' }}>Services</NavLink>
+                    <NavLink to="/testing-uploads" exact activeStyle={{ color: '#00FF00' }}>Testing Uploads</NavLink>
+                    <NavLink to="/dish-builder" exact activeStyle={{ color: '#00FF00' }}>Dish Builder</NavLink>
+                    <NavLink to="/dish-manager" exact activeStyle={{ color: '#00FF00' }}>Dish Manager</NavLink>
                 </Nav>
             </Navbar.Collapse>
         </Navbar>
