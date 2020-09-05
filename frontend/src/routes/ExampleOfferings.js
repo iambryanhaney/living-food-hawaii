@@ -44,10 +44,10 @@ export default class ExampleOfferings extends Component {
     }
 
     importImages() {
-        const context = require.context('../assets/media/dish-images-assigned', false, /\.(gif|jpe?g|svg)$/)
-        const dishImages = {}
-        context.keys().forEach(key => dishImages[key.replace('./', '')] = context(key) );
-        this.setState({ dishImages: dishImages })
+        // const context = require.context('../assets/media/dish-images-assigned', false, /\.(gif|jpe?g|svg)$/)
+        // const dishImages = {}
+        // context.keys().forEach(key => dishImages[key.replace('./', '')] = context(key) );
+        // this.setState({ dishImages: dishImages })
     }
 
     componentDidMount() {

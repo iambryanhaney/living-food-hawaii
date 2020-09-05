@@ -19,6 +19,7 @@
 !/tmp/pids/.keep
 
 # Ignore uploaded files in development.
+/stor_uploads/*
 /storage/*
 !/storage/.keep
 .byebug_history
