@@ -3,7 +3,8 @@ Rails.application.routes.draw do
 
   get '/dishes', to: 'dishes#index'
   post '/dishes', to: 'dishes#create'
-  # post '/dishes', to: 'dishes#attach'
+  patch '/dishes/:id', to: 'dishes#update'
+  delete '/dishes/:id', to: 'dishes#destroy'
   
 
   get '/tags', to: 'tags#index'
