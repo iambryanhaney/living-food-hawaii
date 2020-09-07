@@ -24,8 +24,8 @@ class DishesController < ApplicationController
 
                 ### CloudFront variants
     def index
-        dishes = Dish.with_attached_images.map do |dish|
-            dish.as_json(except: [:created_at, :updated_at]).merge({ images: dish.images.map do |image|
+        dishes = Dish.with_attached_images.includes(:tags).map do |dish|
+            dish.as_json(include: :tags, except: [:created_at, :updated_at]).merge({ images: dish.images.map do |image|
                 {
                     id: image.id,
                     bucket: BUCKET,
@@ -38,19 +38,45 @@ class DishesController < ApplicationController
         render json: dishes
     end
 
-
-
-
     def create
         # binding.pry
         dish = Dish.create(dish_params)
-        render json: {
-            dish_id: dish.id,
-            status: 201
-        }
-        # render json: { message: "Returning from create" }
+        dish = dish.as_json(include: :tags, except: [:created_at, :updated_at]).merge({ images: dish.images.map do |image| 
+            {
+                id: image.id,
+                bucket: BUCKET,
+                key: image.blob.key,
+                base_url: IMAGE_BASE_URL,
+            }
+        end
+        })
+        render json: dish
     end
 
+    def update
+        # binding.pry
+        if(params[:purge_ids])
+            params[:purge_ids].each{|purge_id| ActiveStorage::Attachment.find_by(id: purge_id).purge}
+        end
+
+        dish = Dish.with_attached_images.find_by(id: params[:id])
+        dish.update(dish_params)
+        dish = dish.as_json(include: :tags, except: [:created_at, :updated_at]).merge({ images: dish.images.map do |image| 
+            {
+                id: image.id,
+                bucket: BUCKET,
+                key: image.blob.key,
+                base_url: IMAGE_BASE_URL,
+            }
+        end
+        })
+        render json: dish
+    end
+
+    def destroy
+        Dish.with_attached_images.find_by(id: params[:id]).destroy
+        render json: {id: params[:id]}
+    end
     
     private
 

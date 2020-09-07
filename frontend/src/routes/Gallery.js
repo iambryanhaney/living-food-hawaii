@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.css'
 
 import React, { Component } from 'react'
+import { generateImageUrl } from '../components/ImageHandler'
 
 import Card from 'react-bootstrap/Card'
 import Container from 'react-bootstrap/Container'
@@ -12,7 +13,7 @@ import Button from 'react-bootstrap/Button'
 const DISH_URL = 'http://localhost:3001/dishes'
 const TAG_URL = 'http://localhost:3001/tags'
 
-export default class ExampleOfferings extends Component {
+export default class Gallery extends Component {
 
     constructor() {
         super()
@@ -97,7 +98,7 @@ export default class ExampleOfferings extends Component {
         const filteredDishes = this.state.filteredDishes.map((dish, dishIndex) => 
             dish.images.map((image, imageIndex) => 
                 <Card key={`dish${dish.id}image${image.id}`} style={{ width: '20%', margin: '20px' }}>
-                    <Card.Img style={{ cursor: 'pointer' }} variation="top" src={this.state.dishImages[image.path]} onClick={() => this.showZoomModal(dishIndex, imageIndex)} />
+                    <Card.Img style={{ cursor: 'pointer' }} variation="top" src={generateImageUrl(image, 'medium')} onClick={() => this.showZoomModal(dishIndex, imageIndex)} />
                 </Card>
             )
         )
@@ -179,7 +180,7 @@ export default class ExampleOfferings extends Component {
                             </Button>
                             <Col xs={10}>
                                 <Card>
-                                    <Card.Img onClick={() => this.closeZoomModal()} variation="top" src={this.state.dishImages[this.state.filteredDishes[this.state.dishIndex].images[this.state.imageIndex].path]} />
+                                    <Card.Img onClick={() => this.closeZoomModal()} variation="top" src={generateImageUrl(this.state.filteredDishes[this.state.dishIndex].images[this.state.imageIndex], 'large')} />
                                 </Card>
                             </Col>
                             <Button style={{ backgroundColor: '#7b8487' }} onClick={() => this.navImageRight()}>
@@ -201,7 +202,7 @@ export default class ExampleOfferings extends Component {
     render() {
         return (
             <div >
-                <h1>Example Offerings</h1>
+                <h1>Gallery</h1>
                 <Container>
                     <Row>
                         <Col xs={12} sm={6} md={2} lg >
@@ -229,72 +230,3 @@ export default class ExampleOfferings extends Component {
         )
     }
 }
-
-
-
-
-
-/*
-
-                        <Col xs={2} style={{ margin: '5px' }}>
-                            Courses<br />
-                            <select name='courses' id='courses' value={this.state.filters.courses} onChange={this.filterDishes}>
-                                <option value=''>All</option>
-                                <option value='ingredients'>Ingredients</option>
-                                <option value='beverages'>Beverages</option>
-                                <option value='appetizers'>Appetizers</option>
-                                <option value='salads'>Salads</option>
-                                <option value='entrees'>Entrees</option>
-                                <option value='sides'>Sides</option>
-                                <option value='desserts'>Desserts</option>
-                            </select>
-                        </Col>
-                        <Col xs={2} style={{ margin: '5px' }}>
-                            Diets<br />
-                            <select name='diets' id='diets' value={this.state.filters.diets} onChange={this.filterDishes}>
-                                <option value=''>All</option>
-                                <option value='vegan'>Vegan</option>
-                                <option value='vegetarian'>Vegetarian</option>
-                                <option value='omnivore'>Omnivore</option>
-                                <option value='gluten free'>Gluten Free</option>
-                            </select>
-                        </Col>
-                        <Col xs={2} style={{ margin: '5px' }}>
-                            Themes<br />
-                            <select name='themes' id='themes' value={this.state.filters.themes} onChange={this.filterDishes}>
-                                <option value=''>All</option>
-                                <option value='hawaiian'>Hawaiian</option>
-                                <option value='mediterranean'>Mediterannean</option>
-                                <option value='italian'>Italian</option>
-                                <option value='japanese'>Japanese</option>
-                                <option value='thai'>Thai</option>
-                                <option value='cuban'>Cuban</option>
-                                <option value='eastern european'>Eastern European</option>
-                                <option value='indian'>Indian</option>
-                                <option value='southwestern'>Southwestern</option>
-                                <option value='southern'>Southern</option>
-                                <option value='mexican'>Mexican</option>
-                            </select>
-                        </Col>
-                        <Col xs={2} style={{ margin: '5px' }}>
-                            Events<br />
-                            <select name='events' id='events' value={this.state.filters.events} onChange={this.filterDishes}>
-                                <option value=''>All</option>
-                                <option value=''></option>
-                                <option value=''></option>
-                                <option value=''></option>
-                                <option value=''></option>
-                            </select>
-                        </Col>
-                        <Col xs={2} style={{ margin: '5px' }}>
-                            Services<br />
-                            <select name='services' id='services' value={this.state.filters.services} onChange={this.filterDishes}>
-                                <option value=''>All</option>
-                                <option value=''></option>
-                                <option value=''></option>
-                                <option value=''></option>
-                                <option value=''></option>
-                            </select>
-                        </Col>
-
-*/

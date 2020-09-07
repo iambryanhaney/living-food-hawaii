@@ -32,13 +32,6 @@ export default function DishBuilder (props) {
         setFormDescription(event.target.value)
     }
 
-    // const handleTagChange = (event, id) => {
-    //     console.log(id)
-    //     const updatedTags = [...formTags]
-    //     updatedTags[id] = event.target.checked
-    //     setFormTags(updatedTags)
-    // }
-
     const handleSubmit = (event) => {
         event.preventDefault()
 

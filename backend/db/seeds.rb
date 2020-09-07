@@ -69,62 +69,65 @@ dish.tags << [
 ]
 images = [
     { io: File.open('./stor_uploads/dish_001.jpg'), filename: 'dish_001.jpg' },
-    { io: File.open('./stor_uploads/dish_002.jpg'), filename: 'dish_002.jpg' }
+    { io: File.open('./stor_uploads/Molly 001.jpg'), filename: 'Molly 001.jpg' },
+    { io: File.open('./stor_uploads/collatz.png'), filename: 'collatz.png' },
+    { io: File.open('./stor_uploads/blob.jpeg'), filename: 'blob.jpeg' },
+    { io: File.open('./stor_uploads/CookieMonster.jpg'), filename: 'CookieMonster.jpg' },
 ]
 dish.images.attach(images)
 
 
-# 		### [002]
-# dish = Dish.create(description: 'Hawaiian Ahi Poke with Glass Noodle Salad (Toppings include cilantro, tamari, green onion, kimchi) and Haupia (Coconut Pudding)')
-# dish.tags << [
-#     Tag.where(name: 'desserts'),
-#     Tag.where(name: 'lunch'),
-#     Tag.where(name: 'entrees'),
-#     Tag.where(name: 'omnivore'),
-#     Tag.where(name: 'gluten free'),
-#     Tag.where(name: 'hawaiian'),
-#     Tag.where(name: 'private parties'),
-#     Tag.where(name: 'retreats'),
-#     Tag.where(name: 'family style')
-# ]
-# dish.images.create(path: 'dish_002.jpg')
+		### [002]
+dish = Dish.create(description: 'Hawaiian Ahi Poke with Glass Noodle Salad (Toppings include cilantro, tamari, green onion, kimchi) and Haupia (Coconut Pudding)')
+dish.tags << [
+    Tag.where(name: 'desserts'),
+    Tag.where(name: 'lunch'),
+    Tag.where(name: 'entrees'),
+    Tag.where(name: 'omnivore'),
+    Tag.where(name: 'gluten free'),
+    Tag.where(name: 'hawaiian'),
+    Tag.where(name: 'private parties'),
+    Tag.where(name: 'retreats'),
+    Tag.where(name: 'family style')
+]
+dish.images.attach(io: File.open('./stor_uploads/dish_002.jpg'), filename: 'dish_002.jpg')
 
-# 		### [003]
-# dish = Dish.create(description: 'B&B Breakfast Tray. Gluten Free Banana Bread with Butter, Macadamia Nuts, & Fresh Local Fruit')
-# dish.tags << [
-#     Tag.where(name: 'breakfast'),
-#     Tag.where(name: 'vegetarian'),
-#     Tag.where(name: 'gluten free'),
-#     Tag.where(name: 'private parties'),
-#     Tag.where(name: 'retreats'),
-#     Tag.where(name: 'family style')
-# ]
-# dish.images.create(path: 'dish_003.jpg')
+		### [003]
+dish = Dish.create(description: 'B&B Breakfast Tray. Gluten Free Banana Bread with Butter, Macadamia Nuts, & Fresh Local Fruit')
+dish.tags << [
+    Tag.where(name: 'breakfast'),
+    Tag.where(name: 'vegetarian'),
+    Tag.where(name: 'gluten free'),
+    Tag.where(name: 'private parties'),
+    Tag.where(name: 'retreats'),
+    Tag.where(name: 'family style')
+]
+dish.images.attach(io: File.open('./stor_uploads/dish_003.jpg'), filename: 'dish_003.jpg')
 
-# 		### [004]
-# dish = Dish.create(description: 'Garden Frittata with Mushrooms, Tomato, Basil, & Local Goat Cheese')
-# dish.tags << [
-#     Tag.where(name: 'breakfast'),
-#     Tag.where(name: 'vegetarian'),
-#     Tag.where(name: 'gluten free'),
-#     Tag.where(name: 'private parties'),
-#     Tag.where(name: 'retreats'),
-#     Tag.where(name: 'festivals')
-# ]
-# dish.images.create(path: 'dish_004.jpg')
+		### [004]
+dish = Dish.create(description: 'Garden Frittata with Mushrooms, Tomato, Basil, & Local Goat Cheese')
+dish.tags << [
+    Tag.where(name: 'breakfast'),
+    Tag.where(name: 'vegetarian'),
+    Tag.where(name: 'gluten free'),
+    Tag.where(name: 'private parties'),
+    Tag.where(name: 'retreats'),
+    Tag.where(name: 'festivals')
+]
+dish.images.attach(io: File.open('./stor_uploads/dish_004.jpg'), filename: 'dish_004.jpg')
 
-# 		### [005]
-# dish = Dish.create(description: 'Garden Harvest')
-# dish.tags << [
-#     Tag.where(name: 'lunch'),
-#     Tag.where(name: 'dinner'),
-#     Tag.where(name: 'ingredients'),
-#     Tag.where(name: 'vegan'),
-#     Tag.where(name: 'vegetarian'),
-#     Tag.where(name: 'gluten free'),
-#     Tag.where(name: 'retreats')
-# ]
-# dish.images.create(path: 'dish_005.jpg')
+		### [005]
+dish = Dish.create(description: 'Garden Harvest')
+dish.tags << [
+    Tag.where(name: 'lunch'),
+    Tag.where(name: 'dinner'),
+    Tag.where(name: 'ingredients'),
+    Tag.where(name: 'vegan'),
+    Tag.where(name: 'vegetarian'),
+    Tag.where(name: 'gluten free'),
+    Tag.where(name: 'retreats')
+]
+dish.images.attach(io: File.open('./stor_uploads/dish_005.jpg'), filename: 'dish_005.jpg')
 
 # 		### [006]
 # dish = Dish.create(description: 'Salad with Edible Flowers, Beets, & Seeds with a Lilikoi Balsamic Dressing')

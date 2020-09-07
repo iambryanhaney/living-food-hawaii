@@ -19,3 +19,12 @@ h4 {
 .testing {
   margin: 100px auto;
 }
+
+.container-dish {
+  background: #c5e3d3;
+}
+
+.container-dish:hover {
+  background: #d3e3d0;
+}
+/*# sourceMappingURL=App.css.map */

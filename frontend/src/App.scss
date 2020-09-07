@@ -1,0 +1,29 @@
+body {
+    background: #dcdcdc;
+  }
+  
+  h1 {
+    text-align: center;
+  }
+  
+  h4 {
+    text-align: center;
+  }
+  
+  .indented-paragraph {
+    max-width: 950px;
+    text-indent: 30px;
+    margin: 20px auto;
+  }
+  
+  .testing {
+    margin: 100px auto;
+  }
+  
+  .container-dish {
+    background: #c5e3d3;
+
+    &:hover {
+        background: #d3e3d0;
+    }
+  }
