@@ -103,10 +103,10 @@ export default function DishManager(props) {
         .then(resp => resp.json())
         .then(resp => {
             const updatedDishes = [...dishes]
-            const removeIndex = updatedDishes.findIndex(e => e.id == resp.id)
-            console.log(`Response id: ${resp.id}`)
-            console.log(`updatedDishes.map{:id}: ${updatedDishes.map(e => e.id)}`)
-            console.log(`Removing index: ${removeIndex}`)
+            const removeIndex = updatedDishes.findIndex(e => e.id === Number(resp.id))
+            // console.log(`Response id: ${resp.id}`)
+            // console.log(`updatedDishes.map{:id}: ${updatedDishes.map(e => e.id)}`)
+            // console.log(`Removing index: ${removeIndex}`)
             updatedDishes.splice(removeIndex, 1)
             setDishes(updatedDishes)
             hideModal()

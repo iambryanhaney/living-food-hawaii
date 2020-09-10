@@ -45,3 +45,6 @@ gem "aws-sdk-s3", require: false
 
 # Pry
 gem 'pry'
+
+# JWT
+gem "jwt", "~> 2.2"

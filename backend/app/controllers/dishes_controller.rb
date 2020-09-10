@@ -1,26 +1,7 @@
 class DishesController < ApplicationController
-    include Rails.application.routes.url_helpers    
+    include Rails.application.routes.url_helpers
+    skip_before_action :authorized #, only: :index
     
-
-    #             ### ActiveStorage Variants
-    # def index
-    #     dishes = Dish.with_attached_images.map do |dish|
-    #         dish.as_json(except: [:created_at, :updated_at]).merge({ images: dish.images.map do |image|
-    #                 {
-    #                     blob_id: image.blob_id,
-    #                     sm_url: "#{self.request.base_url}#{rails_representation_path(image.variant(resize_to_limit: [80, 80]).processed, only_path: true)}",
-    #                     md_url: "#{self.request.base_url}#{rails_representation_path(image.variant(resize_to_limit: [400, 400]).processed, only_path: true)}",
-    #                     lg_url: "#{self.request.base_url}#{rails_blob_path(image, only_path: true)}",
-    #                     # sm_url: image.variant(resize_to_limit: [80, 80]).processed.service_url,
-    #                     # md_url: image.variant(resize_to_limit: [400, 400]).processed.service_url,
-    #                     # lg_url: image.service_url,
-    #                 }
-    #             end
-    #         })    
-    #     end
-    #     render json: dishes
-    # end
-
 
                 ### CloudFront variants
     def index
@@ -78,8 +59,10 @@ class DishesController < ApplicationController
         render json: {id: params[:id]}
     end
     
-    private
 
+
+    
+    private
 
     def dish_params
         params.require(:dish).permit(:description, tag_ids: [], images: [])
@@ -89,6 +72,30 @@ end
 
 
 =begin
+
+
+
+            ### ActiveStorage Variants
+def index
+    dishes = Dish.with_attached_images.map do |dish|
+        dish.as_json(except: [:created_at, :updated_at]).merge({ images: dish.images.map do |image|
+                {
+                    blob_id: image.blob_id,
+                    sm_url: "#{self.request.base_url}#{rails_representation_path(image.variant(resize_to_limit: [80, 80]).processed, only_path: true)}",
+                    md_url: "#{self.request.base_url}#{rails_representation_path(image.variant(resize_to_limit: [400, 400]).processed, only_path: true)}",
+                    lg_url: "#{self.request.base_url}#{rails_blob_path(image, only_path: true)}",
+                    # sm_url: image.variant(resize_to_limit: [80, 80]).processed.service_url,
+                    # md_url: image.variant(resize_to_limit: [400, 400]).processed.service_url,
+                    # lg_url: image.service_url,
+                }
+            end
+        })    
+    end
+    render json: dishes
+end
+
+
+
 
 <% @post.images.each do |image| %>
   <% image_width = image.metadata['width'] %>
