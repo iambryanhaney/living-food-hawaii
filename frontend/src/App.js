@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './css/App.css';
 import { BrowserRouter as Router, Route, /*Redirect*/ } from 'react-router-dom'
 
@@ -11,9 +11,11 @@ import Services from './routes/Services'
 import DishManager from './routes/DishManager'
 
 function App() {
+  const [user, setUser] = useState(null)
+
   return (
     <Router>
-      <Navigation />
+      <Navigation setUser={setUser} user={user}/>
       <Container style={{ marginTop: '100px', border: '2px solid #000000' }} >
         <Route path='/' exact component={Home} />
         <Route path='/services' exact component={Services} />

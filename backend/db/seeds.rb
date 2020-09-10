@@ -9,7 +9,7 @@
 
 
 ### Users
-
+User.create(email: 'admin@livingfoodhawaii.com', password: '123456', first_name: 'Abby', last_name: 'Wiltse', is_admin: true)
 
 ### Tags
         ### Meals
@@ -69,7 +69,7 @@ dish.tags << [
 ]
 images = [
     { io: File.open('./stor_uploads/dish_001.jpg'), filename: 'dish_001.jpg' },
-    { io: File.open('./stor_uploads/Molly 001.jpg'), filename: 'Molly 001.jpg' },
+#     { io: File.open('./stor_uploads/Molly 001.jpg'), filename: 'Molly 001.jpg' },
     { io: File.open('./stor_uploads/collatz.png'), filename: 'collatz.png' },
     { io: File.open('./stor_uploads/blob.jpeg'), filename: 'blob.jpeg' },
     { io: File.open('./stor_uploads/CookieMonster.jpg'), filename: 'CookieMonster.jpg' },
@@ -104,30 +104,30 @@ dish.tags << [
 ]
 dish.images.attach(io: File.open('./stor_uploads/dish_003.jpg'), filename: 'dish_003.jpg')
 
-		### [004]
-dish = Dish.create(description: 'Garden Frittata with Mushrooms, Tomato, Basil, & Local Goat Cheese')
-dish.tags << [
-    Tag.where(name: 'breakfast'),
-    Tag.where(name: 'vegetarian'),
-    Tag.where(name: 'gluten free'),
-    Tag.where(name: 'private parties'),
-    Tag.where(name: 'retreats'),
-    Tag.where(name: 'festivals')
-]
-dish.images.attach(io: File.open('./stor_uploads/dish_004.jpg'), filename: 'dish_004.jpg')
+# 		### [004]
+# dish = Dish.create(description: 'Garden Frittata with Mushrooms, Tomato, Basil, & Local Goat Cheese')
+# dish.tags << [
+#     Tag.where(name: 'breakfast'),
+#     Tag.where(name: 'vegetarian'),
+#     Tag.where(name: 'gluten free'),
+#     Tag.where(name: 'private parties'),
+#     Tag.where(name: 'retreats'),
+#     Tag.where(name: 'festivals')
+# ]
+# dish.images.attach(io: File.open('./stor_uploads/dish_004.jpg'), filename: 'dish_004.jpg')
 
-		### [005]
-dish = Dish.create(description: 'Garden Harvest')
-dish.tags << [
-    Tag.where(name: 'lunch'),
-    Tag.where(name: 'dinner'),
-    Tag.where(name: 'ingredients'),
-    Tag.where(name: 'vegan'),
-    Tag.where(name: 'vegetarian'),
-    Tag.where(name: 'gluten free'),
-    Tag.where(name: 'retreats')
-]
-dish.images.attach(io: File.open('./stor_uploads/dish_005.jpg'), filename: 'dish_005.jpg')
+# 		### [005]
+# dish = Dish.create(description: 'Garden Harvest')
+# dish.tags << [
+#     Tag.where(name: 'lunch'),
+#     Tag.where(name: 'dinner'),
+#     Tag.where(name: 'ingredients'),
+#     Tag.where(name: 'vegan'),
+#     Tag.where(name: 'vegetarian'),
+#     Tag.where(name: 'gluten free'),
+#     Tag.where(name: 'retreats')
+# ]
+# dish.images.attach(io: File.open('./stor_uploads/dish_005.jpg'), filename: 'dish_005.jpg')
 
 # 		### [006]
 # dish = Dish.create(description: 'Salad with Edible Flowers, Beets, & Seeds with a Lilikoi Balsamic Dressing')
