@@ -1,0 +1,411 @@
+@import 'config';
+@import 'utilities';
+
+
+// Hide Scrollbar
+html {
+    overflow:   scroll;
+}
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
+}
+
+// General Styles
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Dosis', sans-serif;
+    line-height: 1.6;
+    background: rgba(39, 207, 82, 0.05)
+}
+
+a {
+    text-decoration: none;
+    color: $dark-color;
+}
+
+h1, h2 {
+    font-weight: 300;
+    line-height: 1.2;
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    width: 100%;
+}
+
+
+// Logo
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 1rem;
+
+    #logo {
+        // Logo Image
+        &-img {
+            width: 70px;
+            height: 70px;
+            color: #fff;
+            margin-right: 0.5rem;
+        }
+
+        // Logo Text
+        &-text {
+            font-weight: bold;
+            font-size: 1.7rem;
+            line-height: 0;
+            color: $light-color;
+        }
+    }
+}
+
+
+// Main Nav
+#main-nav {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 0.5rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    max-width: $website-width;
+    z-index: 9;
+    
+    ul {
+        display: flex;
+    }
+
+    li {
+        padding: 1rem 1.5rem;
+        
+        a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 1.2rem;
+            border-bottom: 3px transparent solid;
+            padding-bottom: 0.5rem;
+            transition: border-color 1s;
+    
+            &:hover {
+                border-color: $medium-color ;
+            }
+            
+            &.current {
+                border-color: $main-color;;
+            }
+        }
+    }
+}
+
+
+// Header
+#header {
+    // Header Home
+    &-home {
+        display: block;
+        background: $bg-image no-repeat center right/cover;
+        height: 100vh;
+        color: #fff;
+
+        // Navbar Translucent Background
+        &::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 85px;
+            background: rgba(0,0,0,0.4);
+            z-index: 8;
+        }
+    }
+}
+
+
+// Intro
+.intro-container {
+    position: relative;
+    top: 25vh;
+    text-align: center;
+    padding: 3rem 1rem;
+    color: $light-color;
+    
+    #intro-header {
+        position: relative;
+        font-size: 3rem;
+        padding: 0 0 2rem 0;
+        z-index: 2;
+        letter-spacing: 2px;
+    }
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 5%;
+        background: green;
+        opacity: 0.2;
+        height: 100%;
+        width: 90%;
+        border-radius: 35%;
+    }
+    
+    .intro-card {
+        display: flex;
+        flex-grow: 1;
+        flex-shrink: 1;
+        align-items: center;
+        justify-content: space-evenly;
+        margin-bottom: 2rem;
+
+        .portrait {
+            flex-basis: 30%;
+            z-index: 2;
+        }
+    
+        ul {
+            margin: 0 2rem 0 1rem;
+            z-index: 2;
+        }
+
+        li {
+            font-size: 1 rem;
+            margin-bottom: 2rem;
+        }
+    }   
+}
+
+#intro {
+    &-img {
+        border-radius: 30%;
+        margin: 0 0 0 3rem;
+        opacity: 0.9;
+    }
+}
+
+
+// Section About
+#about {
+    // About A
+
+    &-a {
+        margin-bottom: 2.5rem;
+
+        .phrase-divider {
+            color: $main-color;
+            margin: 0 1rem;
+        }
+
+        .about-info {
+            display: grid;
+            grid-template-rows: 120px 270px 120px;
+            grid-template-areas:
+                'bio1 bio1 bioimage1'
+                'bioimage2 bio2 bioimage1'
+                'bio3 bio3 bioimage1';
+            grid-gap: 1.2rem;
+        }
+
+        // Grid Area
+        .bio-image {
+            grid-area: bioimage1;
+        }
+
+        .bio {
+            grid-area: bio1;
+            text-align: left;
+            border-top: 3px solid $main-color;
+            border-right: 3px solid $main-color;
+            border-left: 3px solid $main-color;
+            padding: 0.8rem;
+        }
+
+        .bio-image2 {
+            grid-area: bioimage2;
+        }
+
+        .bio2 {
+            grid-area: bio2;
+            border-left: 3px solid $main-color;
+            border-right: 3px solid $main-color;
+            padding: 0.8rem;
+        }
+
+        .bio3 {
+            grid-area: bio3;
+            border-right: 3px solid $main-color;
+            border-bottom: 3px solid $main-color;
+            border-left: 3px solid $main-color;
+            padding: 0.8rem;
+        }
+    }
+}
+
+
+/* Callback form */
+.contact-header {
+    color: $main-color;
+}
+
+.callback-form {
+    width: 100%;
+    padding: 20px 0;
+
+   
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .form-control {
+        margin-bottom: 15px;
+    }
+
+    input {
+        width: 100%;
+        padding: 4px;
+        height: 40px;
+        border: 1px solid #f5f5f5;
+        // font-family: Tahoma, sans-serif;
+    }
+
+    textarea {
+        height: 100px;
+        width: 100%;
+        padding: 4px;
+        border: 1px solid #f5f5f5;
+        font-family: Tahoma, sans-serif;
+        resize: none;
+    }
+
+    input:focus, textarea:focus {
+        outline: none;
+        border-color: $main-color;
+    }
+
+    .btn-main {
+        padding: 12px 0;
+        margin-top: 20px;
+    }
+}
+
+
+
+
+
+
+
+
+/* Footer */
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    height: 80px;
+    max-width: $website-width;
+    margin: auto;
+
+    p {
+        margin-left: 5rem;
+    }
+
+
+    a {
+        color: #fff;
+
+        i {
+            transition: all 0.5s;
+        }
+
+        &:hover {
+            i {
+                color: $main-color;
+                transform: scale(1.2);
+            }
+        }
+    }
+    
+    .social {
+        margin-right: 5rem;
+
+        > * {
+            margin-right: 30px;
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// body {
+//     background: #dcdcdc;
+//   }
+  
+//   h1 {
+//     text-align: center;
+//   }
+  
+//   h4 {
+//     text-align: center;
+//   }
+  
+//   .indented-paragraph {
+//     max-width: 950px;
+//     text-indent: 30px;
+//     margin: 20px auto;
+//   }
+  
+//   .testing {
+//     margin: 100px auto;
+//   }
+  
+  .container-dish {
+    background: #c5e3d3;
+
+    &:hover {
+        background: #d3e3d0;
+    }
+  }

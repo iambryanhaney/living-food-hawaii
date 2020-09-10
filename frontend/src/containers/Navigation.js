@@ -2,10 +2,13 @@ import React, { useState } from 'react'
 
 import { NavLink } from 'react-router-dom'
 
-import Navbar from 'react-bootstrap/Navbar'
-import Nav from 'react-bootstrap/Nav'
-import Button from 'react-bootstrap/Button'
+// import Navbar from 'react-bootstrap/Navbar'
+// import Nav from 'react-bootstrap/Nav'
+// import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
+
+import AbbyPortrait01 from '../assets/media/abby_portrait_01.jpeg'
+import Logo from '../assets/media/LFH_logo_lowres_green.png'
 
 const LOGIN_URL = 'http://localhost:3001/login'
 
@@ -49,7 +52,48 @@ export default function Navigation(props) {
 
     return (
         <>
-            <Navbar fixed="top" bg="dark" variant="dark" expand="sm">
+            {/* Header */}
+            
+            <header id="header-home" style={{ height: props.viewingGallery ? '85px' : '100vh' }}>
+                <nav id="main-nav">
+                    <a href="#header-home"><h1 className="logo">
+                        <img src={Logo} alt="Living Food Hawaii" id="logo-img" />
+                        <span id="logo-text">Living Food Hawaii</span>
+                    </h1></a>
+                    <ul>
+                        <li><NavLink to="/#header-home" exact activeClassName="current">Home</NavLink></li>
+                        <li><a href="#about-a">About</a></li>
+                        {/* <li><a href="services.html">Services</a></li> */}
+                        <li><a href="#contact">Contact</a></li>
+                        <li><NavLink to="/gallery" exact activeClassName="current">Gallery</NavLink></li>
+                        { props.user && props.user.is_admin ? 
+                            <>
+                                <li><NavLink to="/dish-manager" exact activeClassName="current">Dish Manager</NavLink></li>
+                                <li><a href="#" onClick={() => props.setUser(null)}>Logout</a></li>
+                            </> : <li><a href="#" onClick={() => setShowModal(true)}>Login</a></li>
+                        }
+                    </ul>
+                </nav>
+
+                { props.viewingGallery || <div className="container intro-container">
+                    <h1 id="intro-header">Private Chef & Catering</h1>
+                    <div className="intro-card">
+                        <div className="portrait">
+                            <img src={AbbyPortrait01} alt="Portrait 1" id="intro-img" />
+                        </div>
+                        <ul>
+                            <li className="intro-list"><i className="fas fa-seedling fa-2x"> Organically Grown</i></li>
+                            <li className="intro-list"><i className="fas fa-carrot fa-2x"> Locally Sourced</i></li>
+                            <li className="intro-list"><i className="fas fa-pepper-hot fa-2x"> Food From the Heart</i></li>
+                        </ul>
+                    </div>
+                </div> }
+
+            </header>
+
+
+
+            {/* <Navbar fixed="top" bg="dark" variant="dark" expand="sm">
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav" style={{ display: 'flex', alignItems: 'space-between' }}>
                     <Nav className="mr-auto">
@@ -62,8 +106,9 @@ export default function Navigation(props) {
                         <Button variant="primary" onClick={() => setShowModal(true)}>Login</Button>
                     </div>
                 </Navbar.Collapse>
-            </Navbar>
-            <Modal show={showModal} onHide={() => setShowModal(false)}>
+            </Navbar> */}
+
+            <Modal show={showModal} onHide={() => setShowModal(false)} centered>
                 <Modal.Header>
                     <h3 style={{ width: '100%', textAlign: 'center', fontWeight: 'bold' }}>
                         Login

@@ -38,6 +38,7 @@ export default function DishManager(props) {
     // Load dishes and tags
     useEffect(() => {
         let isMounted = true
+        props.setViewingGallery(true)
         
         fetch(DISH_URL)
         .then(resp => resp.json())
@@ -60,7 +61,10 @@ export default function DishManager(props) {
         })
         .catch(err => console.error(err))
 
-        return () => isMounted = false
+        return () => {
+            isMounted = false
+            props.setViewingGallery(false)
+        }
     }, [])
 
     // Reset form elements on change of selectedDish
@@ -226,7 +230,7 @@ export default function DishManager(props) {
 
     const renderModal = () => {
         return (
-                <Modal size='xl' show={showModal} onHide={hideModal} keyboard={false} centered>
+                <Modal size='xl' show={showModal} onHide={hideModal} keyboard={false} centered backdrop="static">
                     <Modal.Header style={{ background: '#c5e3d3', textAlign: 'center' }} closeButton>
                         <h3 style={{ width: '100%', textAlign: 'center', fontWeight: 'bold' }}>
                             { selectedDish.is_new ? 'Create Dish' : 'Edit Dish' }
@@ -275,10 +279,9 @@ export default function DishManager(props) {
     //      -----------
 
     return (
-        <div>
+        <div style={{ maxWidth: '1280px', margin: '2rem auto'}}>
             {/* <form onSubmit={handleSubmit}> */}
-                <h1>Dish Manager</h1>
-                <p style={{ width: '100%', textAlign: 'center', fontWeight: 'bold' }}>Here are the dishes...</p>
+                <h1 style={{ textAlign: 'center' }}>Dish Manager</h1>
                 <Button variant="primary" onClick={handleClickCreate} style={{ marginBottom: '1rem' }}>Create New Dish</Button>
                 { renderDishes() }
                 { renderModal() }

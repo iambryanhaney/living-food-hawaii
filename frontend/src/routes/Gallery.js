@@ -15,11 +15,11 @@ const TAG_URL = 'http://localhost:3001/tags'
 
 export default class Gallery extends Component {
 
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             dishImages: {},
-            show_borders: true,
+            show_borders: false,
             borders: {},
             filters: {
                 meals: '',
@@ -32,7 +32,7 @@ export default class Gallery extends Component {
             dishes: [],
             filteredDishes: [],
             tags: [],
-            filterEnabledColor: '#34b7eb',
+            filterEnabledColor: '#3bc23b',
             filterDisabledColor: null,
             showZoomModal: false,
             dishIndex: null,
@@ -40,19 +40,7 @@ export default class Gallery extends Component {
         }
     }
 
-    componentWillMount() {
-        this.importImages()
-    }
-
-    importImages() {
-        // const context = require.context('../assets/media/dish-images-assigned', false, /\.(gif|jpe?g|svg)$/)
-        // const dishImages = {}
-        // context.keys().forEach(key => dishImages[key.replace('./', '')] = context(key) );
-        // this.setState({ dishImages: dishImages })
-    }
-
     componentDidMount() {
-
         if (this.state.show_borders) {
             this.setState({
                 borders: {
@@ -60,6 +48,9 @@ export default class Gallery extends Component {
                 }
             })
         }
+
+        this.props.setViewingGallery(true)
+        console.log(this.props.viewingGallery)
 
         fetch(DISH_URL)
         .then(resp => resp.json())
@@ -70,6 +61,10 @@ export default class Gallery extends Component {
         .then(resp => resp.json())
         .then(tags => this.updateTags(tags))
         .catch(err => console.error(err))
+    }
+
+    componentWillUnmount() {
+        this.props.setViewingGallery(false)
     }
 
     updateDishes = (dishes) => {
@@ -115,7 +110,7 @@ export default class Gallery extends Component {
         return (
             <Col xs={12} sm={6} md={2} lg >
                 { group[0].toUpperCase() + group.slice(1) }<br />
-                <select style={{ backgroundColor: this.state.filters[group] ? this.state.filterEnabledColor : this.state.filterDisabledColor }}
+                <select style={{ width: '120px', backgroundColor: this.state.filters[group] ? this.state.filterEnabledColor : this.state.filterDisabledColor }}
                     name={group} id={group} value={this.state.filters[group]} onChange={this.filterDishes}>
                     <option value=''>All</option>
                     { this.state.tags.filter(tag => tag.group === group).sort((a,b) => a.name.localeCompare(b.name)).map(tag =>
@@ -166,7 +161,7 @@ export default class Gallery extends Component {
         // return this.state.filteredDishes.length === 0 ? null : (
         return this.state.dishIndex === null ? null : (
             <Modal size='lg' show={this.state.showZoomModal} onHide={() => this.closeZoomModal()} keyboard={false} centered>
-                <Modal.Header style={{ backgroundColor: '#60c9f0', textAlign: 'center' }} closeButton>
+                <Modal.Header style={{ backgroundColor: '#3bc23b', textAlign: 'center' }} closeButton>
                     {/* <Modal.Title></Modal.Title> */}
                     {this.state.filteredDishes[this.state.dishIndex].description}
                 </Modal.Header>
@@ -201,13 +196,13 @@ export default class Gallery extends Component {
 
     render() {
         return (
-            <div >
-                <h1>Gallery</h1>
+            <div style={{ maxWidth: '1280px', margin: '2rem auto'}}>
+                <h1 style={{ textAlign: 'center', marginBottom: '1.5rem' }}>Gallery</h1>
                 <Container>
-                    <Row>
+                    <Row style={{ marginBottom: '1.5rem'}}>
                         <Col xs={12} sm={6} md={2} lg >
                             Meals<br />
-                            <select style={{ backgroundColor: this.state.filters['meals'] ? this.state.filterEnabledColor : this.state.filterDisabledColor }}
+                            <select style={{ width: '120px', backgroundColor: this.state.filters['meals'] ? this.state.filterEnabledColor : this.state.filterDisabledColor }}
                                 name='meals' id='meals' value={this.state.filters.meals} onChange={this.filterDishes}>
                                 <option value=''>All</option>
                                 <option value='breakfast'>Breakfast</option>
