@@ -1,10 +1,5 @@
 import React from 'react'
-
 import Ingredients01 from '../assets/media/ingredients_01.jpeg'
-
-
-
-
 
 export default function Contact() {
     return (
