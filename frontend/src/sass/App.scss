@@ -6,6 +6,7 @@
 html {
     overflow:   scroll;
 }
+
 ::-webkit-scrollbar {
     width: 0px;
     background: transparent; /* make scrollbar transparent */
@@ -133,73 +134,139 @@ img {
     }
 }
 
+#splash {
+    position: absolute;
+    top: 13vh;
+    width: 100%;
+}
 
 // Intro
 .intro-container {
     position: relative;
-    top: 25vh;
     text-align: center;
-    padding: 3rem 1rem;
+    padding: 1.5rem 1rem;
     color: $light-color;
-    
-    #intro-header {
-        position: relative;
-        font-size: 3rem;
-        padding: 0 0 2rem 0;
-        z-index: 2;
-        letter-spacing: 2px;
-    }
+    // max-height: 800px;
 
+    // Splash underlay
     &::before {
         content: '';
         position: absolute;
         top: 0;
-        left: 5%;
-        background: green;
-        opacity: 0.2;
+        left: 0;
+        right: 0;
+        // background: hsla(63, 100, 40, 0.2);
+        background: hsla(63, 100, 25, 0.2);
+        backdrop-filter: blur(1px);
         height: 100%;
-        width: 90%;
-        border-radius: 35%;
+        width: 83%;
+        margin: auto;
+        border-radius: 10px;
+    }
+    
+    // Splash header
+    #intro-header {
+        position: relative;
+        font-size: 3rem;
+        font-weight: 600;
+        // width: 50%;
+        width: 75%;
+        line-height: 5rem;
+        margin: 0 auto 2.5rem auto;
+        z-index: 2;
+        letter-spacing: 1.5px;
+        border: 2px  hsla(125, 47, 20, 0.5) solid;
+        background:  hsla(190, 65, 30, 0.5);
+        // background:  hsla(125, 47, 30, 0.5);
+        border-radius: 20px 100px 20px 100px;
+        // border-radius: 8px;
+        box-shadow: -8px -4px 8px 4px hsla(125, 47, 20, 0.1);
+
+        #signature {
+            font-size: 1.3rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            line-height: 1rem;
+            margin: 0.2rem 0 1rem 0;
+
+            #full-name {
+                font-size: 2rem;
+                font-weight: 600;
+                // color: $main-color;
+                color: hsl(170, 60, 30);
+                margin-left: 0.2rem;
+            }
+        }
+
     }
     
     .intro-card {
         display: flex;
-        flex-grow: 1;
-        flex-shrink: 1;
         align-items: center;
         justify-content: space-evenly;
-        margin-bottom: 2rem;
 
         .portrait {
-            flex-basis: 30%;
+            flex-basis: 40%;
+            flex-grow: 0;
+            // flex-shrink: 0;
+            margin: 0 0 0 3rem;
             z-index: 2;
-        }
-    
+            // border: 2px  hsla(125, 47, 20, 0.3) solid;
+            border-radius: 45px;
+            overflow: hidden;
+            // background:  hsla(190, 100, 30, 0.5);
+            box-shadow: -2px 8px 8px 4px hsla(125, 47, 20, 0.6);
+        }    
+
+        // Splash Bullet Points
         ul {
-            margin: 0 2rem 0 1rem;
+            flex-basis: 30%;
+            // flex-grow: 0;
+            // flex-shrink: 2;
+            position: relative;
+            margin: -1rem 3rem 0 0rem;
+            padding: 30px 15px 0 15px;
             z-index: 2;
+            border: 2px  hsla(125, 47, 20, 0.6) solid;
+            background:  hsla(190, 65, 30, 0.5);
+            // background:  hsla(125, 47, 30, 0.5);
+            border-radius: 10px;
+            box-shadow: 0px 8px 8px 6px hsla(125, 47, 20, 0.4);
+
+            li {
+                margin-bottom: 2rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                
+                i {
+                    &.fa-sun {
+                        color: hsla(60, 80, 50, 1)
+                    }
+    
+                    &.fa-carrot {
+                        color: #3bc23b
+                    }
+    
+                    &.fa-heart {
+                        color: hsla(0, 70, 50, 1)
+                    }
+    
+                    span {
+                        color: $light-color;
+                    }
+                }
+            }
         }
 
-        li {
-            font-size: 1 rem;
-            margin-bottom: 2rem;
-        }
     }   
-}
-
-#intro {
-    &-img {
-        border-radius: 30%;
-        margin: 0 0 0 3rem;
-        opacity: 0.9;
-    }
 }
 
 
 // Section About
 #about {
-    // About A
 
+    // About A
     &-a {
         margin-bottom: 2.5rem;
 
@@ -256,14 +323,12 @@ img {
 
 /* Callback form */
 .contact-header {
-    color: $main-color;
+    color:  $main-color;
 }
 
 .callback-form {
     width: 100%;
     padding: 20px 0;
-
-   
 
     label {
         display: block;
@@ -279,7 +344,6 @@ img {
         padding: 4px;
         height: 40px;
         border: 1px solid #f5f5f5;
-        // font-family: Tahoma, sans-serif;
     }
 
     textarea {
@@ -348,64 +412,12 @@ img {
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// body {
-//     background: #dcdcdc;
-//   }
   
-//   h1 {
-//     text-align: center;
-//   }
-  
-//   h4 {
-//     text-align: center;
-//   }
-  
-//   .indented-paragraph {
-//     max-width: 950px;
-//     text-indent: 30px;
-//     margin: 20px auto;
-//   }
-  
-//   .testing {
-//     margin: 100px auto;
-//   }
-  
-  .container-dish {
+
+.container-dish {
     background: #c5e3d3;
 
     &:hover {
         background: #d3e3d0;
     }
-  }
+}
