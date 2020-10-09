@@ -47,12 +47,16 @@ input[class^='btn-']:hover {
         color: set-text-color($main-color);
     }
     &-dark {
-        background: $dark-color;
-        color: set-text-color($dark-color);
+        // background: $dark-color;
+        // color: set-text-color($dark-color);
+        background: hsl(210, 10, 23);
+        color: set-text-color(hsl(210, 10, 23));
     }
     &-light {
-        background: $light-color;
-        color: set-text-color($light-color);
+        // background: $light-color;
+        // color: set-text-color($light-color);
+        background: hsl(210, 17, 98);
+        color: set-text-color(hsl(210, 17, 98));
     }
     &-medium {
         background: $medium-color;
@@ -95,15 +99,14 @@ input[class^='btn-']:hover {
     // text-transform: uppercase;
 }
 
-.bottom-line {
-    height: 2px;
-    width: 3rem;
-    background: $main-color;
+.divider {
+    height: 1px;
+    width: 75%;
+    background: $light-color;
     display: block;
-    margin: 0 auto 1rem auto;
+    margin: 1rem auto 0 auto;
     position: relative;
-    right: 0.5%;
-    // padding-right: 20rem;
+    z-index: -1;
 }
 
 
@@ -127,6 +130,19 @@ input[class^='btn-']:hover {
     flex-direction: column;
     flex-basis: 100%;
     flex: 1;
+}
+
+.flex-columns .column-a {
+    flex-basis: 70%;
+    flex-grow: 0;
+
+    .column-1 {
+        
+        img {
+            max-height: 450px;
+            // object-fit: cover;
+        }
+    }
 }
 
 .flex-columns .column .column-1,

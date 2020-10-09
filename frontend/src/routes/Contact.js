@@ -1,5 +1,5 @@
 import React from 'react'
-import Ingredients01 from '../assets/media/ingredients_01.jpeg'
+import FruitCircle from '../assets/media/fruit_circle.jpg'
 
 export default function Contact() {
     return (
@@ -7,12 +7,12 @@ export default function Contact() {
             {/* Section C: Contact */}
             <section id="contact" className="contact flex-columns">
                 <div className="row">
-                    <div className="column">
+                    <div className="column column-a">
                         <div className="column-1">
-                            <img src={Ingredients01} alt="" />
+                            <img src={FruitCircle} alt="" style={{ filter: 'grayscale(5%)' }} />
                         </div>
                     </div>
-                    <div className="column">
+                    <div className="column column-b">
                         <div className="column-2 bg-light">
                             <h2><i className="fas fa-envelope-open-text contact-header"></i> Contact <span className="contact-header">Abby Jane</span></h2>
                             <form action="" className="callback-form">
