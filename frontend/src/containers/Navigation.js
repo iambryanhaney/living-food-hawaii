@@ -43,31 +43,31 @@ export default function Navigation(props) {
         setShowModal(false)
     }
 
+// About to get crazy...
+
     return (
         <>
-            {/* Header */}
-            
-            <header id="header-home" style={{ height: props.viewingGallery ? '85px' : '100vh' }}>
-                <nav id="main-nav">
-                    <a href="#header-home"><h1 className="logo">
-                        <img src={Logo} alt="Living Food Hawaii" id="logo-img" />
-                        <span id="logo-text">Living Food Hawaii</span>
-                    </h1></a>
-                    <ul>
-                        <li><NavLink to="/#header-home" exact activeClassName="current">Home</NavLink></li>
-                        <li><a href="#about-a">About</a></li>
-                        {/* <li><a href="services.html">Services</a></li> */}
-                        <li><a href="#contact">Contact</a></li>
-                        <li><NavLink to="/gallery" exact activeClassName="current">Gallery</NavLink></li>
-                        { props.user?.is_admin ? 
-                            <>
-                                <li><NavLink to="/dish-manager" exact activeClassName="current">Dish Manager</NavLink></li>
-                                <li><a href="#" onClick={() => props.setUser(null)}>Logout</a></li>
-                            </> : <li><a href="#" onClick={() => setShowModal(true)}>Login</a></li>
-                        }
-                    </ul>
-                </nav>
-            </header>
+            <section id="background-banner" style={{ height: props.viewingGallery ? '85px' : '50vh' }} />
+            <nav id="nav-trans"/>
+            <nav id="main-nav">
+                <a href="#background-banner"><h1 className="logo">
+                    <img src={Logo} alt="Living Food Hawaii" id="logo-img" />
+                    <span id="logo-text" style={{ letterSpacing: '1.3px' }}>Living Food Hawaii</span>
+                </h1></a>
+                <ul>
+                    <li><NavLink to="/#background-banner" exact activeClassName="current">Home</NavLink></li>
+                    <li><a href="#about-a">About</a></li>
+                    {/* <li><a href="services.html">Services</a></li> */}
+                    <li><a href="#contact">Contact</a></li>
+                    <li><NavLink to="/gallery" exact activeClassName="current">Gallery</NavLink></li>
+                    { props.user?.is_admin ? 
+                        <>
+                            <li><NavLink to="/dish-manager" exact activeClassName="current">Dish Manager</NavLink></li>
+                            <li><a href="#" onClick={() => props.setUser(null)}>Logout</a></li>
+                        </> : <li><a href="#" onClick={() => setShowModal(true)}>Login</a></li>
+                    }
+                </ul>
+            </nav>
 
             <Modal show={showModal} onHide={() => setShowModal(false)} centered>
                 <Modal.Header>
