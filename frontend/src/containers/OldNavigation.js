@@ -1,10 +1,10 @@
-/* eslint-disable */
-
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import Modal from '../containers/Modal.js'
-import ModalContent from '../containers/ModalContent.js'
-import Logo from '../assets/media/LFH_logo_lowres_olive_invert.png'
+import Modal from 'react-bootstrap/Modal'
+import Logo1 from '../assets/media/LFH_logo_lowres_green.png'
+import Logo2 from '../assets/media/LFH_logo_lowres_olive.png'
+import Logo3 from '../assets/media/LFH_logo_lowres_olive_invert.png'
+import 'bootstrap/dist/css/bootstrap.css'
 
 const LOGIN_URL = 'http://localhost:3001/login'
 
@@ -46,13 +46,15 @@ export default function Navigation(props) {
         setShowModal(false)
     }
 
+// About to get crazy...
+
     return (
         <>
             <section id="background-banner" style={{ height: props.viewingGallery ? '85px' : '50vh' }} />
             <nav id="nav-trans"/>
             <nav id="main-nav">
                 <a href="#background-banner"><h1 className="logo">
-                    <img src={Logo} alt="Living Food Hawaii" id="logo-img" />
+                    <img src={Logo3} alt="Living Food Hawaii" id="logo-img" />
                     <span id="logo-text" style={{ letterSpacing: '1.3px' }}>Living Food Hawaii</span>
                 </h1></a>
                 <ul>
@@ -70,26 +72,39 @@ export default function Navigation(props) {
                 </ul>
             </nav>
 
-            <Modal contentClass="modal-content-login" showModal={showModal} onHide={() => setShowModal(false)}>
-                <div className="modal-header">
-                    <i class="far fa-times-circle fa-lg closeBtn" onClick={() => setShowModal(false)}></i>
-                    <h3>Welcome back!</h3>
-                </div>
-                <div className="modal-body">
-                    <form className="login-form" onSubmit={handleSubmit}>
-                        <div className="form-control">
-                            <label htmlFor="email"></label>
-                            <input type="text" name="email" id="email" placeholder="Email Address"
-                                onChange={event => setFormEmail(event.target.value)}/>
+            <Modal show={showModal} onHide={() => setShowModal(false)} centered>
+                <Modal.Header>
+                    <h3 style={{ width: '100%', textAlign: 'center', fontWeight: 'bold' }}>
+                        Login
+                    </h3>
+                </Modal.Header>
+                <Modal.Header>
+                    <h3 style={{ width: '100%', textAlign: 'center', fontWeight: 'bold' }}>
+                        Login
+                    </h3>
+                </Modal.Header>
+                <Modal.Header>
+                    <h3 style={{ width: '100%', textAlign: 'center', fontWeight: 'bold' }}>
+                        Login
+                    </h3>
+                </Modal.Header>
+                <Modal.Body>
+                    <form onSubmit={handleSubmit}>
+                        <div style={{ width: '75%', margin: 'auto' }}>
+                            <label htmlFor="email" style={{ width: '100%', textAlign: 'center', fontWeight: 'bold', display: 'inline', marginRight: '10px' }}>Email</label>
+                            <input type="text" name="email" id="email" style={{ width: '75%', marginBottom: '1rem', display: 'inline' }} 
+                                placeholder="Enter a valid email address" onChange={event => setFormEmail(event.target.value)}/>
                         </div>
-                        <div className="form-control">
-                            <label htmlFor="password"></label>
-                            <input type="password" name="password" id="password" placeholder="Password"
-                                onChange={event => setFormPassword(event.target.value)}/>
+                        
+                        <div style={{ width: '75%', margin: 'auto' }}>
+                            <label htmlFor="password" style={{ width: '100%', textAlign: 'center', fontWeight: 'bold', display: 'inline', marginRight: '10px' }}>Password</label>
+                            <input type="password" name="password" id="password" style={{ width: '75%', marginBottom: '1rem', display: 'inline' }}
+                                placeholder="Enter a password" onChange={event => setFormPassword(event.target.value)}/>
+
+                            <input type="submit" value="Submit" hidden/>
                         </div>
-                        <input type="submit" value="Log In" id="login-submit" className="btn-main" />
                     </form>
-                </div>
+                </Modal.Body>
             </Modal>
         </>
     )
