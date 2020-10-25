@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React, {useState, useEffect, useRef} from 'react'
 import { generateImageUrl } from '../components/ImageHandler'
 import Modal from 'react-bootstrap/Modal'
@@ -255,7 +257,7 @@ export default function DishManager(props) {
                         <input type="file" ref={formFileInput} multiple={true} accept="image/*" /> <br /><br />
                         { renderTags() }
                     </Modal.Body>
-                    <Modal.Footer style={{ backgroundColor: '#c5e3d3', textAlign: 'center', justifyContent: 'space-between' }}>
+                    <Modal.Footer style={{ textAlign: 'center', justifyContent: 'space-between' }}>
                         <div>
                             { selectedDish.is_new || 
                                 <Button variant="danger" onClick={handleClickDelete}>Delete Dish</Button> }

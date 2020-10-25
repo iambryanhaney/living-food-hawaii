@@ -3,8 +3,6 @@ import './css/App.css';
 import { BrowserRouter as Router, Route, /*Redirect*/ } from 'react-router-dom'
 
 import Navigation from './containers/Navigation'
-
-
 import Home from './routes/Home'
 import Gallery from './routes/Gallery'
 import DishManager from './routes/DishManager'

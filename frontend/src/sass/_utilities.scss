@@ -128,19 +128,19 @@ input[class^='btn-']:hover {
 .flex-columns .column {
     display: flex;
     flex-direction: column;
-    flex-basis: 100%;
+    // flex-basis: 100%;
     flex: 1;
 }
 
 .flex-columns .column-a {
-    flex-basis: 70%;
-    flex-grow: 0;
+    // flex-basis: 70%;
+    // flex-grow: 0;
 
     .column-1 {
         
         img {
-            max-height: 450px;
-            // object-fit: cover;
+            // max-height: 450px;
+            object-fit: cover;
         }
     }
 }

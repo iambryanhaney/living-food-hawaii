@@ -1,5 +1,6 @@
 import React from 'react'
 import FruitCircle from '../assets/media/fruit_circle.jpg'
+import Logo from '../assets/media/LFH_logo_lowres_olive_invert.png'
 
 export default function Contact() {
     return (
@@ -34,6 +35,11 @@ export default function Contact() {
                                 </div>
                                 <input type="submit" value="Send" id="submit" className="btn-main" />
                             </form>
+                        </div>
+                    </div>
+                    <div className="column column-c">
+                        <div className="column-3">
+                            <img src={Logo} alt="" style={{ filter: 'grayscale(5%)' }} />
                         </div>
                     </div>
                 </div>
