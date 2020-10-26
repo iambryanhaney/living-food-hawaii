@@ -48,7 +48,7 @@ export default function Navigation(props) {
 
     return (
         <>
-            <section id="background-banner" style={{ height: props.viewingGallery ? '85px' : '50vh' }} />
+            <section id="background-banner" className={props.viewingGallery ? 'compressed' : ''} />
             <nav id="nav-trans"/>
             <nav id="main-nav">
                 <a href="#background-banner"><h1 className="logo">
@@ -72,7 +72,7 @@ export default function Navigation(props) {
 
             <Modal contentClass="modal-content-login" showModal={showModal} onHide={() => setShowModal(false)}>
                 <div className="modal-header">
-                    <i class="far fa-times-circle fa-lg closeBtn" onClick={() => setShowModal(false)}></i>
+                    <i className="far fa-times-circle fa-lg closeBtn" onClick={() => setShowModal(false)}></i>
                     <h3>Welcome back!</h3>
                 </div>
                 <div className="modal-body">

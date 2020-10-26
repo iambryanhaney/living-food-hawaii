@@ -15,7 +15,7 @@ function generateImageUrl(image, size='large') {
         request.edits = {
             resize: {
                 width: sizes[size],
-            }
+            },
         }
     }
 

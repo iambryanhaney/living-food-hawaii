@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import { generateImageUrl } from '../components/ImageHandler'
 import Card from 'react-bootstrap/Card'
 import Container from 'react-bootstrap/Container'
@@ -6,75 +6,64 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
+// import 'bootstrap/dist/css/bootstrap.css'
 
 const DISH_URL = 'http://localhost:3001/dishes'
 const TAG_URL = 'http://localhost:3001/tags'
 
-export default class Gallery extends Component {
+export default function Gallery({setViewingGallery}) {
+    const [dishImages, setDishImages] = useState({})
+    const [filters, setFilters] = useState({
+        meals: '',
+        courses: '',
+        diets: '',
+        themes: '',
+        events: '',
+        services: '',
+    })
+    const [dishes, setDishes] = useState([])
+    const [filteredDishes, setFilteredDishes] = useState([])
+    const [tags, setTags] = useState([])
+    const [showZoomModal, setShowZoomModal] = useState(false)
+    const [dishIndex, setDishIndex] = useState(null)
+    const [imageIndex, setImageIndex] = useState(null)
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            dishImages: {},
-            show_borders: false,
-            borders: {},
-            filters: {
-                meals: '',
-                courses: '',
-                diets: '',
-                themes: '',
-                events: '',
-                services: '',
-            },
-            dishes: [],
-            filteredDishes: [],
-            tags: [],
-            filterEnabledColor: '#3bc23b',
-            filterDisabledColor: null,
-            showZoomModal: false,
-            dishIndex: null,
-            imageIndex: null,
-        }
-    }
+    const filterEnabledColor = '#71bc62'
+    const filterDisabledColor = null
 
-    componentDidMount() {
-        if (this.state.show_borders) {
-            this.setState({
-                borders: {
-                    black: '2px solid #000000',
-                }
-            })
-        }
-
-        this.props.setViewingGallery(true)
-        console.log(this.props.viewingGallery)
+    useEffect(() => {
+        console.log("About to setViewingGallery to true...")
+        setViewingGallery(true)
 
         fetch(DISH_URL)
         .then(resp => resp.json())
-        .then(dishes => this.updateDishes(dishes))
+        .then(fetchedDishes => updateDishes(fetchedDishes))
         .catch(err => console.error(err))
 
         fetch(TAG_URL)
         .then(resp => resp.json())
-        .then(tags => this.updateTags(tags))
+        .then(fetchedTags => updateTags(fetchedTags))
         .catch(err => console.error(err))
+
+
+        return (() => {
+            console.log("About to setViewingGallery to false...");
+            setViewingGallery(false)
+        })
+    },[])
+
+    const updateDishes = (fetchedDishes) => {
+        setDishes(fetchedDishes)
+        setFilteredDishes(fetchedDishes)
     }
 
-    componentWillUnmount() {
-        this.props.setViewingGallery(false)
+    const updateTags = (fetchedTags) => {
+        setTags(fetchedTags)
     }
 
-    updateDishes = (dishes) => {
-        this.setState({ dishes: dishes, filteredDishes: dishes })
-    }
-
-    updateTags = (tags) => {
-        this.setState({ tags: tags })
-    }
-
-    filterDishes = (event) => {
-        const updatedFilters = {...this.state.filters, [event.target.name]: event.target.value}
-        let updatedDishes = this.state.dishes
+    const filterDishes = (event) => {
+        const updatedFilters = {...filters, [event.target.name]: event.target.value}
+        let updatedDishes = dishes
     
         for (let filter in updatedFilters) {
             if (updatedFilters[filter]) {
@@ -83,18 +72,31 @@ export default class Gallery extends Component {
                 )
             }
         }
-        this.setState({ filters: updatedFilters, filteredDishes: updatedDishes })
+        setFilters(updatedFilters)
+        setFilteredDishes(updatedDishes)
     }
     
-    renderDishes = () => {
-        const filteredDishes = this.state.filteredDishes.map((dish, dishIndex) => 
+    const renderDishes = () => {
+        const dishCards = filteredDishes.map((dish, dishIndex) => 
             dish.images.map((image, imageIndex) => 
-                <Card key={`dish${dish.id}image${image.id}`} style={{ width: '20%', margin: '20px' }}>
-                    <Card.Img style={{ cursor: 'pointer' }} variation="top" src={generateImageUrl(image, 'medium')} onClick={() => this.showZoomModal(dishIndex, imageIndex)} />
-                </Card>
+                <div className="gallery-card" key={`dish${dish.id}image${image.id}`}>
+                    <img className="gallery-card-img" src={generateImageUrl(image, 'medium')} onClick={() => showModal(dishIndex, imageIndex)} />
+                </div>
             )
         )
-        return filteredDishes.length > 0 ? filteredDishes : (
+
+        console.log(`Pre loop. dishCards.length = ${dishCards.length}`)
+        // Add invisible cards to prevent flex items from expanding to fill final row
+        // for(let i = 0; i < (dishCards.length % 4); i++) {
+        for(let i = 0; i < 2; i++) {
+            console.log(`Loop ${i}`)
+            dishCards.push(
+                <div className="gallery-card-invisible" key={`invis-card-${i}`}></div>
+            )
+        }
+
+
+        return dishCards.length > 0 ? dishCards : (
             <>
                 <br />
                 There are no offerings that match your exact request. Please try changing your filters.
@@ -103,79 +105,77 @@ export default class Gallery extends Component {
         )
     }
 
-    renderSortedSelection = (group) => {
+    const renderSortedSelection = (group) => {
         return (
-            <Col xs={12} sm={6} md={2} lg >
-                { group[0].toUpperCase() + group.slice(1) }<br />
-                <select style={{ width: '120px', backgroundColor: this.state.filters[group] ? this.state.filterEnabledColor : this.state.filterDisabledColor }}
-                    name={group} id={group} value={this.state.filters[group]} onChange={this.filterDishes}>
+            <div className="filter">
+                <p>{ group[0].toUpperCase() + group.slice(1) }</p>
+                <select style={{ width: '120px', backgroundColor: filters[group] ? filterEnabledColor : filterDisabledColor }}
+                    name={group} id={group} value={filters[group]} onChange={filterDishes}>
                     <option value=''>All</option>
-                    { this.state.tags.filter(tag => tag.group === group).sort((a,b) => a.name.localeCompare(b.name)).map(tag =>
+                    { tags.filter(tag => tag.group === group).sort((a,b) => a.name.localeCompare(b.name)).map(tag =>
                         <option key={tag.name} value={tag.name}>{tag.name.split(' ').map(name => name[0].toUpperCase() + name.slice(1)).join(' ')}</option>
                     )}
                 </select>
-            </Col>
+            </div>
         )
     }
 
-    showZoomModal = (dishIndex, imageIndex) => {
-        this.setState({ showZoomModal: true, dishIndex: dishIndex, imageIndex: imageIndex})
+    const showModal = (dishIndex, imageIndex) => {
+        setShowZoomModal(true)
+        setDishIndex(dishIndex)
+        setImageIndex(imageIndex)
     }
     
-    closeZoomModal = () => {
-        this.setState({ showZoomModal: false, dishIndex: null, imageIndex: null})
+    const closeModal = () => {
+        setShowZoomModal(false)
+        setDishIndex(null)
+        setImageIndex(null)
     }
     
-    navImageRight = () => {
-        const filteredDishes = this.state.filteredDishes
-        const dishIndex = this.state.dishIndex
-        const imageIndex = this.state.imageIndex
-
+    const navImageRight = () => {
         if (imageIndex < filteredDishes[dishIndex].images.length - 1) {
-            this.setState({ imageIndex: imageIndex + 1 })
+            setImageIndex(imageIndex + 1)
         } else if (dishIndex < filteredDishes.length - 1) {
-            this.setState({ dishIndex: dishIndex + 1, imageIndex: 0 })
+            setDishIndex(dishIndex + 1)
+            setImageIndex(0)
         } else {
-            this.setState({ dishIndex: 0, imageIndex: 0 })
+            setDishIndex(0)
+            setImageIndex(0)
         }
     }
 
-    navImageLeft = () => {
-        const filteredDishes = this.state.filteredDishes
-        const dishIndex = this.state.dishIndex
-        const imageIndex = this.state.imageIndex
-
+    const navImageLeft = () => {
         if (imageIndex > 0) {
-            this.setState({ imageIndex: imageIndex - 1 })
+            setImageIndex(imageIndex - 1)
         } else if (dishIndex > 0) {
-            this.setState({ dishIndex: dishIndex - 1, imageIndex: filteredDishes[dishIndex - 1].images.length - 1 })
+            setDishIndex(dishIndex - 1)
+            setImageIndex(filteredDishes[dishIndex - 1].images.length - 1)
         } else {
-            this.setState({ dishIndex: filteredDishes.length - 1, imageIndex: filteredDishes[filteredDishes.length - 1].images.length - 1})
+            setDishIndex(filteredDishes.length - 1)
+            setImageIndex(filteredDishes[filteredDishes.length - 1].images.length - 1)
         }
     }
 
-    renderZoomModal = () => {
-        // return this.state.filteredDishes.length === 0 ? null : (
-        return this.state.dishIndex === null ? null : (
-            <Modal size='lg' show={this.state.showZoomModal} onHide={() => this.closeZoomModal()} keyboard={false} centered>
+    const renderZoomModal = () => {
+        return dishIndex === null ? null : (
+            <Modal size='lg' show={showZoomModal} onHide={() => closeModal()} keyboard={false} centered>
                 <Modal.Header style={{ backgroundColor: '#3bc23b', textAlign: 'center' }} closeButton>
-                    {/* <Modal.Title></Modal.Title> */}
-                    {this.state.filteredDishes[this.state.dishIndex].description}
+                    {filteredDishes[dishIndex].description}
                 </Modal.Header>
                 <Modal.Body style={{ overflow: 'scroll', backgroundColor: '#dcdcdc' }}>
                     <Container>
                         <Row>
-                            <Button style={{ backgroundColor: '#7b8487' }} onClick={() => this.navImageLeft()}>
+                            <Button style={{ backgroundColor: '#7b8487' }} onClick={() => navImageLeft()}>
                                 <Col xs={1} >    
                                 </Col>
                                 &lt;
                             </Button>
                             <Col xs={10}>
                                 <Card>
-                                    <Card.Img onClick={() => this.closeZoomModal()} variation="top" src={generateImageUrl(this.state.filteredDishes[this.state.dishIndex].images[this.state.imageIndex], 'large')} />
+                                    <Card.Img onClick={() => closeModal()} variation="top" src={generateImageUrl(filteredDishes[dishIndex].images[imageIndex], 'large')} />
                                 </Card>
                             </Col>
-                            <Button style={{ backgroundColor: '#7b8487' }} onClick={() => this.navImageRight()}>
+                            <Button style={{ backgroundColor: '#7b8487' }} onClick={() => navImageRight()}>
                                 <Col xs={1}>
                                 </Col>
                                 &gt;    
@@ -185,40 +185,40 @@ export default class Gallery extends Component {
                     </Container>
                 </Modal.Body>
                 <Modal.Footer style={{ backgroundColor: '#dcdcdc', textAlign: 'center' }}>
-                    { this.state.filteredDishes[this.state.dishIndex].tags.map(tag => `#${tag.name} `) }
+                    { filteredDishes[dishIndex].tags.map(tag => `#${tag.name} `) }
                 </Modal.Footer>
             </Modal>
         )
     }
 
-    render() {
-        return (
-            <div style={{ maxWidth: '1280px', margin: '2rem auto'}}>
-                <h1 style={{ textAlign: 'center', marginBottom: '1.5rem' }}>Gallery</h1>
-                <Container>
-                    <Row style={{ marginBottom: '1.5rem'}}>
-                        <Col xs={12} sm={6} md={2} lg >
-                            Meals<br />
-                            <select style={{ width: '120px', backgroundColor: this.state.filters['meals'] ? this.state.filterEnabledColor : this.state.filterDisabledColor }}
-                                name='meals' id='meals' value={this.state.filters.meals} onChange={this.filterDishes}>
+    return (
+        <div className="bg-gradient">
+            <div className='container gallery-container'>
+                <h1>Gallery</h1>
+                <div className="container">
+                    <div className="filter-container">
+                        <div className="filter">
+                            <p>Meals</p>
+                            <select style={{ width: '120px', backgroundColor: filters['meals'] ? filterEnabledColor : filterDisabledColor }}
+                                name='meals' id='meals' value={filters.meals} onChange={filterDishes}>
                                 <option value=''>All</option>
                                 <option value='breakfast'>Breakfast</option>
                                 <option value='lunch'>Lunch</option>
                                 <option value='dinner'>Dinner</option>
                             </select>
-                        </Col>
-                        { this.renderSortedSelection('courses') }
-                        { this.renderSortedSelection('diets') }
-                        { this.renderSortedSelection('themes') }
-                        { this.renderSortedSelection('events') }
-                        { this.renderSortedSelection('services') }
-                    </Row>
-                </Container>
-                <Container style={{  display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center', border: this.state.borders.black}}>
-                    { this.renderDishes() }
-                </Container>
-                { this.renderZoomModal() }
+                        </div>
+                        { renderSortedSelection('courses') }
+                        { renderSortedSelection('diets') }
+                        { renderSortedSelection('themes') }
+                        { renderSortedSelection('events') }
+                        { renderSortedSelection('services') }
+                    </div>
+                </div>
+                <div className="gallery-cards-container">
+                    { renderDishes() }
+                </div>
+                { renderZoomModal() }
             </div>
-        )
-    }
+        </div>
+    )
 }
