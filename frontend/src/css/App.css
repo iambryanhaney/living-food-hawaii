@@ -223,22 +223,124 @@ input[class^='btn-']:hover {
   padding: 20px 20px 40px;
 }
 
-/* Flex grid */
-.flex-grid .row {
+.bg-gradient {
+  position: relative;
+}
+
+.bg-gradient:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  height: 100%;
+  width: 100%;
+  background: -webkit-gradient(linear, left top, right top, from(rgba(79, 184, 184, 0.5)), color-stop(10%, rgba(39, 207, 82, 0.15)), color-stop(90%, rgba(39, 150, 82, 0.25)), to(rgba(79, 184, 184, 0.5)));
+  background: linear-gradient(90deg, rgba(79, 184, 184, 0.5) 0%, rgba(39, 207, 82, 0.15) 10%, rgba(39, 150, 82, 0.25) 90%, rgba(79, 184, 184, 0.5) 100%);
+}
+
+.gallery-container {
+  margin: 0 auto;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+}
+
+.gallery-container h1 {
+  text-align: center;
+  margin-bottom: 0.75rem;
+  font-size: 2.5rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.gallery-container .filter-container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  padding: 0 4px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-bottom: 1.5rem;
 }
 
-.flex-grid .column {
-  -webkit-box-flex: 25%;
-      -ms-flex: 25%;
-          flex: 25%;
-  max-width: 25%;
-  padding: 0 4px;
+.gallery-container .filter-container .filter {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 auto;
+          flex: 0 0 auto;
+}
+
+.gallery-container .filter-container .filter p {
+  margin-bottom: -0.3rem;
+}
+
+.gallery-container .gallery-cards-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border: 3px solid #71bc62;
+  padding: 0.625rem;
+}
+
+.gallery-container .gallery-cards-container .gallery-card {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 20%;
+          flex: 1 0 20%;
+  margin: 0.625rem;
+  height: 215px;
+  overflow: hidden;
+  -webkit-box-shadow: 0 4px 8px 2px rgba(0, 0, 0, 0.5), 0 7px 20px 0 #333;
+          box-shadow: 0 4px 8px 2px rgba(0, 0, 0, 0.5), 0 7px 20px 0 #333;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+.gallery-container .gallery-cards-container .gallery-card:hover {
+  -webkit-transform: scale(1.05, 1.05);
+          transform: scale(1.05, 1.05);
+  -webkit-box-shadow: 0 2px 4px 6px #333, 0 7px 20px 0 #333;
+          box-shadow: 0 2px 4px 6px #333, 0 7px 20px 0 #333;
+}
+
+.gallery-container .gallery-cards-container .gallery-card-img {
+  cursor: pointer;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+  -webkit-transition: all 0.75s;
+  transition: all 0.75s;
+}
+
+.gallery-container .gallery-cards-container .gallery-card-img:hover {
+  -webkit-transform: scale(1.1, 1.1);
+          transform: scale(1.1, 1.1);
+  -webkit-filter: brightness(110%) saturate(115%) contrast(110%);
+          filter: brightness(110%) saturate(115%) contrast(110%);
+}
+
+.gallery-container .gallery-cards-container .gallery-card-invisible {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 20%;
+          flex: 1 0 20%;
+  margin: 10px;
+  height: 215;
 }
 
 ::-webkit-scrollbar {
@@ -263,13 +365,6 @@ body {
 a {
   text-decoration: none;
   color: #333;
-}
-
-h1 {
-  font-weight: 700;
-  font-size: 5rem;
-  line-height: 1.2;
-  letter-spacing: 10px;
 }
 
 h2 {
@@ -316,6 +411,11 @@ img {
   background: url("../assets/media/fruit_altar.jpg") no-repeat center right/cover;
   -webkit-filter: grayscale(35%);
           filter: grayscale(35%);
+  height: 50vh;
+}
+
+#background-banner.compressed {
+  height: 85px;
 }
 
 #nav-trans {
