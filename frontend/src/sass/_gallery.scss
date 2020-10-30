@@ -10,14 +10,15 @@
         z-index:-1;
         height: 100%;
         width: 100%;
-        background: linear-gradient(90deg, rgba(79,184,184,0.5) 0%, rgba(39,207,82,0.15) 10%, rgba(39,150,82,0.25) 90%, rgba(79,184,184,0.5) 100%);
+        // background: linear-gradient(90deg, rgba(79,184,184,0.2) 0%, rgba(39,207,82,0.05) 10%, rgba(39,150,82,0.15) 90%, rgba(79,184,184,0.2) 100%);
     }
 }
 
 .gallery-container {
-    margin: 0 auto;
+    margin: 0 auto 0 220px;
     padding-top: 1rem;
     padding-bottom: 2rem;
+    overflow: visible;
 
     h1 {
         text-align: center;
@@ -49,25 +50,28 @@
         flex-flow: row wrap;
         justify-content: space-evenly;
         align-items: center;
-        border: 3px solid hsl(110, 40%, 56%);
-        // padding-top: 1rem;
+        border-radius: 10px;
         padding: 0.625rem;
 
+        // Card
         .gallery-card {
-            flex: 1 0 20%;
+            flex: 1 0 200px;
             margin: 0.625rem;
-            height: 215px;
+            height: 200px;
             overflow: hidden;
-            // box-shadow: 0 5px 8px 0 black, 0 7px 20px 0 #333;
-            box-shadow: 0 4px 8px 2px hsla(0, 0, 0, 0.5), 0 7px 20px 0 #333;
+            // box-shadow: 0 4px 8px 2px hsla(0, 0, 0, 0.2), 0 7px 20px 0 #333;
+            box-shadow: 1px 1px 8px 0px hsla(0, 0, 0, 0.4);
             transition: all 0.5s;
+            border: 1px solid hsla(0,0,0, 0.7);
+            border-radius: 4px;
 
+            // Card Hover
             &:hover {
-                transform: scale(1.05, 1.05);
-                box-shadow: 0 2px 4px 6px #333, 0 7px 20px 0 #333;
-                // box-shadow: 0 5px 8px 0 black, 0 7px 20px 0 #333;
+                transform: scale(1.05);
+                box-shadow: 2px 2px 4px 4px #333, 0 7px 20px 0 #333;
             }
 
+            // Image
             &-img {
                 cursor: pointer;
                 height: 100%;
@@ -75,9 +79,10 @@
                 object-position: center;
                 transition: all 0.75s;
 
+                // Image Hover
                 &:hover {
-                    transform: scale(1.1, 1.1);
-                    filter: brightness(110%) saturate(115%) contrast(110%);
+                    // transform: scale(1.1);
+                    filter: brightness(105%) saturate(110%) contrast(110%);
                 }
             }
         }
@@ -91,3 +96,12 @@
 
 }
 
+/*
+
+Josh's idea.
+
+display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(900px, 1fr));
+  grid-gap: 1rem;
+
+*/

@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect } from 'react'
 
-export default function Modal({showModal, onHide, contentClass, children}) {
+
+export default function Modal ({showModal, onHide, modalClass, children}) {
     const modalStyleStart = { backgroundColor: 'hsla(0,0%,0%,0.0)' }
     const modalStyleEnd = { backgroundColor: 'hsla(0,0%,0%,0.5)' }
     const contentStyleStart = { opacity: 0, transform: 'translateY(-200%)' }
@@ -52,10 +53,36 @@ export default function Modal({showModal, onHide, contentClass, children}) {
     return (
         showSelf &&
         <div id="modal" className="modal" style={modalStyle}>
-            <div className={contentClass} style={contentStyle}>
+            <div className={'modal-' + modalClass} style={contentStyle}>
                 {children}
             </div>
         </div>
     )
 }
 
+
+Modal.Header = (props) => {
+    return (
+        <p>
+            Header: {props.ourSharedProp}
+        </p>
+    )
+}
+
+
+Modal.Body = (props) => {
+    return (
+        <p>
+            Body: {props.ourSharedProp}
+        </p>
+    )
+}
+
+
+Modal.Footer = (props) => {
+    return (
+        <p>
+            Footer: {props.ourSharedProp}
+        </p>
+    )
+}

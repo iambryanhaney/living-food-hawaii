@@ -1,0 +1,50 @@
+/* Contact Form */
+.contact-header {
+    color:  $main-color;
+}
+
+.callback-form {
+    width: 100%;
+    padding: 20px 0;
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .form-control {
+        margin-bottom: 15px;
+    }
+
+    input {
+        width: 100%;
+        padding: 4px;
+        height: 40px;
+        border: 1px solid #f5f5f5;
+    }
+
+    textarea {
+        height: 100px;
+        width: 100%;
+        padding: 4px;
+        border: 1px solid #f5f5f5;
+        font-family: Tahoma, sans-serif;
+        font-size: 0.8rem;
+        resize: none;
+    }
+
+    input:focus, textarea:focus {
+        outline: none;
+        border-color: $main-color;
+    }
+
+    .btn-main {
+        padding: 12px 0;
+        margin-top: 20px;
+
+        &:hover {
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+    }
+}

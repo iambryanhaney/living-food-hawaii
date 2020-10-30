@@ -1,6 +1,13 @@
 @import 'config';
 @import 'utilities';
+@import 'navbar';
+@import 'about';
+@import 'services';
+@import 'contact';
+@import 'footer';
 @import 'gallery';
+@import 'gallery-lightbox-modal';
+@import 'login-modal';
 
 ::-webkit-scrollbar {
     width: 0px;
@@ -153,7 +160,7 @@ img {
         // &::before {
         //     content: "";
         //     background: url('../assets/media/black_wooden_sign.jpg') center center/cover;
-        //     opacity: 0.85;
+        //     opacity: 0.5;
         //     top: 0;
         //     right: 0;
         //     bottom: 0;
@@ -170,10 +177,9 @@ img {
         margin: 0 auto 2.5rem auto;
         z-index: 2;
         letter-spacing: 1.5px;
-        border: 2px  hsla(0,0,0, 0.2) solid;
+        border: 2px solid hsla(0,0,0, 0.2);
         background: hsla(0,0,0,0.4);
         border-radius: 16px;
-        // box-shadow: 0 4px 16px 2px hsla(0, 0, 0, 1);
         box-shadow: 0 4px 8px 2px hsla(0, 0, 0, 0.5);
 
         backdrop-filter: grayscale(50%);
@@ -228,276 +234,10 @@ img {
 }
 
 
-// Section About
-#about {
-
-    // About A
-    &-a {
-        margin-bottom: 2.5rem;
-
-        .about-info {
-            display: grid;
-            // grid-template-rows: 120px 270px 120px;
-            grid-template-rows: 1 2 1;
-            grid-template-areas:
-                'bio-1 bio-1 bio-image-1'
-                'bio-image-2 bio-2 bio-image-1'
-                'bio-3 bio-3 bio-image-1';
-            grid-gap: 0.8rem;
-        }
-
-        // Grid Area
-        .bio-image-1 {
-            grid-area: bio-image-1;
-            
-            img {
-                height: 100%;
-                object-fit: cover;
-                object-position: 80% 0;
-            }
-        }
-
-        .bio-image-2 {
-            grid-area: bio-image-2;
-            border-left: 3px solid $main-color;
-            padding-left: 0.8rem;
-
-            img {
-                filter: grayscale(30%);
-                height: 100%;
-                object-fit: cover;
-            }
-        }
-
-        .bio-text {
-            text-align: left;
-            padding: 0.8rem;
-            font-size: 1.3rem;
-        }
-
-        .bio-1 {
-            grid-area: bio-1;
-            border-top: 3px solid $main-color;
-            border-right: 3px solid $main-color;
-            border-left: 3px solid $main-color;
-
-            span {
-                font-weight: bold;
-                font-size: 2rem;
-            }
-            
-        }
-
-        .bio-2 {
-            grid-area: bio-2;
-            border-left: 2px solid $main-color;
-            border-right: 3px solid $main-color;
-
-            p:nth-of-type(2) {
-                margin-top: 2.4rem;
-            }
-        }
-
-        .bio-3 {
-            grid-area: bio-3;
-            border-right: 3px solid $main-color;
-            border-bottom: 3px solid $main-color;
-            border-left: 3px solid $main-color;
-        }
-    }
-}
 
 
-/* Callback form */
-.contact-header {
-    color:  $main-color;
-}
-
-.callback-form {
-    width: 100%;
-    padding: 20px 0;
-
-    label {
-        display: block;
-        margin-bottom: 5px;
-    }
-
-    .form-control {
-        margin-bottom: 15px;
-    }
-
-    input {
-        width: 100%;
-        padding: 4px;
-        height: 40px;
-        border: 1px solid #f5f5f5;
-    }
-
-    textarea {
-        height: 100px;
-        width: 100%;
-        padding: 4px;
-        border: 1px solid #f5f5f5;
-        font-family: Tahoma, sans-serif;
-        resize: none;
-    }
-
-    input:focus, textarea:focus {
-        outline: none;
-        border-color: $main-color;
-    }
-
-    .btn-main {
-        padding: 12px 0;
-        margin-top: 20px;
-    }
-}
 
 
-/* Footer */
-.footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    text-align: center;
-    height: 80px;
-    max-width: $website-width;
-    margin: auto;
-
-    p {
-        margin-left: 5rem;
-    }
-
-    a {
-        color: inherit;
-
-        i {
-            transition: all 0.5s;
-        }
-
-        &:hover {
-            i {
-                color: $main-color;
-                transform: scale(1.2);
-            }
-        }
-    }
-    
-    .social {
-        margin-right: 5rem;
-
-        > * {
-            margin-right: 30px;
-        }
-    }
-}
-
-
-/* Modal */
-.modal {
-    position: fixed;
-    z-index: 10;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    transition: background-color 0.5s;
-
-    &-open {
-        overflow-y: hidden;
-    }
-
-    &-content-login {
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 50%;
-        background: #f4f4f4;
-        margin: auto;
-        width: 30%;
-        box-shadow: 0 5px 8px 0 black, 0 7px 20px 0 #333;
-        transition: opacity 0.5s, transform 0.5s;
-    }
-
-    &-header h2,
-    &-footer h3 {
-        margin: 0;
-    }
-
-    &-header {
-        background: $main-color;
-        padding: 15px;
-        text-align: center;
-        color: #fff;
-
-        h3 {
-            font-size: rem;
-            font-weight: 900;
-        }
-        
-    }
-}
-
-.closeBtn {
-    position: absolute;
-    display: inline !important;
-    top: 1.5rem;
-    right: 15px;
-    color: #fff;
-    cursor: pointer;
-    transition: color 0.5s;
-}
-
-.closeBtn:hover,
-.closeBtn:focus {
-    color: #000;
-    // text-decoration: none;
-}
-
-#login-submit {
-    &:hover,
-    &:focus {
-        color: $dark-color;
-    }
-}
-
-
-/* Login */
-.login-form {
-    width: 100%;
-    padding: 30px;
-    // text-align: right;
-
-    label {
-        display: block;
-        margin-bottom: 5px;
-    }
-
-    .form-control {
-        margin-bottom: 15px;
-    }
-
-    input {
-        width: 100%;
-        padding: 4px;
-        height: 40px;
-        border: 1px solid #f5f5f5;
-    }
-
-    input:focus {
-        outline: none;
-        border-color: $main-color;
-    }
-
-    .btn-main {
-        padding: 12px 0;
-        margin: 20px auto auto auto;
-        // width: 40%;
-        color: #fff;
-        font-weight: bold;
-    }
-}
 
 
 

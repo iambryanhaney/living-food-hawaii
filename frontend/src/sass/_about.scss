@@ -1,0 +1,79 @@
+// Section About
+#about {
+
+    // About A
+    &-a {
+        margin-bottom: 3rem;
+
+        .about-info {
+            display: grid;
+            // grid-template-rows: 120px 270px 120px;
+            grid-template-rows: 1 2 1;
+            grid-template-areas:
+                'bio-1 bio-1 bio-image-1'
+                'bio-image-2 bio-2 bio-image-1'
+                'bio-3 bio-3 bio-image-1';
+            grid-gap: 0.8rem;
+        }
+
+        // Grid Area
+        .bio-image-1 {
+            grid-area: bio-image-1;
+            
+            img {
+                height: 100%;
+                object-fit: cover;
+                object-position: 80% 0;
+            }
+        }
+
+        .bio-image-2 {
+            grid-area: bio-image-2;
+            border-left: 2px solid $main-color;
+            padding-left: 0.8rem;
+
+            img {
+                filter: grayscale(30%);
+                height: 100%;
+                object-fit: cover;
+                object-position: 70% 50%;
+            }
+        }
+
+        .bio-text {
+            text-align: left;
+            padding: 0.8rem;
+            font-size: 1.3rem;
+        }
+
+        .bio-1 {
+            grid-area: bio-1;
+            border-top: 2px solid $main-color;
+            border-right: 2px solid $main-color;
+            border-left: 2px solid $main-color;
+
+            span {
+                font-weight: bold;
+                font-size: 2rem;
+            }
+            
+        }
+
+        .bio-2 {
+            grid-area: bio-2;
+            border-left: 2px solid $main-color;
+            border-right: 2px solid $main-color;
+
+            p:nth-of-type(2) {
+                margin-top: 2.4rem;
+            }
+        }
+
+        .bio-3 {
+            grid-area: bio-3;
+            border-right: 2px solid $main-color;
+            border-bottom: 2px solid $main-color;
+            border-left: 2px solid $main-color;
+        }
+    }
+}
