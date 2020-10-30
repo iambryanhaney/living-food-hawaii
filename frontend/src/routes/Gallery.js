@@ -4,9 +4,9 @@ import Card from 'react-bootstrap/Card'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 // import 'bootstrap/dist/css/bootstrap.css'
+import Modal from '../containers/Modal'
 
 const DISH_URL = 'http://localhost:3001/dishes'
 const TAG_URL = 'http://localhost:3001/tags'
@@ -32,7 +32,6 @@ export default function Gallery({setViewingGallery}) {
     const filterDisabledColor = null
 
     useEffect(() => {
-        console.log("About to setViewingGallery to true...")
         setViewingGallery(true)
 
         fetch(DISH_URL)
@@ -47,7 +46,6 @@ export default function Gallery({setViewingGallery}) {
 
 
         return (() => {
-            console.log("About to setViewingGallery to false...");
             setViewingGallery(false)
         })
     },[])
@@ -85,11 +83,9 @@ export default function Gallery({setViewingGallery}) {
             )
         )
 
-        console.log(`Pre loop. dishCards.length = ${dishCards.length}`)
         // Add invisible cards to prevent flex items from expanding to fill final row
         // for(let i = 0; i < (dishCards.length % 4); i++) {
         for(let i = 0; i < 2; i++) {
-            console.log(`Loop ${i}`)
             dishCards.push(
                 <div className="gallery-card-invisible" key={`invis-card-${i}`}></div>
             )
@@ -156,19 +152,21 @@ export default function Gallery({setViewingGallery}) {
         }
     }
 
+    // Render Lightbox
     const renderZoomModal = () => {
         return dishIndex === null ? null : (
-            <Modal size='lg' show={showZoomModal} onHide={() => closeModal()} keyboard={false} centered>
-                <Modal.Header style={{ backgroundColor: '#3bc23b', textAlign: 'center' }} closeButton>
+            // <p>Hello there.</p>
+            <Modal modalClass="lightbox" showModal={showZoomModal} onHide={() => closeModal()}>
+                <div className="modal-header" style={{ backgroundColor: '#3bc23b', textAlign: 'center' }} closeButton>
                     {filteredDishes[dishIndex].description}
-                </Modal.Header>
-                <Modal.Body style={{ overflow: 'scroll', backgroundColor: '#dcdcdc' }}>
+                </div>
+                <div className="modal-body" style={{ overflow: 'scroll', backgroundColor: '#dcdcdc' }}>
                     <Container>
                         <Row>
                             <Button style={{ backgroundColor: '#7b8487' }} onClick={() => navImageLeft()}>
                                 <Col xs={1} >    
                                 </Col>
-                                &lt;
+                                &#10094;
                             </Button>
                             <Col xs={10}>
                                 <Card>
@@ -178,26 +176,29 @@ export default function Gallery({setViewingGallery}) {
                             <Button style={{ backgroundColor: '#7b8487' }} onClick={() => navImageRight()}>
                                 <Col xs={1}>
                                 </Col>
-                                &gt;    
+                                &#10095;    
                             </Button>
                             
                         </Row>
                     </Container>
-                </Modal.Body>
-                <Modal.Footer style={{ backgroundColor: '#dcdcdc', textAlign: 'center' }}>
+                </div>
+                <div className="modal-footer" style={{ backgroundColor: '#dcdcdc', textAlign: 'center' }}>
                     { filteredDishes[dishIndex].tags.map(tag => `#${tag.name} `) }
-                </Modal.Footer>
+                </div>
             </Modal>
         )
     }
 
+    // Main Render
     return (
-        <div className="bg-gradient">
+        // <div className="bg-gradient">
             <div className='container gallery-container'>
-                <h1>Gallery</h1>
+                {/* <p style={{ fontSize: '1.7rem', textAlign: 'center', margin: '2rem auto 1rem auto'}}>Hi, come on in! Please sit down, take a look and get inspired by my creations!</p> */}
+
+                {/* <p style={{ margin: '2rem 1rem 1rem -12rem', fontSize: '1.5rem'}}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi sapiente vel totam fuga odio autem quibusdam. Quam autem cum labore, velit odit nemo reiciendis quisquam officiis, necessitatibus blanditiis excepturi voluptatem!</p> */}
                 <div className="container">
                     <div className="filter-container">
-                        <div className="filter">
+                        {/* <div className="filter">
                             <p>Meals</p>
                             <select style={{ width: '120px', backgroundColor: filters['meals'] ? filterEnabledColor : filterDisabledColor }}
                                 name='meals' id='meals' value={filters.meals} onChange={filterDishes}>
@@ -206,12 +207,12 @@ export default function Gallery({setViewingGallery}) {
                                 <option value='lunch'>Lunch</option>
                                 <option value='dinner'>Dinner</option>
                             </select>
-                        </div>
-                        { renderSortedSelection('courses') }
+                        </div> */}
+                        {/* { renderSortedSelection('courses') }
                         { renderSortedSelection('diets') }
                         { renderSortedSelection('themes') }
                         { renderSortedSelection('events') }
-                        { renderSortedSelection('services') }
+                        { renderSortedSelection('services') } */}
                     </div>
                 </div>
                 <div className="gallery-cards-container">
@@ -219,6 +220,6 @@ export default function Gallery({setViewingGallery}) {
                 </div>
                 { renderZoomModal() }
             </div>
-        </div>
+        // </div>
     )
 }

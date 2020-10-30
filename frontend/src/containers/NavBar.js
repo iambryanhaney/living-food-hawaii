@@ -3,8 +3,15 @@
 import React, { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import Modal from '../containers/Modal.js'
-import ModalContent from '../containers/ModalContent.js'
-import Logo from '../assets/media/LFH_logo_lowres_olive_invert.png'
+// import ModalHeader from './ModalHeader'
+// import Logo from '../assets/media/LFH_logo_lowres_olive_invert.png'
+// import Logo from '../assets/media/LFH_logo.png'
+// import Logo from '../assets/media/LFH_logo_hires_green_lines.png'
+// import Logo from '../assets/media/LFH_logo_hires_green_lines2.png'
+// import Logo from '../assets/media/LFH_logo_hires_white_lines.png'
+// import Logo from '../assets/media/LFH_logo_hires_trans_lines.png'
+// import Logo from '../assets/media/LFH_logo_hires_black_lines.png'
+import Logo from '../assets/media/LFH_logo_hires_brown_lines.png'
 
 const LOGIN_URL = 'http://localhost:3001/login'
 
@@ -56,9 +63,9 @@ export default function Navigation(props) {
                     <span id="logo-text" style={{ letterSpacing: '1.3px' }}>Living Food Hawaii</span>
                 </h1></a>
                 <ul>
-                    <li><NavLink to="/#background-banner" exact activeClassName="current">Home</NavLink></li>
+                    <li><NavLink to="/home" exact activeClassName="current">Home</NavLink></li>
                     <li><a href="#about-a">About</a></li>
-                    {/* <li><a href="services.html">Services</a></li> */}
+                    <li><NavLink to="/services" exact activeClassName="current">Services</NavLink></li>
                     <li><a href="#contact">Contact</a></li>
                     <li><NavLink to="/gallery" exact activeClassName="current">Gallery</NavLink></li>
                     { props.user?.is_admin ? 
@@ -70,7 +77,8 @@ export default function Navigation(props) {
                 </ul>
             </nav>
 
-            <Modal contentClass="modal-content-login" showModal={showModal} onHide={() => setShowModal(false)}>
+            {/* Login Modal */}
+            <Modal modalClass="login" showModal={showModal} onHide={() => setShowModal(false)}>
                 <div className="modal-header">
                     <i className="far fa-times-circle fa-lg closeBtn" onClick={() => setShowModal(false)}></i>
                     <h3>Welcome back!</h3>
@@ -90,6 +98,9 @@ export default function Navigation(props) {
                         <input type="submit" value="Log In" id="login-submit" className="btn-main" />
                     </form>
                 </div>
+                {/* <Modal.Footer testing="Hello"/> */}
+                {/* <Modal.Body message="Haaaaayyyyyyy!"/> */}
+                {/* <Modal.Footer testing="Goodbye"/> */}
             </Modal>
         </>
     )
