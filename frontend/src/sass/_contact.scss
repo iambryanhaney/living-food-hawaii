@@ -1,6 +1,54 @@
 /* Contact Form */
+
+#contact {
+    .column-1 {
+        // height: 800px;
+        // width: 800px;
+        // filter: grayscale(30%);
+
+        img {
+            filter: grayscale(30%);
+            height: 100%;
+            width: 75%;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+
+    h2 {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .social {
+        margin-left: 5rem;
+
+        a {
+            color: inherit;
+    
+            i {
+                transition: all 0.5s;
+            }
+    
+            &:hover {
+                i {
+                    color: $main-color;
+                    transform: scale(1.2);
+                }
+            }
+        }
+
+        > * {
+            margin-right: 30px;
+        }
+    }
+}
+
 .contact-header {
     color:  $main-color;
+
 }
 
 .callback-form {
