@@ -9,12 +9,21 @@ export default function Contact() {
             <div className="row">
                 <div className="column column-a">
                     <div className="column-1">
-                        <img src={SaladsOnPlates} alt="" style={{ filter: 'grayscale(5%)' }} />
+                        <img src={SaladsOnPlates} />
                     </div>
                 </div>
                 <div className="column column-b">
                     <div className="column-2 bg-light-trans">
-                        <h2><i className="fas fa-envelope-open-text contact-header"></i> Contact <span className="contact-header">Abby Jane</span></h2>
+                        <h2>
+                            <div>
+                                <i className="fas fa-envelope-open-text contact-header" /> Contact
+                                <span className="contact-header"> Abby Jane</span>
+                            </div>
+                            <span className="social">
+                                <a href="https://www.facebook.com/abbywiltse/"><i className="fab fa-facebook"></i></a>
+                                <a href="https://www.instagram.com/livingfoodhawaii/"><i className="fab fa-instagram"></i></a>
+                            </span>
+                        </h2>
                         <form action="" className="callback-form">
                             <div className="form-contol">
                                 <label htmlFor="name"></label>

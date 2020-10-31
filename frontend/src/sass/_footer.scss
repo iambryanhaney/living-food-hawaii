@@ -1,37 +1,29 @@
 /* Footer */
+
+.footer-banner {
+    position: relative;
+    top: -85px;
+    // margin-top: 2rem;
+}
+
 .footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    text-align: center;
-    height: 80px;
-    max-width: $website-width;
-    margin: auto;
+    top: 85px;
+    left: 0;
+    right: 0;
+    height: 85px;
+    background: url('../assets/media/fruit_altar.jpg') no-repeat center center/cover;
+    filter: grayscale(50%);
+
+    // display: flex;
+    // align-items: center;
+    // justify-content: space-between;
+    // text-align: center;
+    // height: 85px;
+    // max-width: $website-width;
+    // margin: auto;
 
     p {
         margin-left: 5rem;
     }
 
-    a {
-        color: inherit;
-
-        i {
-            transition: all 0.5s;
-        }
-
-        &:hover {
-            i {
-                color: $main-color;
-                transform: scale(1.2);
-            }
-        }
-    }
-    
-    .social {
-        margin-right: 5rem;
-
-        > * {
-            margin-right: 30px;
-        }
-    }
 }
