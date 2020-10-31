@@ -1,5 +1,6 @@
 import React from 'react'
 import FruitCircle from '../assets/media/fruit_circle.jpg'
+import SaladsOnPlates from '../assets/media/salads_on_plates.jpg'
 
 
 export default function Contact() {
@@ -8,11 +9,11 @@ export default function Contact() {
             <div className="row">
                 <div className="column column-a">
                     <div className="column-1">
-                        <img src={FruitCircle} alt="" style={{ filter: 'grayscale(5%)' }} />
+                        <img src={SaladsOnPlates} alt="" style={{ filter: 'grayscale(5%)' }} />
                     </div>
                 </div>
                 <div className="column column-b">
-                    <div className="column-2 bg-light">
+                    <div className="column-2 bg-light-trans">
                         <h2><i className="fas fa-envelope-open-text contact-header"></i> Contact <span className="contact-header">Abby Jane</span></h2>
                         <form action="" className="callback-form">
                             <div className="form-contol">

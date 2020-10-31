@@ -63,6 +63,7 @@
             grid-area: bio-2;
             border-left: 2px solid $main-color;
             border-right: 2px solid $main-color;
+            z-index: 2;
 
             p:nth-of-type(2) {
                 margin-top: 2.4rem;
@@ -74,6 +75,7 @@
             border-right: 2px solid $main-color;
             border-bottom: 2px solid $main-color;
             border-left: 2px solid $main-color;
+            z-index: 2;
         }
     }
 }

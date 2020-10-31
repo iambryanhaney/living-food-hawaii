@@ -58,6 +58,11 @@ input[class^='btn-']:hover {
         background: hsl(210, 17, 98);
         color: set-text-color(hsl(210, 17, 98));
     }
+    &-light-trans {
+        background: hsla(210, 17%, 98%, 0.75);
+        color: set-text-color(hsl(210, 17, 98));
+    }
+
     &-medium {
         background: $medium-color;
         color: set-text-color($medium-color);
@@ -148,6 +153,7 @@ input[class^='btn-']:hover {
 .flex-columns .column .column-1,
 .flex-columns .column .column-2 {
     height: 100%;
+    z-index: 2;
 }
 
 .flex-columns img {
