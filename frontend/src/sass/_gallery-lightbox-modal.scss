@@ -47,28 +47,28 @@
     */
 }
 
-.closeBtn {
-    position: absolute;
-    display: inline !important;
-    top: 1.5rem;
-    right: 15px;
-    color: #fff;
-    cursor: pointer;
-    transition: color 0.5s;
-}
+// .closeBtn {
+//     position: absolute;
+//     display: inline !important;
+//     top: 1.5rem;
+//     right: 15px;
+//     color: #fff;
+//     cursor: pointer;
+//     transition: color 0.5s;
+// }
 
-.closeBtn:hover,
-.closeBtn:focus {
-    color: #000;
-    // text-decoration: none;
-}
+// .closeBtn:hover,
+// .closeBtn:focus {
+//     color: #000;
+//     // text-decoration: none;
+// }
 
-#login-submit {
-    &:hover,
-    &:focus {
-        color: $dark-color;
-    }
-}
+// #login-submit {
+//     &:hover,
+//     &:focus {
+//         color: $dark-color;
+//     }
+// }
 
 
 /* Login */ /*

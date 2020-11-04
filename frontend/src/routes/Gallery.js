@@ -7,11 +7,12 @@ import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 // import 'bootstrap/dist/css/bootstrap.css'
 import Modal from '../containers/Modal'
+import SelectionCircle from '../components/SelectionCircle'
 
 const DISH_URL = 'http://localhost:3001/dishes'
 const TAG_URL = 'http://localhost:3001/tags'
 
-export default function Gallery({setViewingGallery}) {
+export default function Gallery(props) {
     const [dishImages, setDishImages] = useState({})
     const [filters, setFilters] = useState({
         meals: '',
@@ -22,57 +23,48 @@ export default function Gallery({setViewingGallery}) {
         services: '',
     })
     const [dishes, setDishes] = useState([])
+    const [filteredDishesBuffer, setFilteredDishesBuffer] = useState([])
     const [filteredDishes, setFilteredDishes] = useState([])
     const [tags, setTags] = useState([])
     const [showZoomModal, setShowZoomModal] = useState(false)
     const [dishIndex, setDishIndex] = useState(null)
     const [imageIndex, setImageIndex] = useState(null)
+    const [galleryFade, setGalleryFade] = useState('')
 
-    const filterEnabledColor = '#71bc62'
-    const filterDisabledColor = null
-
+    // Fetch dishes and tags on page load
     useEffect(() => {
-        setViewingGallery(true)
-
         fetch(DISH_URL)
         .then(resp => resp.json())
-        .then(fetchedDishes => updateDishes(fetchedDishes))
+        .then(fetchedDishes => {
+            setDishes(fetchedDishes)
+            setFilteredDishesBuffer(fetchedDishes)
+        })
         .catch(err => console.error(err))
 
         fetch(TAG_URL)
         .then(resp => resp.json())
-        .then(fetchedTags => updateTags(fetchedTags))
+        .then(fetchedTags => setTags(fetchedTags))
         .catch(err => console.error(err))
-
-
-        return (() => {
-            setViewingGallery(false)
-        })
     },[])
 
-    const updateDishes = (fetchedDishes) => {
-        setDishes(fetchedDishes)
-        setFilteredDishes(fetchedDishes)
-    }
+    // When dish buffer is updated, initiate fade-out
+    useEffect(() => {
+        setGalleryFade('')
+    },[filteredDishesBuffer])
 
-    const updateTags = (fetchedTags) => {
-        setTags(fetchedTags)
-    }
-
-    const filterDishes = (event) => {
-        const updatedFilters = {...filters, [event.target.name]: event.target.value}
-        let updatedDishes = dishes
-    
-        for (let filter in updatedFilters) {
-            if (updatedFilters[filter]) {
-                updatedDishes = updatedDishes.filter(dish => 
-                    dish.tags.filter(tag => tag.name === updatedFilters[filter]).length > 0
-                )
-            }
+    // When fade-out is initiated, wait for it to complete and update dishes
+    useEffect(() => {
+        let fadeOut;
+        if (galleryFade == '') {
+            fadeOut = setTimeout(() => setFilteredDishes(filteredDishesBuffer), 500)
         }
-        setFilters(updatedFilters)
-        setFilteredDishes(updatedDishes)
-    }
+        return () => clearTimeout(fadeOut)
+    },[galleryFade])
+
+    // When dishes are updated, initiate fade-in
+    useEffect(() => {
+        setGalleryFade('gc-fade-in')
+    },[filteredDishes])
     
     const renderDishes = () => {
         const dishCards = filteredDishes.map((dish, dishIndex) => 
@@ -84,13 +76,12 @@ export default function Gallery({setViewingGallery}) {
         )
 
         // Add invisible cards to prevent flex items from expanding to fill final row
-        // for(let i = 0; i < (dishCards.length % 4); i++) {
-        for(let i = 0; i < 2; i++) {
+        for(let i = 0; i < (dishCards.length % 5); i++) {
+        // for(let i = 0; i < 2; i++) {
             dishCards.push(
                 <div className="gallery-card-invisible" key={`invis-card-${i}`}></div>
             )
         }
-
 
         return dishCards.length > 0 ? dishCards : (
             <>
@@ -98,21 +89,6 @@ export default function Gallery({setViewingGallery}) {
                 There are no offerings that match your exact request. Please try changing your filters.
                 <br />
             </>
-        )
-    }
-
-    const renderSortedSelection = (group) => {
-        return (
-            <div className="filter">
-                <p>{ group[0].toUpperCase() + group.slice(1) }</p>
-                <select style={{ width: '120px', backgroundColor: filters[group] ? filterEnabledColor : filterDisabledColor }}
-                    name={group} id={group} value={filters[group]} onChange={filterDishes}>
-                    <option value=''>All</option>
-                    { tags.filter(tag => tag.group === group).sort((a,b) => a.name.localeCompare(b.name)).map(tag =>
-                        <option key={tag.name} value={tag.name}>{tag.name.split(' ').map(name => name[0].toUpperCase() + name.slice(1)).join(' ')}</option>
-                    )}
-                </select>
-            </div>
         )
     }
 
@@ -189,37 +165,44 @@ export default function Gallery({setViewingGallery}) {
         )
     }
 
+    const updateFilters = (group, tagName) => {
+        // Copy gallery filters and inject the tag name
+        const updatedFilters = {...filters, [group]: tagName}
+        
+        // Copy and start with the master list of all dishes, iterate the gallery filters by group key.
+        // If a key has a value, it is the tag we want to filter for; map the dishes, keeping only those
+        // which have a tag matching the current key.   
+        let updatedDishes = dishes
+        for (let filter in updatedFilters) {
+            if (updatedFilters[filter]) {
+                updatedDishes = updatedDishes.filter(dish => 
+                    dish.tags.filter(tag => tag.name === updatedFilters[filter]).length > 0
+                )
+            }
+        }
+
+        // Update filter state, update dish buffer to trigger animation and re-render 
+        setFilters(updatedFilters)
+        setFilteredDishesBuffer(updatedDishes)
+    }
+
     // Main Render
     return (
-        // <div className="bg-gradient">
-            <div className='container gallery-container'>
-                {/* <p style={{ fontSize: '1.7rem', textAlign: 'center', margin: '2rem auto 1rem auto'}}>Hi, come on in! Please sit down, take a look and get inspired by my creations!</p> */}
-
-                {/* <p style={{ margin: '2rem 1rem 1rem -12rem', fontSize: '1.5rem'}}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi sapiente vel totam fuga odio autem quibusdam. Quam autem cum labore, velit odit nemo reiciendis quisquam officiis, necessitatibus blanditiis excepturi voluptatem!</p> */}
-                <div className="container">
-                    <div className="filter-container">
-                        {/* <div className="filter">
-                            <p>Meals</p>
-                            <select style={{ width: '120px', backgroundColor: filters['meals'] ? filterEnabledColor : filterDisabledColor }}
-                                name='meals' id='meals' value={filters.meals} onChange={filterDishes}>
-                                <option value=''>All</option>
-                                <option value='breakfast'>Breakfast</option>
-                                <option value='lunch'>Lunch</option>
-                                <option value='dinner'>Dinner</option>
-                            </select>
-                        </div> */}
-                        {/* { renderSortedSelection('courses') }
-                        { renderSortedSelection('diets') }
-                        { renderSortedSelection('themes') }
-                        { renderSortedSelection('events') }
-                        { renderSortedSelection('services') } */}
+            <div className="gallery-container">
+                <div className="filter-sticky">
+                    <div className="filters-container">
+                        <SelectionCircle group="meals" updateFilters={updateFilters} tags={tags} filters={filters} /> 
+                        <SelectionCircle group="courses" updateFilters={updateFilters} tags={tags} filters={filters} /> 
+                        <SelectionCircle group="diets" updateFilters={updateFilters} tags={tags} filters={filters} /> 
+                        <SelectionCircle group="themes" updateFilters={updateFilters} tags={tags} filters={filters} /> 
+                        <SelectionCircle group="events" updateFilters={updateFilters} tags={tags} filters={filters} /> 
+                        <SelectionCircle group="services" updateFilters={updateFilters} tags={tags} filters={filters} /> 
                     </div>
                 </div>
-                <div className="gallery-cards-container">
+                <div className={`gallery-cards-container ${galleryFade}`}>
                     { renderDishes() }
                 </div>
                 { renderZoomModal() }
             </div>
-        // </div>
     )
 }

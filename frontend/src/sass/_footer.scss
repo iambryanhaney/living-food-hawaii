@@ -2,25 +2,18 @@
 
 .footer-banner {
     position: relative;
-    top: -85px;
-    // margin-top: 2rem;
 }
 
 .footer {
-    top: 85px;
+    position: absolute;
+    top: -85px;
     left: 0;
     right: 0;
     height: 85px;
-    background: url('../assets/media/fruit_altar.jpg') no-repeat center center/cover;
-    filter: grayscale(50%);
-
-    // display: flex;
-    // align-items: center;
-    // justify-content: space-between;
-    // text-align: center;
-    // height: 85px;
-    // max-width: $website-width;
-    // margin: auto;
+    background: url('../assets/media/floral_divider.jpg') no-repeat center center/cover;
+    // filter: grayscale(30%);
+    // background: $dark-color;
+    z-index: 2;
 
     p {
         margin-left: 5rem;

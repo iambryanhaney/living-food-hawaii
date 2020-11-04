@@ -80,7 +80,7 @@ export default function Navigation(props) {
             {/* Login Modal */}
             <Modal modalClass="login" showModal={showModal} onHide={() => setShowModal(false)}>
                 <div className="modal-header">
-                    <i className="far fa-times-circle fa-lg closeBtn" onClick={() => setShowModal(false)}></i>
+                    <i className="far fa-times-circle fa-lg modal-closeBtn" onClick={() => setShowModal(false)}></i>
                     <h3>Welcome back!</h3>
                 </div>
                 <div className="modal-body">

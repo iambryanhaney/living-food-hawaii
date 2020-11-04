@@ -1,10 +1,14 @@
 $website-width: 1280px;
 
 $main-color: hsl(110, 40, 56);
+$main-color-trans: hsla(110, 40%, 56%, 0.5);
 $light-color:  hsl(0, 0, 85);
 $light-color-trans:  red;
 $medium-color: #ccc;
 $dark-color: #333;
+
+$bg-light: hsl(210, 17, 98);
+$bg-dark: hsl(210, 10, 23);
 
 $bg-image: url('../assets/media/fruit_altar.jpg');
 

@@ -44,7 +44,7 @@
     }
 }
 
-.closeBtn {
+.modal-closeBtn {
     position: absolute;
     display: inline !important;
     top: 1.5rem;
@@ -54,8 +54,8 @@
     transition: color 0.5s;
 }
 
-.closeBtn:hover,
-.closeBtn:focus {
+.modal-closeBtn:hover,
+.modal-closeBtn:focus {
     color: #000;
     // text-decoration: none;
 }
