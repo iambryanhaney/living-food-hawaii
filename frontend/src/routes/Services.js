@@ -14,7 +14,7 @@ export default function Services() {
             <div className="container services-body bg-light">
                 <div className="services-list-container flex-item ">
                     <ul className="services-list">
-                        <li className="services-item item-festival">Health and Wellness Retreat</li>
+                        <li className="services-item item-festival">Health and Wellness Retreats</li>
                         <li className="services-item item-retreats">Workshop and Crew Lunches</li>
                         <li className="services-item item-parties">One on One or Group Cooking Classes</li>
                         <li className="services-item item-dinners">Weekly Meal Prep & Pantry Supply</li>
@@ -28,7 +28,7 @@ export default function Services() {
                 </div>
                 <div className="services-spotlight flex-item ">
                     <div>
-                        <p className="spotlight-festival">Chef Abby Jane provides a variety of personal chef services in your home, vacation rental, or event space featuring fresh, organic, and locally sourced ingredients. The best quality seasonal products always inspire her flavorful menus from purely plant based to local omnivore cuisine. Abby is always sensitive to food allergies and dietary restrictions. Please inquire with your preferences below to begin planning your next event!</p>
+                        <p className="spotlight-festival"><strong>Chef Abby Jane</strong> provides a variety of personal chef services in your home, vacation rental, or event space featuring fresh, organic, and locally sourced ingredients. The best quality seasonal products always inspire her flavorful menus from purely plant based to local omnivore cuisine. Abby is always sensitive to food allergies and dietary restrictions. Please inquire with your preferences below to begin planning your next event!</p>
                     </div>
                 </div>
             </div>

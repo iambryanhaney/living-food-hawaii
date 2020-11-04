@@ -337,6 +337,13 @@ input[class^='btn-']:hover {
   height: 400px;
 }
 
+.services-body .services-list-container {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 400px;
+          flex: 1 400px;
+  margin-left: 2rem;
+}
+
 .services-body .services-list-container .services-list {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -371,19 +378,22 @@ input[class^='btn-']:hover {
 
 .services-body .services-logo {
   -webkit-box-flex: 0;
-      -ms-flex: 0 0 400px;
-          flex: 0 0 400px;
+      -ms-flex: 0 0 40px;
+          flex: 0 0 40px;
   overflow: visible;
   z-index: 1;
 }
 
 .services-body .services-logo img {
-  -webkit-transform: scale(2.5) rotate(-6.5deg);
-          transform: scale(2.5) rotate(-6.5deg);
-  opacity: 0.30;
+  -webkit-transform: scale(25) rotate(-6.5deg) translateY(6.8px);
+          transform: scale(25) rotate(-6.5deg) translateY(6.8px);
+  opacity: 0.23;
 }
 
 .services-body .services-spotlight {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 400px;
+          flex: 1 400px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -392,11 +402,11 @@ input[class^='btn-']:hover {
           align-items: center;
   height: 100%;
   z-index: 2;
+  margin-right: 3rem;
 }
 
 .services-body .services-spotlight p {
   text-align: right;
-  padding: 0 0rem 1rem 5rem;
   font-size: 1.3rem;
 }
 
@@ -432,8 +442,8 @@ input[class^='btn-']:hover {
 
 /* Contact Form */
 #contact .column-1 img {
-  -webkit-filter: grayscale(30%);
-          filter: grayscale(30%);
+  -webkit-filter: grayscale(20%);
+          filter: grayscale(20%);
   height: 100%;
   width: 75%;
   -o-object-fit: cover;
@@ -532,43 +542,25 @@ input[class^='btn-']:hover {
 /* Footer */
 .footer-banner {
   position: relative;
-  top: -85px;
 }
 
 .footer {
-  top: 85px;
+  position: absolute;
+  top: -85px;
   left: 0;
   right: 0;
   height: 85px;
-  background: url("../assets/media/fruit_altar.jpg") no-repeat center center/cover;
-  -webkit-filter: grayscale(50%);
-          filter: grayscale(50%);
+  background: url("../assets/media/floral_divider.jpg") no-repeat center center/cover;
+  z-index: 2;
 }
 
 .footer p {
   margin-left: 5rem;
 }
 
-.bg-gradient {
-  position: relative;
-}
-
-.bg-gradient:before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: -1;
-  height: 100%;
-  width: 100%;
-}
-
 .gallery-container {
-  margin: 0 auto 0 220px;
-  padding-top: 1rem;
-  padding-bottom: 2rem;
-  overflow: visible;
+  position: relative;
+  min-height: calc(100vh - 85px);
 }
 
 .gallery-container h1 {
@@ -579,29 +571,175 @@ input[class^='btn-']:hover {
   line-height: 1.2;
 }
 
-.gallery-container .filter-container {
+.gallery-container .filter-sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 85px;
+  left: 0;
+}
+
+.gallery-container .filters-container {
+  position: absolute;
+  top: 0;
+  left: 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: nowrap column;
+          flex-flow: nowrap column;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  margin-bottom: 1.5rem;
+  width: 300px;
+  height: 650px;
+  margin: 1.25rem 0 0 0;
 }
 
-.gallery-container .filter-container .filter {
+.gallery-container .filters-container .filter-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  width: 300px;
+}
+
+.gallery-container .filters-container .filter-container .filter-circle {
   -webkit-box-flex: 0;
       -ms-flex: 0 0 auto;
           flex: 0 0 auto;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 100px;
+  height: 100px;
+  font-size: 1.6rem;
+  font-weight: 600;
+  border: 2px solid #71bc62;
+  border-radius: 50%;
+  margin-left: 2rem;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
 }
 
-.gallery-container .filter-container .filter p {
-  margin-bottom: -0.3rem;
+.gallery-container .filters-container .filter-container .filter-circle:hover {
+  background: #71bc62;
+  border-color: green;
+  font-weight: 900;
+}
+
+.gallery-container .filters-container .filter-container .filter-circle:hover + .filter-selected {
+  -webkit-transform: scale(0);
+          transform: scale(0);
+}
+
+.gallery-container .filters-container .filter-container .filter-circle:hover .filter-menu {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  visibility: visible;
+}
+
+.gallery-container .filters-container .filter-container .filter-circle .filter-menu {
+  position: absolute;
+  left: 6.5rem;
+  width: 140px;
+  font-size: 1.3rem;
+  padding: 0.3rem;
+  color: green;
+  border: 1px solid #71bc62;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  visibility: hidden;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  z-index: 5;
+}
+
+.gallery-container .filters-container .filter-container .filter-circle .filter-menu .filter-item {
+  cursor: pointer;
+  white-space: nowrap;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: nowrap row;
+          flex-flow: nowrap row;
+  border-bottom: 1px solid #71bc62;
+  color: #333;
+  font-weight: 300;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  padding: 0 0.5rem 0 0.5rem;
+}
+
+.gallery-container .filters-container .filter-container .filter-circle .filter-menu .filter-item:last-child {
+  border-bottom: none;
+}
+
+.gallery-container .filters-container .filter-container .filter-circle .filter-menu .filter-item:hover {
+  background: #71bc62;
+  font-weight: 900;
+}
+
+.gallery-container .filters-container .filter-container .filter-selected {
+  white-space: nowrap;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: nowrap row;
+          flex-flow: nowrap row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  font-size: 1.2rem;
+  background: rgba(113, 188, 98, 0.5);
+  z-index: 1;
+  padding: 0 0.3rem 0 1rem;
+  margin-left: 1rem;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+.gallery-container .filters-container .filter-container .filter-selected:hover {
+  -webkit-filter: grayscale(60%);
+          filter: grayscale(60%);
+}
+
+.gallery-container .filters-container .filter-container .filter-selected:hover .filter-closeBtn {
+  color: #ff3333;
+  -webkit-filter: grayscale(-100%);
+          filter: grayscale(-100%);
+}
+
+.gallery-container .filters-container .filter-container .filter-selected .filter-closeBtn {
+  position: relative;
+  top: 1px;
+  margin-left: 0.7rem;
+  color: #888;
+  background: none;
 }
 
 .gallery-container .gallery-cards-container {
@@ -619,22 +757,30 @@ input[class^='btn-']:hover {
       -ms-flex-align: center;
           align-items: center;
   border-radius: 10px;
+  margin: 0 0 0 300px;
   padding: 0.625rem;
+  opacity: 0;
+  -webkit-transition: all ease-in 0.5s;
+  transition: all ease-in 0.5s;
+}
+
+.gallery-container .gallery-cards-container.gc-fade-in {
+  opacity: 1;
 }
 
 .gallery-container .gallery-cards-container .gallery-card {
   -webkit-box-flex: 1;
-      -ms-flex: 1 0 200px;
-          flex: 1 0 200px;
+      -ms-flex: 1 0 220px;
+          flex: 1 0 220px;
   margin: 0.625rem;
-  height: 200px;
+  height: 220px;
   overflow: hidden;
   -webkit-box-shadow: 1px 1px 8px 0px rgba(0, 0, 0, 0.4);
           box-shadow: 1px 1px 8px 0px rgba(0, 0, 0, 0.4);
-  -webkit-transition: all 0.5s;
-  transition: all 0.5s;
   border: 1px solid rgba(0, 0, 0, 0.7);
   border-radius: 4px;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
 }
 
 .gallery-container .gallery-cards-container .gallery-card:hover {
@@ -662,10 +808,10 @@ input[class^='btn-']:hover {
 
 .gallery-container .gallery-cards-container .gallery-card-invisible {
   -webkit-box-flex: 1;
-      -ms-flex: 1 0 20%;
-          flex: 1 0 20%;
+      -ms-flex: 1 0 220px;
+          flex: 1 0 220px;
   margin: 10px;
-  height: 215;
+  height: 220;
 }
 
 /*
@@ -714,26 +860,6 @@ display: grid;
   transition: opacity 0.5s, -webkit-transform 0.5s;
   transition: opacity 0.5s, transform 0.5s;
   transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
-}
-
-.closeBtn {
-  position: absolute;
-  display: inline !important;
-  top: 1.5rem;
-  right: 15px;
-  color: #fff;
-  cursor: pointer;
-  -webkit-transition: color 0.5s;
-  transition: color 0.5s;
-}
-
-.closeBtn:hover,
-.closeBtn:focus {
-  color: #000;
-}
-
-#login-submit:hover, #login-submit:focus {
-  color: #333;
 }
 
 /* Login */
@@ -824,7 +950,7 @@ display: grid;
   font-weight: 900;
 }
 
-.closeBtn {
+.modal-closeBtn {
   position: absolute;
   display: inline !important;
   top: 1.5rem;
@@ -835,8 +961,8 @@ display: grid;
   transition: color 0.5s;
 }
 
-.closeBtn:hover,
-.closeBtn:focus {
+.modal-closeBtn:hover,
+.modal-closeBtn:focus {
   color: #000;
 }
 

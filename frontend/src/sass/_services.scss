@@ -7,27 +7,12 @@
     &-body {
         position: relative;
         overflow: visible;
-        // color: $light-color;
         margin: 2rem auto;
         display: flex;
         flex-wrap: nowrap;
         align-items: center;
         justify-content: space-evenly;
         border: 2px solid $main-color;
-        // z-index: 2;
-
-        // &::before {
-        //     content: "";
-        //     position: absolute;
-        //     background: url('../assets/media/white_wooden_sign.jpg') center center/cover;
-        //     opacity: 0.2;
-        //     top: 0;
-        //     right: 0;
-        //     bottom: 0;
-        //     left: 0;
-        //     border-radius: 10px;
-        //     z-index: -1;
-        // }
 
         .flex-item {
             flex: 1 400px;
@@ -37,6 +22,8 @@
         .services {
 
             &-list-container {
+                flex: 1 400px;
+                margin-left: 2rem;
 
                 .services-list {
                     display: flex;
@@ -64,14 +51,15 @@
 
 
             &-logo {
-                flex: 0 0 400px;
+                flex: 0 0 40px;
                 overflow: visible;
                 z-index: 1;
                 
                 img {
-                    transform: scale(2.5) rotate(-6.5deg);
+                    // transform: scale(2.5) rotate(-6.5deg);
+                    transform: scale(25) rotate(-6.5deg) translateY(6.8px);
                     // filter: grayscale(20%);
-                    opacity: 0.30;
+                    opacity: 0.23;
                     // animation-name: logorotate;
                     // animation-iteration-count: infinite;
                     // animation-duration: 320s;
@@ -80,14 +68,15 @@
             }
 
             &-spotlight {
+                flex: 1 400px;
                 display: flex;
                 align-items: center;
                 height: 100%;
                 z-index: 2;
+                margin-right: 3rem;
                 
                 p {
                     text-align: right;
-                    padding: 0 0rem 1rem 5rem;
                     font-size: 1.3rem;
                 }
             }
