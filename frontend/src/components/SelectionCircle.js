@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function SelectionCircle ({group, updateFilters, tags, filters}) {
+export default function SelectionCircle ({group, updateFilters, tags, filters, activeCircle}) {
     
     const sortTagNames = (group, nameA, nameB) => {
         // MEALS are sorted by time of day via lookup table.
@@ -27,8 +27,9 @@ export default function SelectionCircle ({group, updateFilters, tags, filters}) 
     const menuTags = tags.filter(tag => tag.group === group)
     return (
         <div className="filter-container">
-            <div className="filter-circle">
+            <div className={`filter-circle ${activeCircle ? 'active-circle' : ''}`}>
                 <p >{ titleCase(group) }</p>
+                <div className="filter-menu-bridge"></div>
                 <div className="filter-menu bg-light" style={{ top: `${-menuTags.length*0.35}rem`}} >
                     { menuTags.filter(tag => tag.group === group).sort((a,b) => sortTagNames(group, a.name, b.name)).map(tag =>
                         <div className="filter-item" key={tag.name} onClick={(e) => updateFilters(group, tag.name)}>{titleCase(tag.name)}</div>
@@ -42,12 +43,3 @@ export default function SelectionCircle ({group, updateFilters, tags, filters}) 
         </div>
     )
 }
-
-/*
-
-r e t r e a t s
-p r i v a t e   p a r t i e s
-w e d d i n g s
-s u p p e r c l u b
-
-*/ 

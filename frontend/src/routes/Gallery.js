@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { generateImageUrl } from '../components/ImageHandler'
 import Card from 'react-bootstrap/Card'
 import Container from 'react-bootstrap/Container'
@@ -30,6 +30,8 @@ export default function Gallery(props) {
     const [dishIndex, setDishIndex] = useState(null)
     const [imageIndex, setImageIndex] = useState(null)
     const [galleryFade, setGalleryFade] = useState('')
+    const [activeCircle, setActiveCircle] = useState(true)
+    const galleryRef = useRef(null)
 
     // Fetch dishes and tags on page load
     useEffect(() => {
@@ -47,9 +49,10 @@ export default function Gallery(props) {
         .catch(err => console.error(err))
     },[])
 
-    // When dish buffer is updated, initiate fade-out
+    // When dish buffer is updated, initiate fade-out and deactivate circle menus
     useEffect(() => {
         setGalleryFade('')
+        setActiveCircle(false)
     },[filteredDishesBuffer])
 
     // When fade-out is initiated, wait for it to complete and update dishes
@@ -61,9 +64,10 @@ export default function Gallery(props) {
         return () => clearTimeout(fadeOut)
     },[galleryFade])
 
-    // When dishes are updated, initiate fade-in
+    // When dishes are updated, initiate fade-in and activate circle menus
     useEffect(() => {
         setGalleryFade('gc-fade-in')
+        setActiveCircle(true)
     },[filteredDishes])
     
     const renderDishes = () => {
@@ -166,6 +170,9 @@ export default function Gallery(props) {
     }
 
     const updateFilters = (group, tagName) => {
+        // Scroll to the top of the gallery when filters change
+        window.scrollTo(0, galleryRef.current.offsetTop - 85)
+
         // Copy gallery filters and inject the tag name
         const updatedFilters = {...filters, [group]: tagName}
         
@@ -188,14 +195,14 @@ export default function Gallery(props) {
 
     // Main Render
     return (
-            <div className="gallery-container">
+            <div className="gallery-container" ref={galleryRef}>
                 <div className="filter-sticky">
                     <div className="filters-container">
-                        <SelectionCircle group="meals" updateFilters={updateFilters} tags={tags} filters={filters} /> 
-                        <SelectionCircle group="courses" updateFilters={updateFilters} tags={tags} filters={filters} /> 
-                        <SelectionCircle group="diets" updateFilters={updateFilters} tags={tags} filters={filters} /> 
-                        <SelectionCircle group="events" updateFilters={updateFilters} tags={tags} filters={filters} /> 
-                        <SelectionCircle group="serving style" updateFilters={updateFilters} tags={tags} filters={filters} /> 
+                        <SelectionCircle group="meals" updateFilters={updateFilters} tags={tags} filters={filters} activeCircle={activeCircle}/> 
+                        <SelectionCircle group="courses" updateFilters={updateFilters} tags={tags} filters={filters} activeCircle={activeCircle}/> 
+                        <SelectionCircle group="diets" updateFilters={updateFilters} tags={tags} filters={filters} activeCircle={activeCircle}/> 
+                        <SelectionCircle group="events" updateFilters={updateFilters} tags={tags} filters={filters} activeCircle={activeCircle}/> 
+                        <SelectionCircle group="serving style" updateFilters={updateFilters} tags={tags} filters={filters} activeCircle={activeCircle}/> 
                     </div>
                 </div>
                 <div className={`gallery-cards-container ${galleryFade}`}>

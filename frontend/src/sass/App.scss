@@ -14,6 +14,10 @@
     background: transparent; /* make scrollbar transparent */
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 // General Styles
 * {
     box-sizing: border-box;
