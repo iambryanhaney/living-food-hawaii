@@ -638,18 +638,22 @@ input[class^='btn-']:hover {
   transition: all 0.5s;
 }
 
-.gallery-container .filters-container .filter-container .filter-circle:hover {
+.gallery-container .filters-container .filter-container .filter-circle.active-circle:hover {
   background: #71bc62;
   border-color: green;
   font-weight: 900;
 }
 
-.gallery-container .filters-container .filter-container .filter-circle:hover + .filter-selected {
+.gallery-container .filters-container .filter-container .filter-circle.active-circle:hover + .filter-selected {
   -webkit-transform: scale(0);
           transform: scale(0);
 }
 
-.gallery-container .filters-container .filter-container .filter-circle:hover .filter-menu {
+.gallery-container .filters-container .filter-container .filter-circle.active-circle:hover .filter-menu-bridge {
+  visibility: visible;
+}
+
+.gallery-container .filters-container .filter-container .filter-circle.active-circle:hover .filter-menu {
   -webkit-transform: scale(1);
           transform: scale(1);
   visibility: visible;
@@ -658,6 +662,14 @@ input[class^='btn-']:hover {
 .gallery-container .filters-container .filter-container .filter-circle p {
   text-align: center;
   line-height: 1.2;
+}
+
+.gallery-container .filters-container .filter-container .filter-circle .filter-menu-bridge {
+  position: absolute;
+  left: 4rem;
+  width: 50px;
+  height: 100px;
+  visibility: hidden;
 }
 
 .gallery-container .filters-container .filter-container .filter-circle .filter-menu {
@@ -1013,6 +1025,10 @@ display: grid;
   width: 0px;
   background: transparent;
   /* make scrollbar transparent */
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 * {

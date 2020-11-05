@@ -51,13 +51,17 @@ $galleryleftmargin: 300px;
                 margin-left: 2rem;
                 transition: all 0.5s;
     
-                &:hover {
+                &.active-circle:hover {
                     background: $main-color;
                     border-color: green;
                     font-weight: 900;
 
                     + .filter-selected {
                         transform: scale(0);
+                    }
+
+                    .filter-menu-bridge {
+                        visibility: visible;
                     }
     
                     .filter-menu {
@@ -70,6 +74,14 @@ $galleryleftmargin: 300px;
                     text-align: center;
                     line-height: 1.2;
                     
+                }
+
+                .filter-menu-bridge {
+                    position: absolute;
+                    left: 4rem;
+                    width: 50px;
+                    height: 100px;
+                    visibility: hidden;
                 }
     
                 .filter-menu {
