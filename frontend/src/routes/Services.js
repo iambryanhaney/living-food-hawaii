@@ -8,9 +8,9 @@ import Logo from '../assets/media/LFH_logo_hires_trans_no_fill.png'
 // import Logo from '../assets/media/LFH_logo_hires_white_lines.png'
 // import Logo from '../assets/media/LFH_logo_hires_white_lines_rotated_no_bg.png'
 
-export default function Services() {
+export default function Services({scrollRef}) {
     return (
-        <section id="services">
+        <section id="services" ref={scrollRef}>
             <div className="container services-body bg-light">
                 <div className="services-list-container flex-item ">
                     <ul className="services-list">

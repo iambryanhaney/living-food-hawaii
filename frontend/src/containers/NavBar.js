@@ -1,7 +1,7 @@
 /* eslint-disable */
 
 import React, { useState, useEffect } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 import Modal from '../containers/Modal.js'
 // import ModalHeader from './ModalHeader'
 // import Logo from '../assets/media/LFH_logo_lowres_olive_invert.png'
@@ -58,21 +58,21 @@ export default function Navigation(props) {
             <section id="background-banner" className={props.viewingGallery ? 'compressed' : ''} />
             <nav id="nav-trans"/>
             <nav id="main-nav">
-                <a href="#background-banner"><h1 className="logo">
+                <Link to="/home"><h1 className="logo">
                     <img src={Logo} alt="Living Food Hawaii" id="logo-img" />
                     <span id="logo-text" style={{ letterSpacing: '1.3px' }}>Living Food Hawaii</span>
-                </h1></a>
+                </h1></Link>
                 <ul>
-                    <li><NavLink to="/home" exact activeClassName="current">Home</NavLink></li>
-                    <li><a href="#about-a">About</a></li>
+                    <li><NavLink to="/home" activeClassName="current">Home</NavLink></li>
+                    <li><NavLink to="/about" exact activeClassName="current">About</NavLink></li>
                     <li><NavLink to="/services" exact activeClassName="current">Services</NavLink></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><NavLink to="/contact" exact activeClassName="current">Contact</NavLink></li>
                     <li><NavLink to="/gallery" exact activeClassName="current">Gallery</NavLink></li>
                     { props.user?.is_admin ? 
                         <>
                             <li><NavLink to="/dish-manager" exact activeClassName="current">Dish Manager</NavLink></li>
-                            <li><a href="#" onClick={() => props.setUser(null)}>Logout</a></li>
-                        </> : <li><a href="#" onClick={() => setShowModal(true)}>Login</a></li>
+                            <li><a onClick={() => props.setUser(null)}>Logout</a></li>
+                        </> : <li><a onClick={() => setShowModal(true)}>Login</a></li>
                     }
                 </ul>
             </nav>
@@ -98,9 +98,6 @@ export default function Navigation(props) {
                         <input type="submit" value="Log In" id="login-submit" className="btn-main" />
                     </form>
                 </div>
-                {/* <Modal.Footer testing="Hello"/> */}
-                {/* <Modal.Body message="Haaaaayyyyyyy!"/> */}
-                {/* <Modal.Footer testing="Goodbye"/> */}
             </Modal>
         </>
     )

@@ -1,8 +1,8 @@
 import React from 'react'
 
-export default function Splash() {
+export default function Splash({scrollRef}) {
     return (
-        <div id="splash">
+        <div id="splash" ref={scrollRef}>
             <div className="container splash-container">
                 <div id="splash-placard">
                     <h1>Living Food Hawaii</h1>
