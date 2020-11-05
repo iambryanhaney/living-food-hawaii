@@ -49,3 +49,22 @@ export default function Contact() {
         </section>
     )
 }
+
+/*
+
+Contact Chef Abby Jane 
+Name:
+Email:
+Type of Service:
+(Retreat, Workshop, Meal Prep, Cooking Class, Private Party, etc.) 
+Date of Event:
+Location: 
+Number of Guests:
+Diet: (Vegan, Vegetarian, Omnivore, Other) 
+Allergies or Food Sensitivities: 
+Type of Meal: 
+(Breakfast, Lunch, Dinner, Beverage, Appetizer, Dessert, etc.) 
+Budget:
+Notes: Please share any additional information that could help create an estimate for your event.
+
+*/
