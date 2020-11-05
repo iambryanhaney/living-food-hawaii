@@ -3,9 +3,9 @@ import FruitCircle from '../assets/media/fruit_circle.jpg'
 import SaladsOnPlates from '../assets/media/salads_on_plates.jpg'
 
 
-export default function Contact() {
+export default function Contact({scrollRef}) {
     return (
-        <section id="contact" className="contact flex-columns">
+        <section id="contact" className="contact flex-columns" ref={scrollRef}>
             <div className="row">
                 <div className="column column-a">
                     <div className="column-1">

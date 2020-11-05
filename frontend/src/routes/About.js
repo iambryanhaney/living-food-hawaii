@@ -3,9 +3,9 @@ import AbbyPortrait from "../assets/media/abby_portrait.jpg"
 import BioFood from "../assets/media/bio_food_01.jpeg"
 
 
-export default function About() {
+export default function About({scrollRef}) {
     return (
-        <section id="about-a" className="text-center">
+        <section id="about-a" className="text-center" ref={scrollRef}>
             <div className="container">`
                 <div className="about-info">
                     <div className="bio-image-1">

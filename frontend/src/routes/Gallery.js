@@ -12,7 +12,7 @@ import SelectionCircle from '../components/SelectionCircle'
 const DISH_URL = 'http://localhost:3001/dishes'
 const TAG_URL = 'http://localhost:3001/tags'
 
-export default function Gallery(props) {
+export default function Gallery({scrollRef, ...props}) {
     const [dishImages, setDishImages] = useState({})
     const [filters, setFilters] = useState({
         meals: '',
@@ -31,7 +31,6 @@ export default function Gallery(props) {
     const [imageIndex, setImageIndex] = useState(null)
     const [galleryFade, setGalleryFade] = useState('')
     const [activeCircle, setActiveCircle] = useState(true)
-    const galleryRef = useRef(null)
 
     // Fetch dishes and tags on page load
     useEffect(() => {
@@ -171,7 +170,7 @@ export default function Gallery(props) {
 
     const updateFilters = (group, tagName) => {
         // Scroll to the top of the gallery when filters change
-        window.scrollTo(0, galleryRef.current.offsetTop - 85)
+        window.scrollTo(0, scrollRef.current.offsetTop - 85)
 
         // Copy gallery filters and inject the tag name
         const updatedFilters = {...filters, [group]: tagName}
@@ -195,7 +194,7 @@ export default function Gallery(props) {
 
     // Main Render
     return (
-            <div className="gallery-container" ref={galleryRef}>
+            <div className="gallery-container" ref={scrollRef}>
                 <div className="filter-sticky">
                     <div className="filters-container">
                         <SelectionCircle group="meals" updateFilters={updateFilters} tags={tags} filters={filters} activeCircle={activeCircle}/> 
