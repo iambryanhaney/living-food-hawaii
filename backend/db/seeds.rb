@@ -28,30 +28,16 @@ Tag.create(group: 'courses', name: 'desserts')
 Tag.create(group: 'diets', name: 'vegan')
 Tag.create(group: 'diets', name: 'vegetarian')
 Tag.create(group: 'diets', name: 'omnivore')
-Tag.create(group: 'diets', name: 'gluten free')
-        ### Themes
-Tag.create(group: 'themes', name: 'hawaiian')
-Tag.create(group: 'themes', name: 'mediterranean')
-Tag.create(group: 'themes', name: 'italian')
-Tag.create(group: 'themes', name: 'japanese')
-Tag.create(group: 'themes', name: 'thai')
-Tag.create(group: 'themes', name: 'cuban')
-# Tag.create(group: 'themes', name: 'eastern european')
-Tag.create(group: 'themes', name: 'indian')
-Tag.create(group: 'themes', name: 'southwestern')
-Tag.create(group: 'themes', name: 'southern')
-Tag.create(group: 'themes', name: 'mexican')
         ### Events
-Tag.create(group: 'events', name: 'weddings')
-Tag.create(group: 'events', name: 'private parties')
-Tag.create(group: 'events', name: 'festivals')
 Tag.create(group: 'events', name: 'retreats')
-# Tag.create(group: 'events', name: 'community meals')
-        ###Service
-Tag.create(group: 'services', name: 'plated')
-Tag.create(group: 'services', name: 'family style')
-Tag.create(group: 'services', name: 'self serve')
-Tag.create(group: 'services', name: 'take away')
+Tag.create(group: 'events', name: 'private parties')
+Tag.create(group: 'events', name: 'weddings')
+Tag.create(group: 'events', name: 'supper club')
+        ###Serving Style
+Tag.create(group: 'serving style', name: 'plated')
+Tag.create(group: 'serving style', name: 'family style')
+Tag.create(group: 'serving style', name: 'self serve')
+Tag.create(group: 'serving style', name: 'take away')
 
 
 ### Dishes
@@ -63,7 +49,6 @@ dish.tags << [
     Tag.where(name: 'entrees'),
     Tag.where(name: 'vegan'),
     Tag.where(name: 'vegetarian'),
-    Tag.where(name: 'gluten free'),
     Tag.where(name: 'private parties'),
     Tag.where(name: 'plated')
 ]
@@ -84,8 +69,6 @@ dish.tags << [
     Tag.where(name: 'lunch'),
     Tag.where(name: 'entrees'),
     Tag.where(name: 'omnivore'),
-    Tag.where(name: 'gluten free'),
-    Tag.where(name: 'hawaiian'),
     Tag.where(name: 'private parties'),
     Tag.where(name: 'retreats'),
     Tag.where(name: 'family style')
@@ -97,7 +80,6 @@ dish = Dish.create(description: 'B&B Breakfast Tray. Gluten Free Banana Bread wi
 dish.tags << [
     Tag.where(name: 'breakfast'),
     Tag.where(name: 'vegetarian'),
-    Tag.where(name: 'gluten free'),
     Tag.where(name: 'private parties'),
     Tag.where(name: 'retreats'),
     Tag.where(name: 'family style')
@@ -109,10 +91,8 @@ dish = Dish.create(description: 'Garden Frittata with Mushrooms, Tomato, Basil, 
 dish.tags << [
     Tag.where(name: 'breakfast'),
     Tag.where(name: 'vegetarian'),
-    Tag.where(name: 'gluten free'),
     Tag.where(name: 'private parties'),
     Tag.where(name: 'retreats'),
-    Tag.where(name: 'festivals')
 ]
 dish.images.attach(io: File.open('./stor_uploads/dish_004.jpg'), filename: 'dish_004.jpg')
 
@@ -124,7 +104,6 @@ dish.tags << [
     Tag.where(name: 'ingredients'),
     Tag.where(name: 'vegan'),
     Tag.where(name: 'vegetarian'),
-    Tag.where(name: 'gluten free'),
     Tag.where(name: 'retreats')
 ]
 dish.images.attach(io: File.open('./stor_uploads/dish_005.jpg'), filename: 'dish_005.jpg')
@@ -137,7 +116,6 @@ dish.tags << [
     Tag.where(name: 'salads'),
     Tag.where(name: 'vegan'),
     Tag.where(name: 'vegetarian'),
-    Tag.where(name: 'gluten free'),
     Tag.where(name: 'private parties'),
     Tag.where(name: 'weddings'),
     Tag.where(name: 'plated')
@@ -149,7 +127,6 @@ dish = Dish.create(description: 'Raw Avocado Cacao Pie with a Macadamia, Coconut
 dish.tags << [
     Tag.where(name: 'desserts'),
     Tag.where(name: 'vegan'),
-    Tag.where(name: 'gluten free'),
     Tag.where(name: 'private parties'),
     Tag.where(name: 'retreats'),
     Tag.where(name: 'weddings')
@@ -163,7 +140,6 @@ dish.tags << [
     Tag.where(name: 'lunch'),
     Tag.where(name: 'sides'),
     Tag.where(name: 'vegan'),
-    Tag.where(name: 'gluten free')
 ]
 dish.images.attach(io: File.open('./stor_uploads/dish_008.jpg'), filename: 'dish_008.jpg')
 
@@ -175,7 +151,6 @@ dish.tags << [
     Tag.where(name: 'ingredients'),
     Tag.where(name: 'sides'),
     Tag.where(name: 'vegan'),
-    Tag.where(name: 'hawaiian')
 ]
 dish.images.attach(io: File.open('./stor_uploads/dish_009.jpg'), filename: 'dish_009.jpg')
 
@@ -188,10 +163,7 @@ dish.tags << [
     Tag.where(name: 'vegan'),
     Tag.where(name: 'vegetarian'),
     Tag.where(name: 'omnivore'),
-    Tag.where(name: 'gluten free'),
-    Tag.where(name: 'hawaiian'),
     Tag.where(name: 'private parties'),
-    Tag.where(name: 'festivals')
 ]
 dish.images.attach(io: File.open('./stor_uploads/dish_010.jpg'), filename: 'dish_010.jpg')
 
@@ -204,7 +176,6 @@ dish.tags << [
     Tag.where(name: 'ingredients'),
     Tag.where(name: 'vegan'),
     Tag.where(name: 'vegetarian'),
-    Tag.where(name: 'gluten free'),
     Tag.where(name: 'retreats')
 ]
 dish.images.attach(io: File.open('./stor_uploads/dish_011.jpg'), filename: 'dish_011.jpg')
@@ -217,8 +188,6 @@ dish.tags << [
     Tag.where(name: 'salads'),
     Tag.where(name: 'vegan'),
     Tag.where(name: 'vegetarian'),
-    Tag.where(name: 'gluten free'),
-    Tag.where(name: 'hawaiian'),
     Tag.where(name: 'private parties'),
     Tag.where(name: 'weddings'),
     Tag.where(name: 'plated')
@@ -233,8 +202,6 @@ dish.tags << [
     Tag.where(name: 'appetizers'),
     Tag.where(name: 'entrees'),
     Tag.where(name: 'omnivore'),
-    Tag.where(name: 'gluten free'),
-    Tag.where(name: 'hawaiian'),
     Tag.where(name: 'private parties'),
     Tag.where(name: 'weddings'),
     Tag.where(name: 'family style')
@@ -246,7 +213,6 @@ dish = Dish.create(description: 'Lilikoi Cheesecake with Lilikoi Glaze & Reducti
 dish.tags << [
     Tag.where(name: 'desserts'),
     Tag.where(name: 'vegetarian'),
-    Tag.where(name: 'hawaiian'),
     Tag.where(name: 'retreats'),
     Tag.where(name: 'private parties'),
     Tag.where(name: 'weddings'),
@@ -260,8 +226,6 @@ dish.tags << [
     Tag.where(name: 'lunch'),
     Tag.where(name: 'entrees'),
     Tag.where(name: 'vegetarian'),
-    Tag.where(name: 'gluten free'),
-    Tag.where(name: 'mediterranean'),
     Tag.where(name: 'retreats'),
     Tag.where(name: 'plated'),
     Tag.where(name: 'take away')
@@ -275,7 +239,6 @@ dish.tags << [
     Tag.where(name: 'entrees'),
     Tag.where(name: 'salads'),
     Tag.where(name: 'vegan'),
-    Tag.where(name: 'gluten free'),
     Tag.where(name: 'retreats'),
     Tag.where(name: 'self serve'),
     Tag.where(name: 'take away')
@@ -287,7 +250,6 @@ dish = Dish.create(description: 'Retreat Breakfast Buffet')
 dish.tags << [
     Tag.where(name: 'breakfast'),
     Tag.where(name: 'vegetarian'),
-    Tag.where(name: 'gluten free'),
     Tag.where(name: 'retreats'),
     Tag.where(name: 'self serve')
 ]
@@ -301,7 +263,6 @@ dish.tags << [
     Tag.where(name: 'dinner'),
     Tag.where(name: 'entrees'),
     Tag.where(name: 'omnivore'),
-    Tag.where(name: 'gluten free'),
     Tag.where(name: 'private parties'),
     Tag.where(name: 'weddings'),
     Tag.where(name: 'retreats'),

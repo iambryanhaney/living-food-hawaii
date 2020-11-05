@@ -655,6 +655,11 @@ input[class^='btn-']:hover {
   visibility: visible;
 }
 
+.gallery-container .filters-container .filter-container .filter-circle p {
+  text-align: center;
+  line-height: 1.2;
+}
+
 .gallery-container .filters-container .filter-container .filter-circle .filter-menu {
   position: absolute;
   left: 6.5rem;

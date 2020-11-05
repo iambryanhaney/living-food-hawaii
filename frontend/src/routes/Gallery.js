@@ -194,9 +194,8 @@ export default function Gallery(props) {
                         <SelectionCircle group="meals" updateFilters={updateFilters} tags={tags} filters={filters} /> 
                         <SelectionCircle group="courses" updateFilters={updateFilters} tags={tags} filters={filters} /> 
                         <SelectionCircle group="diets" updateFilters={updateFilters} tags={tags} filters={filters} /> 
-                        <SelectionCircle group="themes" updateFilters={updateFilters} tags={tags} filters={filters} /> 
                         <SelectionCircle group="events" updateFilters={updateFilters} tags={tags} filters={filters} /> 
-                        <SelectionCircle group="services" updateFilters={updateFilters} tags={tags} filters={filters} /> 
+                        <SelectionCircle group="serving style" updateFilters={updateFilters} tags={tags} filters={filters} /> 
                     </div>
                 </div>
                 <div className={`gallery-cards-container ${galleryFade}`}>

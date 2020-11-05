@@ -223,9 +223,8 @@ export default function DishManager(props) {
                 { renderTagGroup('meals') }
                 { renderTagGroup('courses') } 
                 { renderTagGroup('diets') }
-                { renderTagGroup('themes') }
                 { renderTagGroup('events') }
-                { renderTagGroup('services') }
+                { renderTagGroup('serving style') }
             </>
         )
     }
