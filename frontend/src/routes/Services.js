@@ -24,7 +24,7 @@ export default function Services({scrollRef}) {
                     </ul>
                 </div>
                 <div className="services-logo flex-item">
-                    <img src={Logo} />
+                    <img src={Logo} alt="" />
                 </div>
                 <div className="services-spotlight flex-item ">
                     <div>

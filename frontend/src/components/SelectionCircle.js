@@ -14,8 +14,8 @@ export default function SelectionCircle ({group, updateFilters, tags, filters, a
             'weddings': 2,
             'supper club': 3,
         }
-        if (group == 'meals') return customOrder[nameA] - customOrder[nameB]
-        else if (group == 'events') return customOrder[nameA] - customOrder[nameB] 
+        if (group === 'meals') return customOrder[nameA] - customOrder[nameB]
+        else if (group === 'events') return customOrder[nameA] - customOrder[nameB] 
         else return nameA.localeCompare(nameB)
     }
 
@@ -36,7 +36,7 @@ export default function SelectionCircle ({group, updateFilters, tags, filters, a
                     )}
                 </div>
             </div>
-            <div className="filter-selected" onClick={() => updateFilters(group, '')}>
+            <div className="filter-selected" onClick={() => updateFilters(group, null)}>
                     { filters[group] && <div>#{titleCase(filters[group])}</div> } 
                     { filters[group] && <i className="far fa-times-circle filter-closeBtn"/> }
             </div>
