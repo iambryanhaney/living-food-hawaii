@@ -24,7 +24,7 @@ export default function Home() {
             '/contact': contactRef.current?.offsetTop - 100,
             '/gallery': galleryRef.current?.offsetTop - 85,
         }
-        console.log(pathToPositionTable[location.pathname])
+        // console.log(pathToPositionTable[location.pathname])
         window.scrollTo(0, pathToPositionTable[location.pathname])
     },[location])
 

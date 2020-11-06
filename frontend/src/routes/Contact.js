@@ -1,5 +1,4 @@
 import React from 'react'
-import FruitCircle from '../assets/media/fruit_circle.jpg'
 import SaladsOnPlates from '../assets/media/salads_on_plates.jpg'
 
 
@@ -9,7 +8,7 @@ export default function Contact({scrollRef}) {
             <div className="row">
                 <div className="column column-a">
                     <div className="column-1">
-                        <img src={SaladsOnPlates} />
+                        <img src={SaladsOnPlates} alt="" />
                     </div>
                 </div>
                 <div className="column column-b">

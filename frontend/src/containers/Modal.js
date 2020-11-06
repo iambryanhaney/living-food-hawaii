@@ -18,8 +18,6 @@ export default function Modal ({showModal, onHide, modalClass, children}) {
         if(event.target == modal) onHide()
     }
 
-    // Getting Cray Cray
-
     useEffect(() => {
         let fadeOut
 

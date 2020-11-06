@@ -3,7 +3,6 @@ import './css/App.css';
 import { BrowserRouter as Router, Route, /*Redirect*/ } from 'react-router-dom'
 import NavBar from './containers/NavBar'
 import Home from './routes/Home'
-import Gallery from './routes/Gallery'
 import DishManager from './routes/DishManager'
 
 function App() {
@@ -14,6 +13,7 @@ function App() {
     <Router>
       <NavBar setUser={setUser} user={user} viewingGallery={viewingGallery} />
       {/* <Route component={Home} /> */}
+      <Route path='/' exact component={Home} />
       <Route path='/home' exact component={Home} />
       <Route path='/about' exact component={Home} />
       <Route path='/services' exact component={Home} />

@@ -1,34 +1,21 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { generateImageUrl } from '../components/ImageHandler'
-import Card from 'react-bootstrap/Card'
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import Button from 'react-bootstrap/Button'
-// import 'bootstrap/dist/css/bootstrap.css'
 import Modal from '../containers/Modal'
 import SelectionCircle from '../components/SelectionCircle'
 
 const DISH_URL = 'http://localhost:3001/dishes'
 const TAG_URL = 'http://localhost:3001/tags'
 
+// RESTORE POINT
+
 export default function Gallery({scrollRef, ...props}) {
-    const [dishImages, setDishImages] = useState({})
-    const [filters, setFilters] = useState({
-        meals: '',
-        courses: '',
-        diets: '',
-        themes: '',
-        events: '',
-        services: '',
-    })
+    const [filters, setFilters] = useState({})
     const [dishes, setDishes] = useState([])
     const [filteredDishesBuffer, setFilteredDishesBuffer] = useState([])
     const [filteredDishes, setFilteredDishes] = useState([])
     const [tags, setTags] = useState([])
     const [showZoomModal, setShowZoomModal] = useState(false)
-    const [dishIndex, setDishIndex] = useState(null)
-    const [imageIndex, setImageIndex] = useState(null)
+    const [zoomIndex, setZoomIndex] = useState(null)
     const [galleryFade, setGalleryFade] = useState('')
     const [activeCircle, setActiveCircle] = useState(true)
 
@@ -37,8 +24,15 @@ export default function Gallery({scrollRef, ...props}) {
         fetch(DISH_URL)
         .then(resp => resp.json())
         .then(fetchedDishes => {
-            setDishes(fetchedDishes)
-            setFilteredDishesBuffer(fetchedDishes)
+            // Flatten the dish objects
+            const flattenedDishes = []
+            for(let dish of fetchedDishes) {
+                for (let image of dish.images) {
+                    flattenedDishes.push({ description: dish.description, image: image, tags: dish.tags })
+                }
+            }
+            setDishes(flattenedDishes)
+            setFilteredDishesBuffer(flattenedDishes)
         })
         .catch(err => console.error(err))
 
@@ -57,11 +51,11 @@ export default function Gallery({scrollRef, ...props}) {
     // When fade-out is initiated, wait for it to complete and update dishes
     useEffect(() => {
         let fadeOut;
-        if (galleryFade == '') {
+        if (galleryFade === '') {
             fadeOut = setTimeout(() => setFilteredDishes(filteredDishesBuffer), 500)
         }
         return () => clearTimeout(fadeOut)
-    },[galleryFade])
+    },[galleryFade, filteredDishesBuffer])
 
     // When dishes are updated, initiate fade-in and activate circle menus
     useEffect(() => {
@@ -70,12 +64,11 @@ export default function Gallery({scrollRef, ...props}) {
     },[filteredDishes])
     
     const renderDishes = () => {
+        // Generate a card for every image
         const dishCards = filteredDishes.map((dish, dishIndex) => 
-            dish.images.map((image, imageIndex) => 
-                <div className="gallery-card" key={`dish${dish.id}image${image.id}`}>
-                    <img className="gallery-card-img" src={generateImageUrl(image, 'medium')} onClick={() => showModal(dishIndex, imageIndex)} />
-                </div>
-            )
+            <div className="gallery-card" key={dishIndex}>
+                <img className="gallery-card-img" alt="" src={generateImageUrl(dish.image, 'medium')} onClick={() => showModal(dishIndex)} />
+            </div>
         )
 
         // Add invisible cards to prevent flex items from expanding to fill final row
@@ -95,96 +88,89 @@ export default function Gallery({scrollRef, ...props}) {
         )
     }
 
-    const showModal = (dishIndex, imageIndex) => {
+    const showModal = (dishIndex) => {
+        setZoomIndex(dishIndex)
         setShowZoomModal(true)
-        setDishIndex(dishIndex)
-        setImageIndex(imageIndex)
     }
     
     const closeModal = () => {
         setShowZoomModal(false)
-        setDishIndex(null)
-        setImageIndex(null)
+        setZoomIndex(null)
     }
     
     const navImageRight = () => {
-        if (imageIndex < filteredDishes[dishIndex].images.length - 1) {
-            setImageIndex(imageIndex + 1)
-        } else if (dishIndex < filteredDishes.length - 1) {
-            setDishIndex(dishIndex + 1)
-            setImageIndex(0)
-        } else {
-            setDishIndex(0)
-            setImageIndex(0)
-        }
+        if (zoomIndex < filteredDishes.length - 1) setZoomIndex(zoomIndex + 1)
+        else setZoomIndex(0)
     }
 
     const navImageLeft = () => {
-        if (imageIndex > 0) {
-            setImageIndex(imageIndex - 1)
-        } else if (dishIndex > 0) {
-            setDishIndex(dishIndex - 1)
-            setImageIndex(filteredDishes[dishIndex - 1].images.length - 1)
-        } else {
-            setDishIndex(filteredDishes.length - 1)
-            setImageIndex(filteredDishes[filteredDishes.length - 1].images.length - 1)
-        }
+        if (zoomIndex === 0) setZoomIndex(filteredDishes.length - 1)
+        else setZoomIndex(zoomIndex - 1)
     }
 
     // Render Lightbox
     const renderZoomModal = () => {
-        return dishIndex === null ? null : (
-            // <p>Hello there.</p>
+        return showZoomModal && (
             <Modal modalClass="lightbox" showModal={showZoomModal} onHide={() => closeModal()}>
-                <div className="modal-header" style={{ backgroundColor: '#3bc23b', textAlign: 'center' }} closeButton>
-                    {filteredDishes[dishIndex].description}
+                <div className="modal-header" style={{ backgroundColor: 'hsl(110, 40, 56)', textAlign: 'center' }} closeButton>
+                    {filteredDishes[zoomIndex].description}
                 </div>
                 <div className="modal-body" style={{ overflow: 'scroll', backgroundColor: '#dcdcdc' }}>
-                    <Container>
-                        <Row>
-                            <Button style={{ backgroundColor: '#7b8487' }} onClick={() => navImageLeft()}>
-                                <Col xs={1} >    
-                                </Col>
-                                &#10094;
-                            </Button>
-                            <Col xs={10}>
-                                <Card>
-                                    <Card.Img onClick={() => closeModal()} variation="top" src={generateImageUrl(filteredDishes[dishIndex].images[imageIndex], 'large')} />
-                                </Card>
-                            </Col>
-                            <Button style={{ backgroundColor: '#7b8487' }} onClick={() => navImageRight()}>
-                                <Col xs={1}>
-                                </Col>
-                                &#10095;    
-                            </Button>
-                            
-                        </Row>
-                    </Container>
+                    <img alt="" src={generateImageUrl(filteredDishes[zoomIndex].image, 'large')} />
                 </div>
                 <div className="modal-footer" style={{ backgroundColor: '#dcdcdc', textAlign: 'center' }}>
-                    { filteredDishes[dishIndex].tags.map(tag => `#${tag.name} `) }
+                    { filteredDishes[zoomIndex].tags.map(tag => 
+                        <span key={tag.id} style={{ marginLeft: '0.5rem', color: 'red', backgroundColor: 'hsl(110, 40, 56)' }}>
+                            { `#${tag.name}` }
+                        </span>
+                    ) }
                 </div>
             </Modal>
         )
     }
 
+
+    {/* Login Modal */}
+    // <Modal modalClass="login" showModal={showModal} onHide={() => setShowModal(false)}>
+    //     <div className="modal-header">
+    //         <i className="far fa-times-circle fa-lg modal-closeBtn" onClick={() => setShowModal(false)}></i>
+    //         <h3>Welcome back!</h3>
+    //     </div>
+    //     <div className="modal-body">
+    //         <form className="login-form" onSubmit={handleSubmit}>
+    //             <div className="form-control">
+    //                 <label htmlFor="email"></label>
+    //                 <input type="text" name="email" id="email" placeholder="Email Address"
+    //                     onChange={event => setFormEmail(event.target.value)}/>
+    //             </div>
+    //             <div className="form-control">
+    //                 <label htmlFor="password"></label>
+    //                 <input type="password" name="password" id="password" placeholder="Password"
+    //                     onChange={event => setFormPassword(event.target.value)}/>
+    //             </div>
+    //             <input type="submit" value="Log In" id="login-submit" className="btn-main" />
+    //         </form>
+    //     </div>
+    // </Modal>
+
+
+
+
+
     const updateFilters = (group, tagName) => {
         // Scroll to the top of the gallery when filters change
         window.scrollTo(0, scrollRef.current.offsetTop - 85)
 
-        // Copy gallery filters and inject the tag name
-        const updatedFilters = {...filters, [group]: tagName}
+        // Copy the gallery filters and either set the tag name or delete the group if there is no tagName
+        const updatedFilters = { ...filters }
+        if (tagName) updatedFilters[group] = tagName
+        else delete updatedFilters[group]
         
-        // Copy and start with the master list of all dishes, iterate the gallery filters by group key.
-        // If a key has a value, it is the tag we want to filter for; map the dishes, keeping only those
-        // which have a tag matching the current key.   
+        // Start with the master list of all dishes, iterate the gallery filters,
+        // keeping only the dishes whose tags include the filter tags.
         let updatedDishes = dishes
-        for (let filter in updatedFilters) {
-            if (updatedFilters[filter]) {
-                updatedDishes = updatedDishes.filter(dish => 
-                    dish.tags.filter(tag => tag.name === updatedFilters[filter]).length > 0
-                )
-            }
+        for (let groupFilter in updatedFilters) {
+            updatedDishes = updatedDishes.filter(dish => dish.tags.map(tag => tag.name).includes(updatedFilters[groupFilter]) )
         }
 
         // Update filter state, update dish buffer to trigger animation and re-render 
