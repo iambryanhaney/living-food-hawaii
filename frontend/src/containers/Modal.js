@@ -42,9 +42,17 @@ export default function Modal ({showModal, onHide, modalClass, children}) {
     },[showModal])
 
     useEffect(() => {
+        let fadeIn
+
         if(showSelf) {
-            setModalStyle(modalStyleEnd)
-            setContentStyle(contentStyleEnd)
+            fadeIn = setTimeout(() => {
+                setModalStyle(modalStyleEnd)
+                setContentStyle(contentStyleEnd)
+            }, 10)            
+        }
+
+        return () => {
+            clearTimeout(fadeIn)
         }
     },[showSelf])
 
