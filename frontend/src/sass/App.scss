@@ -6,8 +6,9 @@
 @import 'contact';
 @import 'footer';
 @import 'gallery';
-@import 'gallery-lightbox-modal';
-@import 'login-modal';
+@import 'modal';
+@import 'modal-login';
+@import 'modal-lightbox';
 
 ::-webkit-scrollbar {
     width: 0px;

@@ -7,7 +7,7 @@ export default function Modal ({showModal, onHide, modalClass, children}) {
     const modalStyleStart = { backgroundColor: 'hsla(0,0%,0%,0.0)' }
     const modalStyleEnd = { backgroundColor: 'hsla(0,0%,0%,0.5)' }
     const contentStyleStart = { opacity: 0, transform: 'translateY(-200%)' }
-    const contentStyleEnd = { opacity: 1, transform: 'translateY(-100%)' }
+    const contentStyleEnd = { opacity: 1, transform: modalClass === 'login' ? 'translateY(-100%)' : null }
 
     const [showSelf, setShowSelf] = useState(false)
     const [modalStyle, setModalStyle] = useState(modalStyleStart)
@@ -55,32 +55,5 @@ export default function Modal ({showModal, onHide, modalClass, children}) {
                 {children}
             </div>
         </div>
-    )
-}
-
-
-Modal.Header = (props) => {
-    return (
-        <p>
-            Header: {props.ourSharedProp}
-        </p>
-    )
-}
-
-
-Modal.Body = (props) => {
-    return (
-        <p>
-            Body: {props.ourSharedProp}
-        </p>
-    )
-}
-
-
-Modal.Footer = (props) => {
-    return (
-        <p>
-            Footer: {props.ourSharedProp}
-        </p>
     )
 }

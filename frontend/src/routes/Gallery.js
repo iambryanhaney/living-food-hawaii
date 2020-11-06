@@ -110,22 +110,22 @@ export default function Gallery({scrollRef, ...props}) {
 
     // Render Lightbox
     const renderZoomModal = () => {
-        return showZoomModal && (
-            <Modal modalClass="lightbox" showModal={showZoomModal} onHide={() => closeModal()}>
-                <div className="modal-header" style={{ backgroundColor: 'hsl(110, 40, 56)', textAlign: 'center' }} closeButton>
-                    {filteredDishes[zoomIndex].description}
-                </div>
-                <div className="modal-body" style={{ overflow: 'scroll', backgroundColor: '#dcdcdc' }}>
-                    <img alt="" src={generateImageUrl(filteredDishes[zoomIndex].image, 'large')} />
-                </div>
-                <div className="modal-footer" style={{ backgroundColor: '#dcdcdc', textAlign: 'center' }}>
-                    { filteredDishes[zoomIndex].tags.map(tag => 
-                        <span key={tag.id} style={{ marginLeft: '0.5rem', color: 'red', backgroundColor: 'hsl(110, 40, 56)' }}>
-                            { `#${tag.name}` }
-                        </span>
-                    ) }
-                </div>
-            </Modal>
+        return showZoomModal && ( null
+            // <Modal modalClass="lightbox" showModal={showZoomModal} onHide={() => closeModal()}>
+            //     <div className="modal-header" style={{ textAlign: 'center' }} closeButton>
+            //         {filteredDishes[zoomIndex].description}
+            //     </div>
+            //     <div className="modal-body" >
+            //         {/* <img alt="" src={generateImageUrl(filteredDishes[zoomIndex].image, 'large')} /> */}
+            //     </div>
+            //     <div className="modal-footer" style={{ backgroundColor: '#dcdcdc', textAlign: 'center' }}>
+            //         { filteredDishes[zoomIndex].tags.map(tag => 
+            //             <span key={tag.id} style={{ marginLeft: '0.5rem', background: 'hsla(110, 40%, 56%, 0.5)' }}>
+            //                 { `#${tag.name}` }
+            //             </span>
+            //         ) }
+            //     </div>
+            // </Modal>
         )
     }
 
