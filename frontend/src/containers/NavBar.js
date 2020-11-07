@@ -19,25 +19,16 @@ export default function Navigation(props) {
     const [showModal, setShowModal] = useState(false)
     const [formEmail, setFormEmail] = useState('')
     const [formPassword, setFormPassword] = useState('')
-    const [clientHeight, setClientHeight] = useState(0)
-    const [scrollY, setScrollY] = useState(-document.getElementById('root').getBoundingClientRect().top)
-
-    // Update client height on window resize, for tracking scrollbar logo
-    useEffect(() =>{
-        const handleWindowResize = () => setClientHeight(document.getElementById('root').clientHeight)
-
-        window.addEventListener("resize", handleWindowResize)
-
-        // Get initial size
-        handleWindowResize()
-
-        return () => window.removeEventListener("resize", handleWindowResize)
-    },[])
+    const [scrollPercent, setScrollPercent] = useState(-document.getElementById('root').getBoundingClientRect().top)
 
     // Update the scroll position when scrolling
     useEffect(() => {
         const handleScroll = () => {
-            setScrollY(-document.getElementById('root').getBoundingClientRect().top)
+            let h = document.documentElement, 
+                b = document.body,
+                st = 'scrollTop',
+                sh = 'scrollHeight'
+                setScrollPercent((h[st]||b[st]) / ((h[sh]||b[sh]) - h.clientHeight) * 98)
         }
         window.addEventListener("scroll", handleScroll)
         return () => window.removeEventListener("scroll", handleScroll)
@@ -79,7 +70,7 @@ export default function Navigation(props) {
     return (
         <>
             <div className="logo-scrollbar-outer">
-                <div className="logo-scrollbar-inner" style={{ transform: `translateY(${(scrollY / clientHeight) * 95}vh)` }}>
+                <div className="logo-scrollbar-inner" style={{ transform: `translateY(${scrollPercent}vh)` }}>
                     <img src={Logo} alt="" />
                 </div>
             </div>
