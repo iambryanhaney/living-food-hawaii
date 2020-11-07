@@ -10,12 +10,14 @@
 @import 'modal-login';
 @import 'modal-lightbox';
 
+// Hide scrollbars in chrome / edge
 ::-webkit-scrollbar {
-    width: 0px;
-    background: transparent; /* make scrollbar transparent */
+    display: none;
 }
 
+// Hide scrollbars in Firefox and smooth scroll behavior in all browsers
 html {
+    scrollbar-width: none;
     scroll-behavior: smooth;
 }
 
