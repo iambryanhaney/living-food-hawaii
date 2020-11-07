@@ -1,7 +1,9 @@
 
 
 function generateImageUrl(image, size='large') {
+    if (!image) return null
     const sizes = {
+        tiny: 40,
         small: 80,
         medium: 400,
     }

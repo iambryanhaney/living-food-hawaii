@@ -62,6 +62,17 @@ export default function Gallery({scrollRef, ...props}) {
         setGalleryFade('gc-fade-in')
         setActiveCircle(true)
     },[filteredDishes])
+
+    // Listen for the escape key when zoom modal is rendered
+    useEffect(() => {
+        const handleEscape = ({key}) => {
+            if (key === "Escape") closeModal()
+        }
+
+        if (showZoomModal) document.addEventListener("keydown", handleEscape)
+
+        return () => document.removeEventListener("keydown", handleEscape)
+    },[showZoomModal])
     
     const renderDishes = () => {
         // Generate a card for every image
@@ -94,68 +105,63 @@ export default function Gallery({scrollRef, ...props}) {
     }
     
     const closeModal = () => {
+        console.log('In close Modal...')
         setShowZoomModal(false)
         setZoomIndex(null)
     }
-    
-    const navImageRight = () => {
-        if (zoomIndex < filteredDishes.length - 1) setZoomIndex(zoomIndex + 1)
-        else setZoomIndex(0)
-    }
 
-    const navImageLeft = () => {
-        if (zoomIndex === 0) setZoomIndex(filteredDishes.length - 1)
-        else setZoomIndex(zoomIndex - 1)
-    }
+    // True modulo helper function (JavaScript's % operator is actually REMAINDER and does not handle negative values as expected)
+    const mod = (n, m) => (n % m + m) % m
 
     // Render Lightbox
     const renderZoomModal = () => {
-        return showZoomModal && ( null
-            // <Modal modalClass="lightbox" showModal={showZoomModal} onHide={() => closeModal()}>
-            //     <div className="modal-header" style={{ textAlign: 'center' }} closeButton>
-            //         {filteredDishes[zoomIndex].description}
-            //     </div>
-            //     <div className="modal-body" >
-            //         {/* <img alt="" src={generateImageUrl(filteredDishes[zoomIndex].image, 'large')} /> */}
-            //     </div>
-            //     <div className="modal-footer" style={{ backgroundColor: '#dcdcdc', textAlign: 'center' }}>
-            //         { filteredDishes[zoomIndex].tags.map(tag => 
-            //             <span key={tag.id} style={{ marginLeft: '0.5rem', background: 'hsla(110, 40%, 56%, 0.5)' }}>
-            //                 { `#${tag.name}` }
-            //             </span>
-            //         ) }
-            //     </div>
-            // </Modal>
+        const len = filteredDishes.length
+
+        return (
+            <Modal modalClass="lightbox" showModal={showZoomModal} onHide={() => closeModal()}>
+                <div className="modal-header">
+                    <i className="far fa-times-circle fa-lg modal-closeBtn" onClick={() => setShowZoomModal(false)} style={{ top: '1rem' }}></i>
+                    <h3>{filteredDishes[zoomIndex]?.description}</h3>
+                </div>
+                
+                <div className="modal-image" >
+                    <div className="nav-left-pane" onClick={() => setZoomIndex(mod(zoomIndex - 1, len))}>
+                        <div className="nav-left-arrow">
+                            <i className="fas fa-angle-left fa-4x"></i>
+                        </div>
+                    </div>
+                    <div className="nav-right-pane" onClick={() => setZoomIndex(mod(zoomIndex + 1, len))}>
+                        <div className="nav-right-arrow">
+                            <i className="fas fa-angle-right fa-4x"></i>
+                        </div>
+                    </div>
+                    <img alt="" src={ generateImageUrl(filteredDishes[ mod(zoomIndex + mod(-zoomIndex - 3, 5) - 2, len) ]?.image) } style={{ opacity: mod(zoomIndex, 5) === 0 ? 1 : 0 }} />
+                    <img alt="" src={ generateImageUrl(filteredDishes[ mod(zoomIndex + mod(-zoomIndex - 2, 5) - 2, len) ]?.image) } style={{ opacity: mod(zoomIndex, 5) === 1 ? 1 : 0 }} />
+                    <img alt="" src={ generateImageUrl(filteredDishes[ mod(zoomIndex + mod(-zoomIndex - 1, 5) - 2, len) ]?.image) } style={{ opacity: mod(zoomIndex, 5) === 2 ? 1 : 0 }} />
+                    <img alt="" src={ generateImageUrl(filteredDishes[ mod(zoomIndex + mod(-zoomIndex - 0, 5) - 2, len) ]?.image) } style={{ opacity: mod(zoomIndex, 5) === 3 ? 1 : 0 }} />
+                    <img alt="" src={ generateImageUrl(filteredDishes[ mod(zoomIndex + mod(-zoomIndex - 4, 5) - 2, len) ]?.image) } style={{ opacity: mod(zoomIndex, 5) === 4 ? 1 : 0 }} />
+                </div>
+                
+                <div className="modal-tags" >
+                    { filteredDishes[zoomIndex]?.tags?.map(tag => 
+                        <span key={tag.id} >
+                            { `#${tag.name}` }
+                        </span>
+                    ) }
+                </div>
+                
+                <div className="modal-thumbs">
+                    <div className="thumb-slider" style={{ transform: `translateX(${-55 * zoomIndex}px)`}}>
+                        { filteredDishes.map((dish, index) => 
+                            <div className="tiny-thumb">
+                                <img alt="" key={index} src={ generateImageUrl(dish.image, "tiny")} style={{ opacity: zoomIndex === index ? 1 : 0.3 }} />
+                            </div> 
+                        )}
+                    </div>
+                </div>
+            </Modal>
         )
     }
-
-
-    {/* Login Modal */}
-    // <Modal modalClass="login" showModal={showModal} onHide={() => setShowModal(false)}>
-    //     <div className="modal-header">
-    //         <i className="far fa-times-circle fa-lg modal-closeBtn" onClick={() => setShowModal(false)}></i>
-    //         <h3>Welcome back!</h3>
-    //     </div>
-    //     <div className="modal-body">
-    //         <form className="login-form" onSubmit={handleSubmit}>
-    //             <div className="form-control">
-    //                 <label htmlFor="email"></label>
-    //                 <input type="text" name="email" id="email" placeholder="Email Address"
-    //                     onChange={event => setFormEmail(event.target.value)}/>
-    //             </div>
-    //             <div className="form-control">
-    //                 <label htmlFor="password"></label>
-    //                 <input type="password" name="password" id="password" placeholder="Password"
-    //                     onChange={event => setFormPassword(event.target.value)}/>
-    //             </div>
-    //             <input type="submit" value="Log In" id="login-submit" className="btn-main" />
-    //         </form>
-    //     </div>
-    // </Modal>
-
-
-
-
 
     const updateFilters = (group, tagName) => {
         // Scroll to the top of the gallery when filters change

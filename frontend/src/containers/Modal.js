@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react'
 
 export default function Modal ({showModal, onHide, modalClass, children}) {
     const modalStyleStart = { backgroundColor: 'hsla(0,0%,0%,0.0)' }
-    const modalStyleEnd = { backgroundColor: 'hsla(0,0%,0%,0.5)' }
+    const modalStyleEnd = { backgroundColor: modalClass === 'login' ? 'hsla(0,0%,0%,0.5)' : 'hsla(0,0%,0%,0.85)'}
     const contentStyleStart = { opacity: 0, transform: 'translateY(-200%)' }
     const contentStyleEnd = { opacity: 1, transform: modalClass === 'login' ? 'translateY(-100%)' : null }
 
@@ -14,13 +14,14 @@ export default function Modal ({showModal, onHide, modalClass, children}) {
     const [contentStyle, setContentStyle] = useState(contentStyleStart)
 
     const outsideClick = (event) => {
+        console.log('In outsideClick...')
         const modal = document.getElementById('modal')
         if(event.target == modal) onHide()
     }
 
     useEffect(() => {
         let fadeOut
-
+        console.log("In useEffect 1...")
         if(showModal) {
             setShowSelf(true);
             document.body.classList.add('modal-open')
@@ -29,9 +30,11 @@ export default function Modal ({showModal, onHide, modalClass, children}) {
         else {
             setModalStyle(modalStyleStart);
             setContentStyle(contentStyleStart)
+            console.log("Reverting styles...")
             fadeOut = setTimeout(() => {
-                setShowSelf(false)
+                console.log("Should be removing modal-open NOW...")
                 document.body.classList.remove('modal-open')
+                setShowSelf(false)
             }, 500)
         }
 
