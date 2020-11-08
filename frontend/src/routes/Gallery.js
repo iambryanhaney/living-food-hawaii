@@ -117,6 +117,18 @@ export default function Gallery({scrollRef, ...props}) {
     const renderZoomModal = () => {
         const len = filteredDishes.length
 
+        // Algorithmically generate zoomed image and its surrounding images, automatically transitioning based on zoomIndex. 
+        const generateImageAndBuffers = () => {
+            const buffer = 13;
+            return [...Array(buffer)].map((e,i) => 
+                <img alt="" src={ generateImageUrl(filteredDishes[ mod(zoomIndex + mod(-zoomIndex - (buffer+1)/2 + i, buffer) - (buffer-1)/2, len) ]?.image) } style={
+                    { 
+                        opacity: mod(zoomIndex, buffer) === i ? 1 : 0,
+                        pointerEvents: mod(zoomIndex, buffer) === i ? 'auto' : 'none',                        
+                    }} />
+            )
+        }
+
         return (
             <Modal modalClass="lightbox" showModal={showZoomModal} onHide={() => closeModal()}>
                 <div className="modal-header">
@@ -135,11 +147,7 @@ export default function Gallery({scrollRef, ...props}) {
                             <i className="fas fa-angle-right fa-4x"></i>
                         </div>
                     </div>
-                    <img alt="" src={ generateImageUrl(filteredDishes[ mod(zoomIndex + mod(-zoomIndex - 3, 5) - 2, len) ]?.image) } style={{ opacity: mod(zoomIndex, 5) === 0 ? 1 : 0 }} />
-                    <img alt="" src={ generateImageUrl(filteredDishes[ mod(zoomIndex + mod(-zoomIndex - 2, 5) - 2, len) ]?.image) } style={{ opacity: mod(zoomIndex, 5) === 1 ? 1 : 0 }} />
-                    <img alt="" src={ generateImageUrl(filteredDishes[ mod(zoomIndex + mod(-zoomIndex - 1, 5) - 2, len) ]?.image) } style={{ opacity: mod(zoomIndex, 5) === 2 ? 1 : 0 }} />
-                    <img alt="" src={ generateImageUrl(filteredDishes[ mod(zoomIndex + mod(-zoomIndex - 0, 5) - 2, len) ]?.image) } style={{ opacity: mod(zoomIndex, 5) === 3 ? 1 : 0 }} />
-                    <img alt="" src={ generateImageUrl(filteredDishes[ mod(zoomIndex + mod(-zoomIndex - 4, 5) - 2, len) ]?.image) } style={{ opacity: mod(zoomIndex, 5) === 4 ? 1 : 0 }} />
+                    { generateImageAndBuffers() }
                 </div>
                 
                 <div className="modal-tags" >
