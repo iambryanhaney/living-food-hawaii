@@ -6,7 +6,7 @@ class DishesController < ApplicationController
                 ### CloudFront variants
     def index
         dishes = Dish.with_attached_images.includes(:tags).map do |dish|
-            dish.as_json(include: :tags, except: [:created_at, :updated_at]).merge({ images: dish.images.map do |image|
+            dish.as_json(include: :tags, except: [:updated_at]).merge({ images: dish.images.map do |image|
                 {
                     id: image.id,
                     bucket: BUCKET,
@@ -22,7 +22,7 @@ class DishesController < ApplicationController
     def create
         # binding.pry
         dish = Dish.create(dish_params)
-        dish = dish.as_json(include: :tags, except: [:created_at, :updated_at]).merge({ images: dish.images.map do |image| 
+        dish = dish.as_json(include: :tags, except: [:updated_at]).merge({ images: dish.images.map do |image| 
             {
                 id: image.id,
                 bucket: BUCKET,
@@ -42,7 +42,7 @@ class DishesController < ApplicationController
 
         dish = Dish.with_attached_images.find_by(id: params[:id])
         dish.update(dish_params)
-        dish = dish.as_json(include: :tags, except: [:created_at, :updated_at]).merge({ images: dish.images.map do |image| 
+        dish = dish.as_json(include: :tags, except: [:updated_at]).merge({ images: dish.images.map do |image| 
             {
                 id: image.id,
                 bucket: BUCKET,

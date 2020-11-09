@@ -28,10 +28,11 @@ export default function Gallery({scrollRef, ...props}) {
             const flattenedDishes = []
             for(let dish of fetchedDishes) {
                 for (let image of dish.images) {
-                    flattenedDishes.push({ description: dish.description, image: image, tags: dish.tags })
+                    flattenedDishes.push({ description: dish.description, image: image, tags: dish.tags, createdAt: dish.created_at })
                 }
             }
-            setDishes(flattenedDishes)
+            // Sort dishes by time created, from newest to oldest 
+            setDishes(flattenedDishes.sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt) ))
             setFilteredDishesBuffer(flattenedDishes)
         })
         .catch(err => console.error(err))
@@ -119,10 +120,10 @@ export default function Gallery({scrollRef, ...props}) {
 
         // Algorithmically generate zoomed image and its surrounding images, automatically transitioning based on zoomIndex. 
         const generateImageAndBuffers = () => {
-            const buffer = 13;
+            const buffer = 7;
             return [...Array(buffer)].map((e,i) => {
                 const offset = mod(-zoomIndex - (buffer+1)/2 + i, buffer) - (buffer-1)/2
-                return <img alt="" src={ generateImageUrl(filteredDishes[ mod(zoomIndex + offset, len) ]?.image) } style={
+                return <img alt="" key={i} src={ generateImageUrl(filteredDishes[ mod(zoomIndex + offset, len) ]?.image) } style={
                     { 
                         opacity: mod(zoomIndex, buffer) === i ? 1 : 0,
                         pointerEvents: mod(zoomIndex, buffer) === i ? 'auto' : 'none',
@@ -163,8 +164,8 @@ export default function Gallery({scrollRef, ...props}) {
                 <div className="modal-thumbs">
                     <div className="thumb-slider" style={{ transform: `translateX(${-55 * zoomIndex}px)`}}>
                         { filteredDishes.map((dish, index) => 
-                            <div className="tiny-thumb">
-                                <img alt="" key={index} src={ generateImageUrl(dish.image, "tiny")} style={{ opacity: zoomIndex === index ? 1 : 0.3 }} />
+                            <div className="tiny-thumb" key={index}>
+                                <img alt="" src={ generateImageUrl(dish.image, "tiny")} style={{ opacity: zoomIndex === index ? 1 : 0.3 }} />
                             </div> 
                         )}
                     </div>

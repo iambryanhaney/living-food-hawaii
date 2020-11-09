@@ -14,14 +14,13 @@ export default function Modal ({showModal, onHide, modalClass, children}) {
     const [contentStyle, setContentStyle] = useState(contentStyleStart)
 
     const outsideClick = (event) => {
-        console.log('In outsideClick...')
         const modal = document.getElementById('modal')
         if(event.target == modal) onHide()
     }
 
     useEffect(() => {
         let fadeOut
-        console.log("In useEffect 1...")
+        // console.log("In useEffect 1...")
         if(showModal) {
             setShowSelf(true);
             document.body.classList.add('modal-open')
@@ -30,9 +29,9 @@ export default function Modal ({showModal, onHide, modalClass, children}) {
         else {
             setModalStyle(modalStyleStart);
             setContentStyle(contentStyleStart)
-            console.log("Reverting styles...")
+            // console.log("Reverting styles...")
             fadeOut = setTimeout(() => {
-                console.log("Should be removing modal-open NOW...")
+                // console.log("Should be removing modal-open NOW...")
                 document.body.classList.remove('modal-open')
                 setShowSelf(false)
             }, 500)
