@@ -120,13 +120,15 @@ export default function Gallery({scrollRef, ...props}) {
         // Algorithmically generate zoomed image and its surrounding images, automatically transitioning based on zoomIndex. 
         const generateImageAndBuffers = () => {
             const buffer = 13;
-            return [...Array(buffer)].map((e,i) => 
-                <img alt="" src={ generateImageUrl(filteredDishes[ mod(zoomIndex + mod(-zoomIndex - (buffer+1)/2 + i, buffer) - (buffer-1)/2, len) ]?.image) } style={
+            return [...Array(buffer)].map((e,i) => {
+                const offset = mod(-zoomIndex - (buffer+1)/2 + i, buffer) - (buffer-1)/2
+                return <img alt="" src={ generateImageUrl(filteredDishes[ mod(zoomIndex + offset, len) ]?.image) } style={
                     { 
                         opacity: mod(zoomIndex, buffer) === i ? 1 : 0,
-                        pointerEvents: mod(zoomIndex, buffer) === i ? 'auto' : 'none',                        
+                        pointerEvents: mod(zoomIndex, buffer) === i ? 'auto' : 'none',
+                        transform: `translateX(calc(${offset} * 50vw))`,
                     }} />
-            )
+            })
         }
 
         return (
