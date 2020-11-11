@@ -19,6 +19,7 @@
         // Grid Area
         .bio-image-1 {
             grid-area: bio-image-1;
+            z-index: 3;
             
             img {
                 height: 100%;
@@ -37,6 +38,7 @@
                 height: 100%;
                 object-fit: cover;
                 object-position: 70% 50%;
+                
             }
         }
 
@@ -75,7 +77,7 @@
             border-right: 2px solid $main-color;
             border-bottom: 2px solid $main-color;
             border-left: 2px solid $main-color;
-            z-index: 2;
+            z-index: 0;
         }
     }
 }
