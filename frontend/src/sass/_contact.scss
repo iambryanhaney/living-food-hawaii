@@ -6,7 +6,6 @@
         img {
             filter: grayscale(20%);
             height: 100%;
-            width: 75%;
             object-fit: cover;
             object-position: center;
         }
@@ -43,6 +42,13 @@
     }
 }
 
+.contact {
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    border-left: 1px solid black;
+}
+
 .contact-header {
     color:  $main-color;
 
@@ -51,7 +57,6 @@
 .callback-form {
     width: 100%;
     padding: 20px 0;
-    z-index: 10;
 
     label {
         display: block;

@@ -153,10 +153,21 @@ input[class^='btn-']:hover {
           flex: 1;
 }
 
+.column.column-a {
+  -ms-flex-preferred-size: 25%;
+      flex-basis: 25%;
+}
+
+.column.column-b {
+  -ms-flex-preferred-size: 75%;
+      flex-basis: 75%;
+  border-left: 1px solid black;
+}
+
 .flex-columns .column .column-1,
 .flex-columns .column .column-2 {
   height: 100%;
-  z-index: 2;
+  z-index: -1;
 }
 
 .flex-columns .column-2 {
@@ -353,6 +364,7 @@ input[class^='btn-']:hover {
   -ms-grid-row-span: 3;
   -ms-grid-column: 3;
   grid-area: bio-image-1;
+  z-index: 3;
 }
 
 #about-a .bio-image-1 img {
@@ -423,10 +435,11 @@ input[class^='btn-']:hover {
   border-right: 2px solid #71bc62;
   border-bottom: 2px solid #71bc62;
   border-left: 2px solid #71bc62;
-  z-index: 2;
+  z-index: 0;
 }
 
 #services {
+  position: relative;
   margin: 6rem auto 7rem auto;
 }
 
@@ -439,30 +452,57 @@ input[class^='btn-']:hover {
   display: flex;
   -ms-flex-wrap: nowrap;
       flex-wrap: nowrap;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
   -webkit-box-pack: space-evenly;
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
   border: 2px solid #71bc62;
+  padding-left: 0;
+  padding-right: 2rem;
 }
 
-.services-body .flex-item {
-  -webkit-box-flex: 1;
-      -ms-flex: 1 400px;
-          flex: 1 400px;
-  height: 400px;
+.services-body .services-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  overflow: visible;
+  z-index: 2;
+  width: 700px;
+  height: 700px;
 }
 
-.services-body .services-list-container {
-  -webkit-box-flex: 1;
-      -ms-flex: 1 400px;
-          flex: 1 400px;
-  margin-left: 2rem;
+.services-body .services-logo img {
+  position: relative;
+  -webkit-transform: translateX(-50%) translateY(-50%) rotate(-6.5deg) scale(1.45);
+          transform: translateX(-50%) translateY(-50%) rotate(-6.5deg) scale(1.45);
+  opacity: 0.2;
 }
 
-.services-body .services-list-container .services-list {
+.services-body .services-left {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 42%;
+          flex: 0 42%;
+  border-right: 2px solid #71bc62;
+}
+
+.services-body .services-left .services-title {
+  background: #333;
+  color: #fff;
+  font-size: 2.0rem;
+  font-weight: bold;
+  text-align: center;
+  height: 15%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.services-body .services-left .services-list {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -476,56 +516,90 @@ input[class^='btn-']:hover {
       justify-content: space-around;
   justify-items: center;
   font-size: 1.5rem;
-  padding: 20px 0 20px 1rem;
-  height: 100%;
+  padding: 1.5rem 0 1.5rem 2rem;
+  height: 85%;
 }
 
-.services-body .services-list-container .services-list .services-item {
+.services-body .services-left .services-list .services-item {
+  position: relative;
+  z-index: 2;
+  line-height: 3rem;
+  list-style: inside;
+}
+
+.services-body .services-left .services-list .services-item span {
+  background: rgba(113, 188, 98, 0.1);
+  font-weight: bold;
+}
+
+.services-body .services-right {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 58%;
+          flex: 0 58%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  z-index: 2;
+  padding: 2rem 0 2rem 2rem;
+}
+
+.services-body .services-right p {
   -webkit-box-flex: 1;
       -ms-flex: 1 auto;
           flex: 1 auto;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  font-weight: 700;
-  z-index: 2;
+  font-size: 1.3rem;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid #71bc62;
 }
 
-.services-body .services-logo {
-  -webkit-box-flex: 0;
-      -ms-flex: 0 0 40px;
-          flex: 0 0 40px;
-  overflow: visible;
-  z-index: 1;
+.services-body .services-right p strong {
+  background: rgba(113, 188, 98, 0.5);
+  font-size: 1.5rem;
+  padding: 0 0.75rem;
 }
 
-.services-body .services-logo img {
-  -webkit-transform: scale(25) rotate(-6.5deg) translateY(6.8px);
-          transform: scale(25) rotate(-6.5deg) translateY(6.8px);
-  opacity: 0.23;
-}
-
-.services-body .services-spotlight {
+.services-body .services-right .example-menus {
+  -ms-flex-item-align: center;
+      align-self: center;
+  position: relative;
   -webkit-box-flex: 1;
-      -ms-flex: 1 400px;
-          flex: 1 400px;
+      -ms-flex: 1 auto;
+          flex: 1 auto;
+  font-size: 1.5rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  height: 100%;
-  z-index: 2;
-  margin-right: 3rem;
+  z-index: 5;
 }
 
-.services-body .services-spotlight p {
-  text-align: right;
-  font-size: 1.3rem;
+.services-body .services-right .example-menus a {
+  border: 1px solid #dcdcdc;
+  width: 34px;
+  height: 50px;
+  margin: 0 1rem 0 1rem;
+}
+
+.services-body .services-right .example-menus a img {
+  position: relative;
+  height: 100%;
+  z-index: 5;
+  -webkit-transition: all 0.7s;
+  transition: all 0.7s;
+}
+
+.services-body .services-right .example-menus a img:hover {
+  -webkit-transform: scale(7);
+          transform: scale(7);
+  -webkit-box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.5);
+          box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.5);
+  z-index: 10;
 }
 
 @-webkit-keyframes logorotate {
@@ -563,7 +637,6 @@ input[class^='btn-']:hover {
   -webkit-filter: grayscale(20%);
           filter: grayscale(20%);
   height: 100%;
-  width: 75%;
   -o-object-fit: cover;
      object-fit: cover;
   -o-object-position: center;
@@ -606,6 +679,13 @@ input[class^='btn-']:hover {
   margin-right: 30px;
 }
 
+.contact {
+  border-top: 1px solid black;
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+  border-left: 1px solid black;
+}
+
 .contact-header {
   color: #71bc62;
 }
@@ -613,7 +693,6 @@ input[class^='btn-']:hover {
 .callback-form {
   width: 100%;
   padding: 20px 0;
-  z-index: 10;
 }
 
 .callback-form label {
@@ -663,12 +742,10 @@ input[class^='btn-']:hover {
 }
 
 .footer {
-  position: absolute;
   top: -85px;
   left: 0;
   right: 0;
   height: 85px;
-  background: url("../assets/media/floral_divider.jpg") no-repeat center center/cover;
   z-index: 2;
 }
 
