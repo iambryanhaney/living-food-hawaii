@@ -19,9 +19,9 @@ export default function Home() {
     useEffect(() => {
         const pathToPositionTable = {
             '/home': homeRef.current.offsetTop - 80,
-            '/about': aboutRef.current?.offsetTop - 50,
-            '/services': servicesRef.current?.offsetTop - 75,
-            '/contact': contactRef.current?.offsetTop - 100,
+            '/about': aboutRef.current?.offsetTop - 60,
+            '/services': servicesRef.current?.offsetTop - 96,
+            '/contact': contactRef.current?.offsetTop - 96,
             '/gallery': galleryRef.current?.offsetTop - 85,
         }
         // console.log(pathToPositionTable[location.pathname])

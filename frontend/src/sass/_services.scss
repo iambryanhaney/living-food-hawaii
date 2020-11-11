@@ -3,7 +3,7 @@
 
 #services {
     position: relative;
-    margin: 6rem auto 7rem auto;
+    margin: 6rem auto 6rem auto;
 }
 
 .services {
@@ -35,7 +35,6 @@
                     position: relative;
                     transform: translateX(-50%) translateY(-50%) rotate(-6.5deg) scale(1.45);
                     opacity: 0.2;
-                    // filter: grayscale(20%);
                 }
             }
 
@@ -45,11 +44,11 @@
 
                 .services-title {
                     background: $dark-color;
-                    color: #fff;
+                    color: $light-color;
                     font-size: 2.0rem;
                     font-weight: bold;
                     text-align: center;
-                    height: 15%;
+                    height: 6rem;
                     display: flex;
                     align-items: center;
                     justify-content: center;
@@ -59,20 +58,13 @@
                     display: flex;
                     flex-direction: column;
                     flex-wrap: nowrap;
-                    // align-items: flex-end;
                     justify-content: space-around;
                     justify-items: center;
                     font-size: 1.5rem;
-                    padding: 1.5rem 0 1.5rem 2rem;
-                    
-                    // border-right: 1px solid $main-color;
-                    height: 85%;                    
-                    
+                    padding: 1.5rem 0 1.5rem 2rem;                 
 
                     .services-item {
                         position: relative;
-                        // left: -10px;
-                        // font-weight: 700;
                         z-index: 2;
                         line-height: 3rem;
                         list-style: inside;

@@ -1,101 +1,118 @@
 /* Contact Form */
 
-#contact {
-    .column-1 {
+.contact {
+    display: flex;
+    flex-flow: row nowrap;
+    margin-bottom: 6rem;
+    border-top: 2px solid $main-color;
+    border-right: 2px solid $main-color;
+    border-bottom: 2px solid $main-color;
+    border-left: 2px solid $main-color;
+    
+    &-left-pane {
+        flex: 0 40.75%;
+        position: relative;
+        z-index: 3;
 
         img {
-            filter: grayscale(20%);
-            height: 100%;
+            filter: grayscale(15%);
             object-fit: cover;
             object-position: center;
+            height: 100%;
         }
+        
     }
 
-    h2 {
+    &-right-pane {
+        flex: 1;
         display: flex;
-        width: 100%;
-        align-items: center;
-        justify-content: space-between;
-    }
+        flex-flow: column nowrap;
+        align-items: flex-start;
+        z-index: 3;
 
-    .social {
-        margin-left: 5rem;
+        h2 {
+            display: flex;
+            height: 6rem;
+            width: 100%;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 2rem;
+            font-weight: 700;
+            background: $dark-color;
+            color: $light-color;
+            padding-left: 2rem;
 
-        a {
-            color: inherit;
-    
-            i {
-                transition: all 0.5s;
+            .contact-header-highlights {
+                color:  $main-color;
             }
+        }
+
+        .social {
+            z-index: 2;
+            margin-left: 5rem;
     
-            &:hover {
+            a {
+                color: inherit;
+                margin-right: 2rem;
+        
                 i {
-                    color: $main-color;
-                    transform: scale(1.2);
+                    transition: all 0.5s;
+                }
+        
+                &:hover {
+                    i {
+                        color: $main-color;
+                        transform: scale(1.2);
+                    }
                 }
             }
         }
 
-        > * {
-            margin-right: 30px;
+        .callback-form {
+            width: 100%;
+            padding: 2rem 2rem;
+            background: $bg-light;
+        
+            label {
+                display: block;
+                margin-bottom: 0.3rem;
+            }
+        
+            input {
+                width: 100%;
+                padding: 0.25rem;
+                height: 40px;
+                border: 1px solid #f5f5f5;
+            }
+        
+            textarea {
+                height: 4rem;
+                width: 100%;
+                padding: 4px;
+                border: 1px solid #f5f5f5;
+                font-family: Tahoma, sans-serif;
+                font-size: 0.8rem;
+                resize: none;
+            }
+        
+            input:focus, textarea:focus {
+                outline: none;
+                border-color: $main-color;
+            }
+        
+            .btn-main {
+                padding: 12px 0;
+                margin-top: 20px;
+        
+                &:hover {
+                    font-weight: bold;
+                    font-size: 0.8rem;
+                }
+            }
         }
     }
 }
 
 .contact {
-    border-top: 1px solid black;
-    border-right: 1px solid black;
-    border-bottom: 1px solid black;
-    border-left: 1px solid black;
-}
-
-.contact-header {
-    color:  $main-color;
-
-}
-
-.callback-form {
-    width: 100%;
-    padding: 20px 0;
-
-    label {
-        display: block;
-        margin-bottom: 5px;
-    }
-
-    .form-control {
-        margin-bottom: 15px;
-    }
-
-    input {
-        width: 100%;
-        padding: 4px;
-        height: 40px;
-        border: 1px solid #f5f5f5;
-    }
-
-    textarea {
-        height: 100px;
-        width: 100%;
-        padding: 4px;
-        border: 1px solid #f5f5f5;
-        font-family: Tahoma, sans-serif;
-        font-size: 0.8rem;
-        resize: none;
-    }
-
-    input:focus, textarea:focus {
-        outline: none;
-        border-color: $main-color;
-    }
-
-    .btn-main {
-        padding: 12px 0;
-        margin-top: 20px;
-
-        &:hover {
-            font-weight: bold;
-            font-size: 0.8rem;
-        }
-    }
+    
 }
