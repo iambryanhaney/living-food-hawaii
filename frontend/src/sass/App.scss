@@ -6,6 +6,7 @@
 @import 'contact';
 @import 'footer';
 @import 'gallery';
+@import 'dish-manager';
 @import 'modal';
 @import 'modal-login';
 @import 'modal-lightbox';
@@ -159,22 +160,4 @@ img {
             }
         }
     }   
-}
-
-
-
-
-
-
-
-
-
-
-/* I don't know! Delete me? */
-.container-dish {
-    background: #c5e3d3;
-
-    &:hover {
-        background: #d3e3d0;
-    }
 }

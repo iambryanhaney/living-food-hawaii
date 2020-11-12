@@ -96,6 +96,7 @@
             border-bottom: 3px transparent solid;
             padding-bottom: 0.5rem;
             transition: border-color 1s;
+            cursor: pointer;
     
             &:hover {
                 border-color: $medium-color ;
