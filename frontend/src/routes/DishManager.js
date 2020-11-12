@@ -3,7 +3,6 @@
 import React, {useState, useEffect, useRef} from 'react'
 import { generateImageUrl } from '../components/ImageHandler'
 import Modal from 'react-bootstrap/Modal'
-import Button from 'react-bootstrap/Button'
 
 
 const DISH_URL = 'http://localhost:3001/dishes'
@@ -18,12 +17,8 @@ export default function DishManager(props) {
         is_new: true,
     }
 
-
-    //      -----
-    //      Hooks
-    //      -----
-
     const [dishes, setDishes] = useState([])
+    const [filteredDishes, setFilteredDishes] = useState([])
     const [tags, setTags] = useState([])
     const [showModal, setShowModal] = useState(false)
     const [selectedDish, setSelectedDish] = useState({...newDish})
@@ -31,11 +26,11 @@ export default function DishManager(props) {
     const [formImagePurges, setFormImagePurges] = useState({})
     const formFileInput = useRef(null)
     const [formTags, setFormTags] = useState({})
+    const [filterInput, setFilterInput] = useState('')
 
-
-    //      -------
-    //      Effects
-    //      -------
+    useEffect(() => {
+        setFilteredDishes(dishes.filter(dish => dish.description.toLowerCase().includes( filterInput.toLowerCase())))
+    },[filterInput])
 
     // Load dishes and tags
     useEffect(() => {
@@ -44,9 +39,11 @@ export default function DishManager(props) {
         
         fetch(DISH_URL)
         .then(resp => resp.json())
-        .then(resp => {
+        .then(fetchedDishes => {
             if (isMounted) {
-                setDishes(resp)
+                const sortedDishes = fetchedDishes.sort((a,b) => new Date(b.created_at) - new Date(a.created_at) )
+                setDishes(sortedDishes)
+                setFilteredDishes(sortedDishes)
             } else {
                 console.log('Component unmounted; aborted dishes fetch')
             }
@@ -83,8 +80,9 @@ export default function DishManager(props) {
     //      Clicks
     //      ------
 
-    const handleClickDish = (event) => {
-        setSelectedDish(dishes[event.currentTarget.dataset.index])
+    const handleClickDish = (event, dish) => {
+        // setSelectedDish(dishes[event.currentTarget.dataset.index])
+        setSelectedDish(dish)
         setShowModal(true)
     }
 
@@ -93,7 +91,7 @@ export default function DishManager(props) {
     }
 
     const hideModal = (event) => {
-        setSelectedDish({...newDish})
+        setSelectedDish({ ...newDish })
         setShowModal(false)
     }
 
@@ -179,21 +177,20 @@ export default function DishManager(props) {
         setFormImagePurges({ ...formImagePurges, [event.target.dataset.id]: true})
     }
 
-    //      -------
-    //      Renders
-    //      -------
-
     const renderDishes = () => {
-        return dishes.map((dish, index) => 
-            <div className='container-dish' key={dish.id} data-index={index} onClick={handleClickDish} style={{ marginBottom: '2rem', border: '2px solid green', padding: '1rem' }}>
-                <p style={{ marginBottom: '0.1rem', textAlign: 'center' }}>{dish.description}</p>
-                <div style={{ display: 'flex', flexWrap: 'wrap', marginBottom: '0.5rem', alignItems: 'center', justifyContent: 'center'}}>
+        // Helper function to calculate image sizes using 2^log4(image count).ceiling 
+        const sizeCalc = dish => 2**Math.ceil( Math.log(dish.images.length || 1) / Math.log(4) )
+        
+        return filteredDishes.map((dish, index) => 
+            <div className='dish-card' key={dish.id} onClick={e => handleClickDish(e, dish)} >
+                <p>{dish.description}</p>
+                <div className="images-container" style={{ gridTemplateColumns: `repeat(auto-fill, ${100 / sizeCalc(dish) - 2}%)` }}>
                     { dish.images.map(image =>
-                        <div key={image.id} style={{position: 'relative'}}>
-                            <img src={generateImageUrl(image, 'small')} alt="" />                            
-                        </div>
+                        <img key={image.id} src={generateImageUrl(image, 'medium')} alt="" style={{ height: 150 / sizeCalc(dish) - (sizeCalc(dish)-1) * 5 / sizeCalc(dish)}} />                            
+                        
                     )}
                 </div>
+                <p>Created: {(new Date(dish.created_at)).toLocaleString('en-US', { month: '2-digit', day: '2-digit', year: '2-digit' })}</p>
             </div>
         )
     }
@@ -258,35 +255,30 @@ export default function DishManager(props) {
                     </Modal.Body>
                     <Modal.Footer style={{ textAlign: 'center', justifyContent: 'space-between' }}>
                         <div>
-                            { selectedDish.is_new || 
-                                <Button variant="danger" onClick={handleClickDelete}>Delete Dish</Button> }
+                            {/* { selectedDish.is_new ||  */}
+                                {/* // <Button variant="danger" onClick={handleClickDelete}>Delete Dish</Button> } */}
                         </div>
                         <div>
-                            <Button variant="warning" onClick={hideModal} style={{ margin: '1rem'}}>Cancel</Button>
-                            <Button variant="success" onClick={handleSubmit}>
+                            {/* <Button variant="warning" onClick={hideModal} style={{ margin: '1rem'}}>Cancel</Button> */}
+                            <button variant="success" onClick={handleSubmit}>
                             { selectedDish.is_new ? 'Create Dish' : 'Save Changes' }
-                            </Button>
+                            </button>
                         </div>
                     </Modal.Footer>
                 </Modal>
         )
     }
 
-
-
-
-    //      -----------
-    //      Main Render
-    //      -----------
-
     return (
-        <div style={{ maxWidth: '1280px', margin: '2rem auto'}}>
-            {/* <form onSubmit={handleSubmit}> */}
-                <h1 style={{ textAlign: 'center' }}>Dish Manager</h1>
-                <Button variant="primary" onClick={handleClickCreate} style={{ marginBottom: '1rem' }}>Create New Dish</Button>
+        <div className="container dish-manager">
+            <div className="actions">
+                <button className="btn-main" onClick={handleClickCreate}>Create New Dish</button>
+                <input type="text" className="search-bar" placeholder="Filter by Name" onChange={e => setFilterInput(e.target.value)}/>
+            </div>
+            <div className="dishes-container">
                 { renderDishes() }
-                { renderModal() }
-            {/* </form> */}
+            </div>
+            { renderModal() }
         </div>
     )
 }
