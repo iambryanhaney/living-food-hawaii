@@ -92,11 +92,9 @@ export default function Gallery({scrollRef, ...props}) {
         }
 
         return dishCards.length > 0 ? dishCards : (
-            <>
-                <br />
+            <div className="no-matches">
                 There are no offerings that match your exact request. Please try changing your filters.
-                <br />
-            </>
+            </div>
         )
     }
 
@@ -111,11 +109,10 @@ export default function Gallery({scrollRef, ...props}) {
         setZoomIndex(null)
     }
 
-    // True modulo helper function (JavaScript's % operator is actually REMAINDER and does not handle negative values as expected)
-    const mod = (n, m) => (n % m + m) % m
-
     // Render Lightbox
     const renderZoomModal = () => {
+        // True modulo helper function (JavaScript's % operator is actually REMAINDER and does not handle negative values as expected)
+        const mod = (n, m) => (n % m + m) % m
         const len = filteredDishes.length
 
         // Algorithmically generate zoomed image and its surrounding images, automatically transitioning based on zoomIndex. 

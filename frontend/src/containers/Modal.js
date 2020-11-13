@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react'
 
 export default function Modal ({showModal, onHide, modalClass, children}) {
     const modalStyleStart = { backgroundColor: 'hsla(0,0%,0%,0.0)' }
-    const modalStyleEnd = { backgroundColor: modalClass === 'login' ? 'hsla(0,0%,0%,0.5)' : 'hsla(0,0%,0%,0.85)'}
+    const modalStyleEnd = { backgroundColor: modalClass === 'login' || modalClass === 'dish-editor' ? 'hsla(0,0%,0%,0.5)' : 'hsla(0,0%,0%,0.85)'}
     const contentStyleStart = { opacity: 0, transform: 'translateY(-200%)' }
     const contentStyleEnd = { opacity: 1, transform: modalClass === 'login' ? 'translateY(-100%)' : null }
 
