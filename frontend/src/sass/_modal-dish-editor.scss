@@ -1,0 +1,207 @@
+.modal {
+
+    &-dish-editor {
+        position: absolute;
+        top: 3vh;
+        left: 0;
+        right: 0;
+        // height: 94vh;
+        max-width: $website-width;
+        margin: auto;
+        box-shadow: 0 5px 8px 0 black, 0 7px 20px 0 #333;
+        transition: opacity 0.5s, transform 0.5s;
+        overflow: hidden;
+
+        .container {
+            padding: 1.5rem;
+        }
+
+        .modal-header {
+            background: $main-color;
+            padding: 10px;
+    
+            h3 {
+                text-align: center;
+                color: #fff;
+                font-size: 1.3rem;
+                font-weight: 700;
+                letter-spacing: 2px;
+            } 
+        }
+
+        .modal-body {
+            background: $bg-light;
+
+            label {
+                // font-size: 1.5rem;
+                font-weight: 700;
+            }
+
+            .description {
+                
+                .input-description {
+                    margin: 0 0 1.5rem 1rem;
+                    width: 50%;
+                    padding: 0.5rem;
+                    height: 30px;
+                    border: 1px solid #dcdcdc;
+                    font-size: 1rem;
+                }
+            }
+
+            .images-container {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                justify-content: center;
+                gap: 1rem;
+                margin-bottom: 1rem;
+                padding: 1rem 0;
+                border: 1px solid hsla(0,0,0, 0.7);
+                background: linear-gradient(90deg, rgba(220,220,220,1) 0%, rgba(225,225,225,1) 35%, rgba(235,235,235,1) 100%);
+
+                .image-card {
+                    position: relative;
+                    height: 150px;
+                    width: 200px;
+                    border: 1px solid hsla(0,0,0, 0.7);
+                    box-shadow: 1px 1px 8px 0px hsla(0, 0, 0, 0.4);
+
+                        img {
+                            height: 100%;
+                            object-fit: cover;
+                        }
+
+                        i {
+                            position: absolute;
+                            right: 1px;
+                            bottom: 1px;
+                            color: red;
+                            cursor: pointer;
+                            opacity: 0.7;
+                        }
+                }
+            }
+
+            .file-selection {
+                margin-bottom: 1rem;
+
+                .input-files {
+                    // margin: 1rem 0 1.5rem 1rem;
+                    margin-left: 0.7rem;
+                    padding-left: 0.7rem;
+                    font-size: 1rem;
+                    // border-left: 1px solid black;
+                }
+            }
+
+            .image-previews-container {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 1rem;
+                margin-bottom: 1rem;
+
+                img {
+                    height: 150px;
+                    width: 200px;
+                    border: 1px solid hsla(0,0,0, 0.7);
+                    box-shadow: 1px 1px 8px 0px hsla(0, 0, 0, 0.4);
+                    object-fit: cover;
+                }
+            }
+
+            .form-tags-container {
+                display: flex;
+                // justify-content: space-evenly;
+                gap: 2rem;
+                
+                .form-tags-column {
+                    // border-right: 1px solid black;
+                    padding-right: 1.2rem;
+
+                    &:last-child {
+                        border-right: none;
+                    }
+
+                    .form-tags-header {
+                        font-size: 1.3rem;
+                        padding-right: 1rem;
+                        border-bottom: 1px solid black;
+                        text-align: center;
+                        margin-bottom: 0.5rem;
+                    }
+                    
+                    .form-tag {
+                        margin-bottom: 0.3rem;
+                        font-size: 1rem;
+                        cursor: pointer;
+                        border: 1px solid hsla(0, 0%, 0%, 0);
+                        transition: all 0.3s;
+
+                        &.active-true {
+                            background: $main-color-trans;
+                        }
+
+                        &.active-false {
+                            background: none;
+                        }
+                    }
+                }
+            }
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: space-between;
+            background: $bg-light;
+            padding: 1rem 1.5rem;
+            text-align: right;
+
+            .btn-save {
+                width: 140px;
+                border-radius: 4px;
+                font-size: 1rem;
+                padding: 0.8rem 1rem;
+                box-shadow: 1px 1px 2px 2px hsla(0, 0%, 0%, 0.1);
+                border: 1px solid hsla(0, 0%, 0%, 0);
+        
+                &:hover {
+                    box-shadow: 1px 1px 2px 2px hsla(0, 0%, 0%, 0.3);
+                    border: 1px solid green;
+                }
+            }
+
+            .btn-cancel {
+                width: 140px;
+                border-radius: 4px;
+                font-size: 1rem;
+                padding: 0.8rem 1rem;
+                box-shadow: 1px 1px 2px 2px hsla(0, 0%, 0%, 0.1);
+                border: 1px solid hsla(0, 0%, 0%, 0);
+                background: hsl(50, 90%, 60%);
+                margin-right: 1rem;
+        
+                &:hover {
+                    box-shadow: 1px 1px 2px 2px hsla(0, 0%, 0%, 0.3);
+                    border: 1px solid gold;
+                }
+            }
+
+            .btn-delete {
+                width: 140px;
+                border-radius: 4px;
+                font-size: 1rem;
+                padding: 0.8rem 1rem;
+                box-shadow: 1px 1px 2px 2px hsla(0, 0%, 0%, 0.1);
+                border: 1px solid hsla(0, 0%, 0%, 0);
+                background: hsl(10, 80%, 55%);
+                margin-right: 1rem;
+        
+                &:hover {
+                    box-shadow: 1px 1px 2px 2px hsla(0, 0%, 0%, 0.3);
+                    border: 1px solid red;
+                }
+            }
+        }
+    }
+}

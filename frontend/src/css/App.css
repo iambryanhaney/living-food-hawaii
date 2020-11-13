@@ -612,13 +612,13 @@ input[class^='btn-']:hover {
   border-radius: 4px;
   -webkit-box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.05);
           box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0);
 }
 
 .contact-right-pane .callback-form .btn-main:hover {
-  font-weight: bold;
-  font-size: 0.8rem;
   -webkit-box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
           box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
+  border: 1px solid green;
 }
 
 /* Footer */
@@ -937,18 +937,18 @@ input[class^='btn-']:hover {
 }
 
 .dish-manager .actions button {
-  width: 180px;
   border-radius: 4px;
   font-size: 1rem;
   padding: 0.8rem 1rem;
   -webkit-box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.1);
           box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0);
 }
 
 .dish-manager .actions button:hover {
-  font-weight: bold;
   -webkit-box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3);
           box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3);
+  border: 1px solid green;
 }
 
 .dish-manager .actions input {
@@ -975,6 +975,7 @@ input[class^='btn-']:hover {
   height: 230px;
   -webkit-box-shadow: 1px 1px 8px 0px rgba(0, 0, 0, 0.4);
           box-shadow: 1px 1px 8px 0px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
 }
@@ -1264,6 +1265,234 @@ input[class^='btn-']:hover {
   width: 100%;
   -o-object-fit: cover;
      object-fit: cover;
+}
+
+.modal-dish-editor {
+  position: absolute;
+  top: 3vh;
+  left: 0;
+  right: 0;
+  max-width: 1280px;
+  margin: auto;
+  -webkit-box-shadow: 0 5px 8px 0 black, 0 7px 20px 0 #333;
+          box-shadow: 0 5px 8px 0 black, 0 7px 20px 0 #333;
+  -webkit-transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
+  overflow: hidden;
+}
+
+.modal-dish-editor .container {
+  padding: 1.5rem;
+}
+
+.modal-dish-editor .modal-header {
+  background: #71bc62;
+  padding: 10px;
+}
+
+.modal-dish-editor .modal-header h3 {
+  text-align: center;
+  color: #fff;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.modal-dish-editor .modal-body {
+  background: #f9fafb;
+}
+
+.modal-dish-editor .modal-body label {
+  font-weight: 700;
+}
+
+.modal-dish-editor .modal-body .description .input-description {
+  margin: 0 0 1.5rem 1rem;
+  width: 50%;
+  padding: 0.5rem;
+  height: 30px;
+  border: 1px solid #dcdcdc;
+  font-size: 1rem;
+}
+
+.modal-dish-editor .modal-body .images-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding: 1rem 0;
+  border: 1px solid rgba(0, 0, 0, 0.7);
+  background: -webkit-gradient(linear, left top, right top, from(gainsboro), color-stop(35%, #e1e1e1), to(#ebebeb));
+  background: linear-gradient(90deg, gainsboro 0%, #e1e1e1 35%, #ebebeb 100%);
+}
+
+.modal-dish-editor .modal-body .images-container .image-card {
+  position: relative;
+  height: 150px;
+  width: 200px;
+  border: 1px solid rgba(0, 0, 0, 0.7);
+  -webkit-box-shadow: 1px 1px 8px 0px rgba(0, 0, 0, 0.4);
+          box-shadow: 1px 1px 8px 0px rgba(0, 0, 0, 0.4);
+}
+
+.modal-dish-editor .modal-body .images-container .image-card img {
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.modal-dish-editor .modal-body .images-container .image-card i {
+  position: absolute;
+  right: 1px;
+  bottom: 1px;
+  color: red;
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.modal-dish-editor .modal-body .file-selection {
+  margin-bottom: 1rem;
+}
+
+.modal-dish-editor .modal-body .file-selection .input-files {
+  margin-left: 0.7rem;
+  padding-left: 0.7rem;
+  font-size: 1rem;
+}
+
+.modal-dish-editor .modal-body .image-previews-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.modal-dish-editor .modal-body .image-previews-container img {
+  height: 150px;
+  width: 200px;
+  border: 1px solid rgba(0, 0, 0, 0.7);
+  -webkit-box-shadow: 1px 1px 8px 0px rgba(0, 0, 0, 0.4);
+          box-shadow: 1px 1px 8px 0px rgba(0, 0, 0, 0.4);
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.modal-dish-editor .modal-body .form-tags-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 2rem;
+}
+
+.modal-dish-editor .modal-body .form-tags-container .form-tags-column {
+  padding-right: 1.2rem;
+}
+
+.modal-dish-editor .modal-body .form-tags-container .form-tags-column:last-child {
+  border-right: none;
+}
+
+.modal-dish-editor .modal-body .form-tags-container .form-tags-column .form-tags-header {
+  font-size: 1.3rem;
+  padding-right: 1rem;
+  border-bottom: 1px solid black;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.modal-dish-editor .modal-body .form-tags-container .form-tags-column .form-tag {
+  margin-bottom: 0.3rem;
+  font-size: 1rem;
+  cursor: pointer;
+  border: 1px solid rgba(0, 0, 0, 0);
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.modal-dish-editor .modal-body .form-tags-container .form-tags-column .form-tag.active-true {
+  background: rgba(113, 188, 98, 0.5);
+}
+
+.modal-dish-editor .modal-body .form-tags-container .form-tags-column .form-tag.active-false {
+  background: none;
+}
+
+.modal-dish-editor .modal-footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  background: #f9fafb;
+  padding: 1rem 1.5rem;
+  text-align: right;
+}
+
+.modal-dish-editor .modal-footer .btn-save {
+  width: 140px;
+  border-radius: 4px;
+  font-size: 1rem;
+  padding: 0.8rem 1rem;
+  -webkit-box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.1);
+          box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0);
+}
+
+.modal-dish-editor .modal-footer .btn-save:hover {
+  -webkit-box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3);
+          box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3);
+  border: 1px solid green;
+}
+
+.modal-dish-editor .modal-footer .btn-cancel {
+  width: 140px;
+  border-radius: 4px;
+  font-size: 1rem;
+  padding: 0.8rem 1rem;
+  -webkit-box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.1);
+          box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0);
+  background: #f5d63d;
+  margin-right: 1rem;
+}
+
+.modal-dish-editor .modal-footer .btn-cancel:hover {
+  -webkit-box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3);
+          box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3);
+  border: 1px solid gold;
+}
+
+.modal-dish-editor .modal-footer .btn-delete {
+  width: 140px;
+  border-radius: 4px;
+  font-size: 1rem;
+  padding: 0.8rem 1rem;
+  -webkit-box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.1);
+          box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0);
+  background: #e84f30;
+  margin-right: 1rem;
+}
+
+.modal-dish-editor .modal-footer .btn-delete:hover {
+  -webkit-box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3);
+          box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3);
+  border: 1px solid red;
 }
 
 ::-webkit-scrollbar {

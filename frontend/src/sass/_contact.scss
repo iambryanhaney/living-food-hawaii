@@ -105,11 +105,13 @@
                 margin-top: 20px;
                 border-radius: 4px;
                 box-shadow: 1px 1px 1px 1px hsla(0, 0%, 0%, 0.05);
+                border: 1px solid hsla(0, 0%, 0%, 0);
         
                 &:hover {
-                    font-weight: bold;
-                    font-size: 0.8rem;
+                    // font-weight: bold;
+                    // font-size: 0.8rem;
                     box-shadow: 1px 1px 1px 1px hsla(0, 0%, 0%, 0.1);
+                    border: 1px solid green;
                 }
             }
         }

@@ -42,9 +42,9 @@ export default function Services({scrollRef}) {
                         <div>
                             Sample Menus
                         </div>
-                        <a href={ExampleMenu01PDF} target="_blank"><img src={ExampleMenu01PNG} /></a>
-                        <a href={ExampleMenu02PDF} target="_blank"><img src={ExampleMenu02PNG} /></a>
-                        <a href={ExampleMenu01PDF} target="_blank"><img src={ExampleMenu01PNG} /></a>
+                        <a href={ExampleMenu01PDF} target="_blank" rel="noopener noreferrer"><img src={ExampleMenu01PNG} alt=""/></a>
+                        <a href={ExampleMenu02PDF} target="_blank" rel="noopener noreferrer"><img src={ExampleMenu02PNG} alt=""/></a>
+                        <a href={ExampleMenu01PDF} target="_blank" rel="noopener noreferrer"><img src={ExampleMenu01PNG} alt=""/></a>
                     </div>
                 </div>
             </div>
