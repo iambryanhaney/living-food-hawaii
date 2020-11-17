@@ -3,10 +3,12 @@
 import React, {useState, useEffect, useRef} from 'react'
 import { generateImageUrl } from '../components/ImageHandler'
 import Modal from '../containers/Modal'
-
+import LoadingAnimation from '../assets/media/loading_animation.gif'
+import { DirectUpload } from '@rails/activestorage'
 
 const DISH_URL = 'http://localhost:3001/dishes'
 const TAG_URL = 'http://localhost:3001/tags'
+const DIRECT_UPLOAD_URL = 'http://localhost:3001/rails/active_storage/direct_uploads'
 
 export default function DishManager(props) {
 
@@ -16,7 +18,6 @@ export default function DishManager(props) {
         tags: [],
         is_new: true,
     }
-
     const [dishes, setDishes] = useState([])
     const [filteredDishes, setFilteredDishes] = useState([])
     const [tags, setTags] = useState([])
@@ -25,13 +26,13 @@ export default function DishManager(props) {
     const [formDescription, setFormDescription] = useState('')
     const [formImagePurges, setFormImagePurges] = useState({})
     const formFileInput = useRef(null)
-    const [uploadPreviews, setUploadPreviews] = useState([])
     const [formTags, setFormTags] = useState({})
     const [filterInput, setFilterInput] = useState('')
+    const [isMounted, setIsMounted] = useState(true)
+    const [uploadPreviews, setUploadPreviews] = useState([])
 
     // Load dishes and tags
     useEffect(() => {
-        let isMounted = true
         props.setViewingGallery(true)
         
         fetch(DISH_URL)
@@ -50,7 +51,7 @@ export default function DishManager(props) {
         .catch(err => console.error(err))
 
         return () => {
-            isMounted = false
+            setIsMounted(false)
             props.setViewingGallery(false)
         }
     }, [])
@@ -86,10 +87,30 @@ export default function DishManager(props) {
         setShowModal(false)
     }
 
+    // Initiate uploads, create previews and progress for images selected for upload
     const handleFileSelection = (event) => {
-        // Release any previous ObjectURLs to avoid memory leaks, then generate new ObjectURLS
+        // Release any previous ObjectURLs before generating new ones (avoids memory leaks)
         uploadPreviews.forEach(imageURL => URL.revokeObjectURL(imageURL))
-        setUploadPreviews([...event.target.files].map(file => URL.createObjectURL(file)))
+
+        // Create initial state for all uploads
+        setUploadPreviews([...event.target.files].map(file => ({ loaded: 0, total: 1, previewURL: URL.createObjectURL(file), signedId: null })))
+
+        for(let i = 0; i < event.target.files.length; i++) {
+            // Setup progress handler object for direct upload callbacks
+            const progressHandler = { 
+                directUploadWillStoreFileWithXHR: request => {
+                    request.upload.addEventListener("progress", progressHandler.updateProgress)
+                },
+                updateProgress: event => setUploadPreviews(prevState => prevState.map((image, index) => index === i ? ({ ...image, loaded: event.loaded, total: event.total }) : image )),
+            }
+
+            // Initiate Upload
+            let upload = new DirectUpload(event.target.files[i], DIRECT_UPLOAD_URL, progressHandler)
+            upload.create((error, blob) => {
+                if (error) console.log('Error in upload.create()')
+                else setUploadPreviews(prevState => prevState.map((image, index) => index === i ? ({ ...image, signedId: blob.signed_id }) : image ))
+            })
+        }
     }
 
     const handleDelete = (event) => {
@@ -126,9 +147,14 @@ export default function DishManager(props) {
         }
 
         // Attach images to form
-        for(let i = 0; i < formFileInput.current.files.length; i++) {
-            formData.append('dish[images][]', formFileInput.current.files[i])
-        }
+        // for(let i = 0; i < formFileInput.current.files.length; i++) {
+        //     formData.append('dish[images][]', formFileInput.current.files[i])
+        // }
+
+        // Attach image-blob signed ids to form
+        uploadPreviews.forEach(image => {
+            formData.append('dish[images][]', image.signedId)
+        })
 
         // Attach tag_ids to form
         let has_tags = false
@@ -147,8 +173,11 @@ export default function DishManager(props) {
             })
             .then(resp => resp.json())
             .then(resp => {
-                setDishes([...dishes, resp])
-                hideModal()
+                console.log("Finished fetch POST...")
+                if (isMounted) {
+                    setDishes([...dishes, resp])
+                    hideModal()
+                }
             })
             .catch(err => console.error(err))    
         } else {
@@ -160,8 +189,10 @@ export default function DishManager(props) {
             .then(resp => {
                 const updatedDishes = [...dishes]
                 updatedDishes[dishes.findIndex(e => e.id === resp.id)] = resp
-                setDishes(updatedDishes)
-                hideModal()
+                if (isMounted) {
+                    setDishes(updatedDishes)
+                    hideModal()
+                }
             })
             .catch(err => console.error(err))
         }
@@ -248,10 +279,20 @@ export default function DishManager(props) {
                                 <input className="input-files" type="file" ref={formFileInput} multiple={true} accept="image/*"
                                     onChange={handleFileSelection}/>
                             </div>
-                            {/* Display previews for images to be uploaded */}
+                            {/* Display previews and progress for images to be uploaded*/}
                             { uploadPreviews.length > 0 &&
                                     <div className="image-previews-container">
-                                        { uploadPreviews.map((imageURL, index) => <img src={imageURL} alt="" key={index} /> ) }
+                                        { uploadPreviews.map((upload, index) =>
+                                            <div className="image-preview-card" key={index}>
+                                                <div className="upload-overlay" style={{ width: `${200 - Math.floor((upload.loaded / upload.total) * 200)}px` }} />
+                                                { upload.loaded / upload.total < 1 && 
+                                                <div className="upload-progress">
+                                                    { Math.floor((upload.loaded / upload.total) * 100).toString().padStart(2, '\xa0') }%
+                                                </div>
+                                                }
+                                                <img src={upload.previewURL} alt="" />
+                                            </div>
+                                        )}
                                     </div>
                                 }
                             <div className="form-tags-container">
@@ -273,7 +314,7 @@ export default function DishManager(props) {
                             </button>
                             <button className="btn-main btn-save" onClick={handleSubmit}>
                                 { selectedDish.is_new ? 'Create Dish' : 'Save Changes' }
-                            </button>
+                            </button>   
                         </div>
                     </div>
                 </Modal>
@@ -293,23 +334,3 @@ export default function DishManager(props) {
         </div>
     )
 }
-
-
-
-
-
-    // // ActiveStorage Variants
-    // const renderDishes = () => {
-    //     return dishes.map(dish => 
-    //         <div key={dish.id}>
-    //             <p>{dish.description}</p>
-    //             { dish.images.map(image => 
-    //                 <Fragment key={image.blob_id}>
-    //                     <img src={image.sm_url} alt=""/>
-    //                     <img src={image.md_url} alt=""/>
-    //                     <img src={image.lg_url} alt=""/>
-    //                 </Fragment>
-    //             )}
-    //         </div>            
-    //     )
-    // }

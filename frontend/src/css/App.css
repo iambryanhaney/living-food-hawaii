@@ -1122,12 +1122,18 @@ input[class^='btn-']:hover {
 /* Modal */
 .modal-lightbox {
   position: absolute;
-  top: 3vh;
+  top: 25px;
+  bottom: 25px;
   left: 0;
-  height: 94vh;
-  width: 100vw;
+  right: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
   background: black;
-  margin: auto;
   -webkit-box-shadow: 0 5px 8px 0 black, 0 7px 20px 0 #333;
           box-shadow: 0 5px 8px 0 black, 0 7px 20px 0 #333;
   -webkit-transition: opacity 0.5s, -webkit-transform 0.5s;
@@ -1138,12 +1144,14 @@ input[class^='btn-']:hover {
 }
 
 .modal-lightbox .modal-header {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 1 auto;
+          flex: 0 1 auto;
   background: rgba(113, 188, 98, 0.5);
   font-size: 1.2rem;
   padding: 10px;
   text-align: center;
   color: #fff;
-  height: 5%;
 }
 
 .modal-lightbox .modal-header h2, .modal-lightbox .modal-header h3 {
@@ -1154,15 +1162,21 @@ input[class^='btn-']:hover {
 }
 
 .modal-lightbox .modal-image {
+  position: relative;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
   background: black;
-  height: 85%;
+  width: 100%;
+  overflow: hidden;
+  margin: 5px 0;
 }
 
 .modal-lightbox .modal-image .nav-left-pane {
   position: absolute;
   left: 0;
   width: 50%;
-  height: 83%;
+  height: 100%;
   color: #333;
   cursor: pointer;
   z-index: 1;
@@ -1184,7 +1198,7 @@ input[class^='btn-']:hover {
   position: absolute;
   right: 0;
   width: 50%;
-  height: 83%;
+  height: 100%;
   color: #333;
   cursor: pointer;
   z-index: 1;
@@ -1204,8 +1218,8 @@ input[class^='btn-']:hover {
 
 .modal-lightbox .modal-image img {
   position: absolute;
-  padding-top: 6px;
-  height: 85%;
+  height: 100%;
+  width: 100%;
   -o-object-fit: contain;
      object-fit: contain;
   z-index: 0;
@@ -1214,27 +1228,29 @@ input[class^='btn-']:hover {
 }
 
 .modal-lightbox .modal-tags {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 1 auto;
+          flex: 0 1 auto;
   text-align: center;
   background: black;
   color: #fff;
   font-size: 1.2rem;
-  height: 5%;
-  padding: 5px;
-  margin: auto;
+  line-height: normal;
+  margin-bottom: 5px;
 }
 
 .modal-lightbox .modal-tags span {
-  margin: 1rem 0 1rem 1.2rem;
   background: rgba(113, 188, 98, 0.5);
   padding: 0 0.3rem;
 }
 
 .modal-lightbox .modal-thumbs {
-  position: relative;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 1 auto;
+          flex: 0 1 auto;
   background: black;
-  height: 5%;
-  -webkit-transform: translateX(50%);
-          transform: translateX(50%);
+  position: relative;
+  left: 50%;
 }
 
 .modal-lightbox .modal-thumbs .thumb-slider {
@@ -1252,10 +1268,13 @@ input[class^='btn-']:hover {
 }
 
 .modal-lightbox .modal-thumbs .thumb-slider .tiny-thumb {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 auto;
+          flex: 1 0 auto;
   position: relative;
-  margin: -5px 5px 5px 5px;
-  height: 45px;
-  width: 45px;
+  margin: 0 10px 5px 0;
+  height: 50px;
+  width: 50px;
   -webkit-transition: all 4s;
   transition: all 4s;
 }
@@ -1379,9 +1398,33 @@ input[class^='btn-']:hover {
       flex-wrap: wrap;
   gap: 1rem;
   margin-bottom: 1rem;
+  max-height: 350px;
+  overflow: scroll;
 }
 
-.modal-dish-editor .modal-body .image-previews-container img {
+.modal-dish-editor .modal-body .image-previews-container .image-preview-card {
+  position: relative;
+}
+
+.modal-dish-editor .modal-body .image-previews-container .image-preview-card .upload-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 150px;
+  background: rgba(113, 188, 98, 0.5);
+}
+
+.modal-dish-editor .modal-body .image-previews-container .image-preview-card .upload-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0 5px;
+  font-family: monospace;
+  color: black;
+  background: white;
+}
+
+.modal-dish-editor .modal-body .image-previews-container .image-preview-card img {
   height: 150px;
   width: 200px;
   border: 1px solid rgba(0, 0, 0, 0.7);
@@ -1493,6 +1536,14 @@ input[class^='btn-']:hover {
   -webkit-box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3);
           box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3);
   border: 1px solid red;
+}
+
+.modal-dish-editor .modal-footer img {
+  position: relative;
+  bottom: 200px;
+  right: 200px;
+  width: 100px;
+  height: 100px;
 }
 
 ::-webkit-scrollbar {

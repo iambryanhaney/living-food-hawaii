@@ -6,8 +6,6 @@ import SelectionCircle from '../components/SelectionCircle'
 const DISH_URL = 'http://localhost:3001/dishes'
 const TAG_URL = 'http://localhost:3001/tags'
 
-// RESTORE POINT
-
 export default function Gallery({scrollRef, ...props}) {
     const [filters, setFilters] = useState({})
     const [dishes, setDishes] = useState([])
@@ -117,7 +115,7 @@ export default function Gallery({scrollRef, ...props}) {
 
         // Algorithmically generate zoomed image and its surrounding images, automatically transitioning based on zoomIndex. 
         const generateImageAndBuffers = () => {
-            const buffer = 7;
+            const buffer = 5;
             return [...Array(buffer)].map((e,i) => {
                 const offset = mod(-zoomIndex - (buffer+1)/2 + i, buffer) - (buffer-1)/2
                 return <img alt="" key={i} src={ generateImageUrl(filteredDishes[ mod(zoomIndex + offset, len) ]?.image) } style={
@@ -159,7 +157,7 @@ export default function Gallery({scrollRef, ...props}) {
                 </div>
                 
                 <div className="modal-thumbs">
-                    <div className="thumb-slider" style={{ transform: `translateX(${-55 * zoomIndex}px)`}}>
+                    <div className="thumb-slider" style={{ transform: `translateX(${-60 * zoomIndex}px)`}}>
                         { filteredDishes.map((dish, index) => 
                             <div className="tiny-thumb" key={index}>
                                 <img alt="" src={ generateImageUrl(dish.image, "tiny")} style={{ opacity: zoomIndex === index ? 1 : 0.3 }} />
