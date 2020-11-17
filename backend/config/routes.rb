@@ -12,5 +12,7 @@ Rails.application.routes.draw do
   post '/login', to: 'auth#create'
   
   get '/tags', to: 'tags#index'
+
+  post "/rails/active_storage/direct_uploads" => "direct_uploads#create"
   
 end

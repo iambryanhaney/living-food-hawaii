@@ -1379,9 +1379,33 @@ input[class^='btn-']:hover {
       flex-wrap: wrap;
   gap: 1rem;
   margin-bottom: 1rem;
+  max-height: 350px;
+  overflow: scroll;
 }
 
-.modal-dish-editor .modal-body .image-previews-container img {
+.modal-dish-editor .modal-body .image-previews-container .image-preview-card {
+  position: relative;
+}
+
+.modal-dish-editor .modal-body .image-previews-container .image-preview-card .upload-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 150px;
+  background: rgba(113, 188, 98, 0.5);
+}
+
+.modal-dish-editor .modal-body .image-previews-container .image-preview-card .upload-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0 5px;
+  font-family: monospace;
+  color: black;
+  background: white;
+}
+
+.modal-dish-editor .modal-body .image-previews-container .image-preview-card img {
   height: 150px;
   width: 200px;
   border: 1px solid rgba(0, 0, 0, 0.7);
@@ -1493,6 +1517,14 @@ input[class^='btn-']:hover {
   -webkit-box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3);
           box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.3);
   border: 1px solid red;
+}
+
+.modal-dish-editor .modal-footer img {
+  position: relative;
+  bottom: 200px;
+  right: 200px;
+  width: 100px;
+  height: 100px;
 }
 
 ::-webkit-scrollbar {

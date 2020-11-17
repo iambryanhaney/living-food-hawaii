@@ -100,19 +100,44 @@
                 flex-wrap: wrap;
                 gap: 1rem;
                 margin-bottom: 1rem;
+                max-height: 350px;
+                overflow: scroll;
 
-                img {
-                    height: 150px;
-                    width: 200px;
-                    border: 1px solid hsla(0,0,0, 0.7);
-                    box-shadow: 1px 1px 8px 0px hsla(0, 0, 0, 0.4);
-                    object-fit: cover;
+                .image-preview-card {
+                    position: relative;
+
+                    .upload-overlay {
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        height: 150px;
+                        background: $main-color-trans;
+                        // background: hsla(0, 0%, 0%, 0.8);
+                    }
+
+                    .upload-progress {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        padding: 0 5px;
+                        font-family: monospace;
+                        color: black;
+                        background: white;
+                    }
+    
+                    img {
+                        height: 150px;
+                        width: 200px;
+                        border: 1px solid hsla(0,0,0, 0.7);
+                        box-shadow: 1px 1px 8px 0px hsla(0, 0, 0, 0.4);
+                        object-fit: cover;
+                    }
                 }
+
             }
 
             .form-tags-container {
                 display: flex;
-                // justify-content: space-evenly;
                 gap: 2rem;
                 
                 .form-tags-column {
@@ -201,6 +226,14 @@
                     box-shadow: 1px 1px 2px 2px hsla(0, 0%, 0%, 0.3);
                     border: 1px solid red;
                 }
+            }
+
+            img {
+                position: relative;
+                bottom: 200px;
+                right: 200px;
+                width: 100px;
+                height: 100px;
             }
         }
     }
