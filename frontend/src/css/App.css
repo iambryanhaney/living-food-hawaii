@@ -488,17 +488,15 @@ input[class^='btn-']:hover {
       -ms-flex-flow: row nowrap;
           flex-flow: row nowrap;
   margin-bottom: 6rem;
-  border-top: 2px solid #71bc62;
-  border-right: 2px solid #71bc62;
-  border-bottom: 2px solid #71bc62;
-  border-left: 2px solid #71bc62;
+  border: 2px solid #71bc62;
+  overflow: hidden;
 }
 
 .contact-left-pane {
-  -webkit-box-flex: 0;
-      -ms-flex: 0 40.75%;
-          flex: 0 40.75%;
   position: relative;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 1 40.75%;
+          flex: 0 1 40.75%;
   z-index: 3;
 }
 
@@ -509,6 +507,7 @@ input[class^='btn-']:hover {
      object-fit: cover;
   -o-object-position: center;
      object-position: center;
+  width: 100%;
   height: 100%;
 }
 
@@ -579,13 +578,34 @@ input[class^='btn-']:hover {
   background: #f9fafb;
 }
 
-.contact-right-pane .callback-form label {
-  display: block;
-  margin-bottom: 0.3rem;
+.contact-right-pane .callback-form .form-full {
+  margin-bottom: 0.5rem;
 }
 
-.contact-right-pane .callback-form input {
+.contact-right-pane .callback-form .form-flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+  gap: 0.5rem;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+.contact-right-pane .callback-form .input-full {
   width: 100%;
+  padding: 0.25rem;
+  height: 40px;
+  border: 1px solid #f5f5f5;
+}
+
+.contact-right-pane .callback-form .input-flex {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
   padding: 0.25rem;
   height: 40px;
   border: 1px solid #f5f5f5;
