@@ -22,7 +22,7 @@ export default function Home() {
             '/about': aboutRef.current?.offsetTop - 60,
             '/services': servicesRef.current?.offsetTop - 96,
             '/contact': contactRef.current?.offsetTop - 96,
-            '/gallery': galleryRef.current?.offsetTop - 85,
+            '/gallery': galleryRef.current?.offsetTop - 84,
         }
         // console.log(pathToPositionTable[location.pathname])
         window.scrollTo(0, pathToPositionTable[location.pathname])

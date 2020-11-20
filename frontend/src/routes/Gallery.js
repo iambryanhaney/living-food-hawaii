@@ -171,7 +171,7 @@ export default function Gallery({scrollRef, ...props}) {
 
     const updateFilters = (group, tagName) => {
         // Scroll to the top of the gallery when filters change
-        window.scrollTo(0, scrollRef.current.offsetTop - 85)
+        window.scrollTo(0, scrollRef.current.offsetTop - 84)
 
         // Copy the gallery filters and either set the tag name or delete the group if there is no tagName
         const updatedFilters = { ...filters }
