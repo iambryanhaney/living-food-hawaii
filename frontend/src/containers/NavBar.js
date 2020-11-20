@@ -89,8 +89,8 @@ export default function Navigation(props) {
                     <li><NavLink to="/gallery" exact activeClassName="current">Gallery</NavLink></li>
                     { props.user?.is_admin ? 
                         <>
-                            <li><NavLink to="/dish-manager" exact activeClassName="current">Dish Manager</NavLink></li>
-                            <li><a onClick={() => props.setUser(null)}>Logout</a></li>
+                            <li><NavLink to="/dish-manager" exact activeClassName="current">Gallery Manager</NavLink></li>
+                            <li><a onClick={() => { props.setUser(null); props.setLoginRedirected(false) }}>Logout</a></li>
                         </> : <li><a onClick={() => setShowModal(true)}>Login</a></li>
                     }
                 </ul>
@@ -106,7 +106,7 @@ export default function Navigation(props) {
                     <form className="login-form" onSubmit={handleSubmit}>
                         <div className="form-control">
                             <label htmlFor="email"></label>
-                            <input type="text" name="email" id="email" placeholder="Email Address"
+                            <input autoFocus type="text" name="email" id="email" placeholder="Email Address"
                                 onChange={event => setFormEmail(event.target.value)}/>
                         </div>
                         <div className="form-control">

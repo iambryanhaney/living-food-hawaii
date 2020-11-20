@@ -6,34 +6,42 @@ import Home from './routes/Home'
 import DishManager from './routes/DishManager'
 
 function App() {
-  const [user, setUser] = useState(null)
-  const [viewingGallery, setViewingGallery] = useState(false)
+    const [user, setUser] = useState(null)
+    const [loginRedirected, setLoginRedirected] = useState(false)
+    const [viewingGallery, setViewingGallery] = useState(false)
 
-  return (
-    <Router>
-      <NavBar setUser={setUser} user={user} viewingGallery={viewingGallery} />
-      {/* <Route component={Home} /> */}
-      <Switch>
-        <Route path='/' exact component={Home} />
-        <Route path='/home' exact>
-          <Home />
-          {/* { user?.is_admin ? <Redirect to="/dish-manager"/> : <Home />} */}
-        </Route>
-        <Route path='/about' exact component={Home} />
-        <Route path='/services' exact component={Home} />
-        <Route path='/contact' exact component={Home} />
-        <Route path='/gallery' exact component={Home} />
-        {/* <Route path='/gallery' exact render={(props) => ( <Gallery {...props} viewingGallery={viewingGallery} setViewingGallery={setViewingGallery}/> )}  /> */}
-        <Route path='/dish-manager' exact>
-          {/* { !user?.is_admin ? <Redirect to="/home" /> : <DishManager viewingGallery={viewingGallery} setViewingGallery={setViewingGallery} /> }  */}
-          <DishManager viewingGallery={viewingGallery} setViewingGallery={setViewingGallery} /> 
-        </Route>/>
-        <Route>
-          <Redirect to="/home" />
-        </Route>
-      </Switch>
-    </Router>
-  );
+    return (
+        <Router>
+            <NavBar setUser={setUser} user={user} viewingGallery={viewingGallery} setLoginRedirected={setLoginRedirected} />
+            
+            <Switch>
+                <Route path='/' exact>
+                    { user?.is_admin && !loginRedirected ? <Redirect to="/dish-manager" /> : <Redirect to="/home" /> }
+                </Route>
+                <Route path='/home' exact>
+                    { user?.is_admin && !loginRedirected ? <Redirect to="/dish-manager" /> : <Home /> }
+                </Route>
+                <Route path='/about' exact>
+                    { user?.is_admin && !loginRedirected ? <Redirect to="/dish-manager" /> : <Home /> }
+                </Route>
+                <Route path='/services' exact>
+                    { user?.is_admin && !loginRedirected ? <Redirect to="/dish-manager" /> : <Home /> }
+                </Route>
+                <Route path='/contact' exact>
+                    { user?.is_admin && !loginRedirected ? <Redirect to="/dish-manager" /> : <Home /> }
+                </Route>
+                <Route path='/gallery' exact>
+                    { user?.is_admin && !loginRedirected ? <Redirect to="/dish-manager" /> : <Home /> }
+                </Route>
+                <Route path='/dish-manager' exact>
+                    { user?.is_admin ? <DishManager setViewingGallery={setViewingGallery} setLoginRedirected={setLoginRedirected} /> : <Redirect to="/home" /> } 
+                </Route>/>
+                <Route>
+                    <Redirect to="/home" />
+                </Route>
+            </Switch>
+      </Router>
+    )
 }
 
-export default App;
+export default App

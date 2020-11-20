@@ -34,6 +34,7 @@ export default function DishManager(props) {
     // Load dishes and tags
     useEffect(() => {
         props.setViewingGallery(true)
+        props.setLoginRedirected(true)
         
         fetch(DISH_URL)
         .then(resp => resp.json())
@@ -325,7 +326,7 @@ export default function DishManager(props) {
         <div className="container dish-manager">
             <div className="actions">
                 <button className="btn-main" onClick={() => setShowModal(true)}>Create New Dish</button>
-                <input type="text" className="search-bar" placeholder="Filter by Name" onChange={e => setFilterInput(e.target.value)}/>
+                <input type="search" className="search-bar" placeholder="Filter by Name" onChange={e => setFilterInput(e.target.value)}/>
             </div>
             <div className="dishes-container">
                 { renderDishes() }

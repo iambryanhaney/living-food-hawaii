@@ -98,6 +98,11 @@
             transition: border-color 1s;
             cursor: pointer;
     
+            &:-moz-focusring {
+                outline: none;
+                border-bottom: 3px transparent solid;
+            }
+
             &:hover {
                 border-color: $medium-color ;
             }

@@ -185,6 +185,11 @@ input[class^='btn-']:hover {
   cursor: pointer;
 }
 
+#main-nav li a:-moz-focusring {
+  outline: none;
+  border-bottom: 3px transparent solid;
+}
+
 #main-nav li a:hover {
   border-color: #ccc;
 }
@@ -1079,7 +1084,7 @@ input[class^='btn-']:hover {
   top: 50%;
   background: #f4f4f4;
   margin: auto;
-  width: 30%;
+  width: 400px;
   -webkit-box-shadow: 0 5px 8px 0 black, 0 7px 20px 0 #333;
           box-shadow: 0 5px 8px 0 black, 0 7px 20px 0 #333;
   -webkit-transition: opacity 0.5s, -webkit-transform 0.5s;
@@ -1260,8 +1265,13 @@ input[class^='btn-']:hover {
 }
 
 .modal-lightbox .modal-tags span {
+  margin-left: 1.2rem;
   background: rgba(113, 188, 98, 0.5);
   padding: 0 0.3rem;
+}
+
+.modal-lightbox .modal-tags span:first-child {
+  margin-left: 0;
 }
 
 .modal-lightbox .modal-thumbs {
@@ -1288,9 +1298,9 @@ input[class^='btn-']:hover {
 }
 
 .modal-lightbox .modal-thumbs .thumb-slider .tiny-thumb {
-  -webkit-box-flex: 1;
-      -ms-flex: 1 0 auto;
-          flex: 1 0 auto;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 auto;
+          flex: 0 0 auto;
   position: relative;
   margin: 0 10px 5px 0;
   height: 50px;
