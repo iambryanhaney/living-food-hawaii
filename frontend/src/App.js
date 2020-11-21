@@ -35,7 +35,7 @@ function App() {
                 </Route>
                 <Route path='/dish-manager' exact>
                     { user?.is_admin ? <DishManager setViewingGallery={setViewingGallery} setLoginRedirected={setLoginRedirected} /> : <Redirect to="/home" /> } 
-                </Route>/>
+                </Route>
                 <Route>
                     <Redirect to="/home" />
                 </Route>
