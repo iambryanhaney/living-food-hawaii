@@ -109,6 +109,8 @@ export default function Gallery({scrollRef, ...props}) {
 
     // Render Lightbox
     const renderZoomModal = () => {
+
+        
         // True modulo helper function (JavaScript's % operator is actually REMAINDER and does not handle negative values as expected)
         const mod = (n, m) => (n % m + m) % m
         const len = filteredDishes.length
