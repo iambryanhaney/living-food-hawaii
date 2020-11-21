@@ -108,14 +108,12 @@ export default function Gallery({scrollRef, ...props}) {
     }
 
     // Render Lightbox
-    const renderZoomModal = () => {
-
-        
+    const renderZoomModal = () => {        
         // True modulo helper function (JavaScript's % operator is actually REMAINDER and does not handle negative values as expected)
         const mod = (n, m) => (n % m + m) % m
-        const len = filteredDishes.length
 
         // Algorithmically generate zoomed image and its surrounding images, automatically transitioning based on zoomIndex. 
+        const len = filteredDishes.length
         const generateImageAndBuffers = () => {
             const buffer = 5;
             return [...Array(buffer)].map((e,i) => {
