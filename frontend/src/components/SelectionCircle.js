@@ -18,7 +18,7 @@ export default function SelectionCircle ({group, updateFilters, tags, filters, a
         else if (group === 'events') return customOrder[nameA] - customOrder[nameB] 
         else return nameA.localeCompare(nameB)
     }
-
+    
     // Convert lowercase tag names to titles
     const titleCase = name => name.split(' ').map(name => name[0].toUpperCase() + name.slice(1)).join(' ')
 
