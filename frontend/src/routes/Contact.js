@@ -1,5 +1,4 @@
 import React from 'react'
-import SaladsOnPlates from '../assets/media/salads_on_plates.jpg'
 import FruitCircle from '../assets/media/fruit_circle.jpg'
 
 

@@ -14,5 +14,7 @@ Rails.application.routes.draw do
   get '/tags', to: 'tags#index'
 
   post "/rails/active_storage/direct_uploads" => "direct_uploads#create"
+
+  post "/charges", to: 'charges#create'
   
 end

@@ -48,3 +48,7 @@ gem 'pry'
 
 # JWT
 gem "jwt", "~> 2.2"
+
+# Stripe
+gem 'stripe'
+gem 'stripe-ruby-mock', '~> 3.0.1', :require => 'stripe_mock'

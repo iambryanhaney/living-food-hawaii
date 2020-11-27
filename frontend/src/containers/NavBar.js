@@ -87,6 +87,7 @@ export default function Navigation(props) {
                     <li><NavLink to="/services" exact activeClassName="current">Services</NavLink></li>
                     <li><NavLink to="/contact" exact activeClassName="current">Contact</NavLink></li>
                     <li><NavLink to="/gallery" exact activeClassName="current">Gallery</NavLink></li>
+                    <li><NavLink to="/payment" exact activeClassName="current">Payment</NavLink></li>
                     { props.user?.is_admin ? 
                         <>
                             <li><NavLink to="/dish-manager" exact activeClassName="current">Gallery Manager</NavLink></li>
