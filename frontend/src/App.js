@@ -3,6 +3,7 @@ import './css/App.css';
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom'
 import NavBar from './containers/NavBar'
 import Home from './routes/Home'
+import Payment from './routes/Payment'
 import DishManager from './routes/DishManager'
 
 function App() {
@@ -32,6 +33,9 @@ function App() {
                 </Route>
                 <Route path='/gallery' exact>
                     { user?.is_admin && !loginRedirected ? <Redirect to="/dish-manager" /> : <Home /> }
+                </Route>
+                <Route path='/payment' exact>
+                    { user?.is_admin && !loginRedirected ? <Redirect to="/dish-manager" /> : <Payment /> }
                 </Route>
                 <Route path='/dish-manager' exact>
                     { user?.is_admin ? <DishManager setViewingGallery={setViewingGallery} setLoginRedirected={setLoginRedirected} /> : <Redirect to="/home" /> } 
