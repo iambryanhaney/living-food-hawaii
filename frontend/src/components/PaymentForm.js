@@ -30,7 +30,7 @@ export default function PaymentForm() {
             address_line1: "3401 Red River",
             address_line2: "APT 235",
             address_city: "Austin",
-            address_city: "Texas",
+            address_state: "Texas",
             address_zip: "78705",
         }
        
