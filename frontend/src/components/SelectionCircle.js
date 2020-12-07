@@ -31,8 +31,8 @@ export default function SelectionCircle ({group, updateFilters, tags, filters, a
                 <p >{ titleCase(group) }</p>
                 <div className="filter-menu-bridge"></div>
                 <div className="filter-menu bg-light" style={{ top: `${-menuTags.length*0.35}rem`}} >
-                    { menuTags.filter(tag => tag.group === group).sort((a,b) => sortTagNames(group, a.name, b.name)).map(tag =>
-                        <div className="filter-item" key={tag.name} onClick={(e) => updateFilters(group, tag.name)}>{titleCase(tag.name)}</div>
+                    { menuTags.filter(tag => tag.group === group).sort((a,b) => sortTagNames(group, a.name, b.name)).map((tag, index) =>
+                        <div className="filter-item" key={`${tag.name}_${index}`} onClick={(e) => updateFilters(group, tag.name)}>{titleCase(tag.name)}</div>
                     )}
                 </div>
             </div>
